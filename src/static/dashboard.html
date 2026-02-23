@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RNPI — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f5f2ed;
+      --surface:  #ffffff;
+      --ink:      #1a1714;
+      --muted:    #7a7570;
+      --accent:   #c84b31;
+      --accent2:  #3a6b5e;
+      --warn:     #d4961a;
+      --border:   #e0dbd4;
+      --radius:   14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP NAV ── */
+    nav {
+      background: var(--ink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.03em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a.active { border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: 0.82rem;
+      color: #aaa;
+    }
+    .avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--accent2);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: .8rem; color: #fff;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      flex: 1;
+      padding: 2rem 2.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      margin-bottom: 2rem;
+      animation: fadeUp .5s ease both;
+    }
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+    .page-header p { color: var(--muted); font-size: .9rem; margin-top: .25rem; }
+
+    /* ── STAT CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .5s ease both;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .stat-card:nth-child(1) { animation-delay: .05s; }
+    .stat-card:nth-child(2) { animation-delay: .10s; }
+    .stat-card:nth-child(3) { animation-delay: .15s; }
+    .stat-card:nth-child(4) { animation-delay: .20s; }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--accent);
+      border-radius: 4px 0 0 4px;
+    }
+    .stat-card.green::before  { background: var(--accent2); }
+    .stat-card.yellow::before { background: var(--warn); }
+    .stat-card.gray::before   { background: var(--muted); }
+
+    .stat-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+    .stat-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .stat-sub {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .4rem;
+    }
+    .stat-sub.up   { color: var(--accent2); }
+    .stat-sub.warn { color: var(--warn); }
+
+    /* ── TWO COLUMN ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    /* ── TABLE CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      animation: fadeUp .55s ease both;
+      animation-delay: .25s;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+    .btn {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: .45rem 1rem;
+      font-size: .8rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: .02em;
+      transition: background .2s, transform .1s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn:hover  { background: #333; }
+    .btn:active { transform: scale(.97); }
+    .btn.accent { background: var(--accent); }
+    .btn.accent:hover { background: #a83a22; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+    thead th {
+      text-align: left;
+      padding: .65rem 1.4rem;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #faf9f7;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #faf9f7; }
+    td {
+      padding: .8rem 1.4rem;
+      vertical-align: middle;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .65rem;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    .badge-green  { background: #d4ede8; color: #2a5248; }
+    .badge-yellow { background: #faefd4; color: #7a5a10; }
+    .badge-red    { background: #fde8e4; color: #8a2a1a; }
+    .badge-gray   { background: #eee; color: #555; }
+
+    /* ── SIDEBAR CARDS ── */
+    .side-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .mini-list { list-style: none; }
+    .mini-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .75rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      font-size: .85rem;
+      transition: background .15s;
+    }
+    .mini-list li:last-child { border-bottom: none; }
+    .mini-list li:hover { background: #faf9f7; }
+    .mini-list .name { font-weight: 500; }
+    .mini-list .meta { color: var(--muted); font-size: .78rem; }
+
+    /* progress bar */
+    .progress-wrap { padding: 1rem 1.4rem; display: flex; flex-direction: column; gap: .85rem; }
+    .prog-item {}
+    .prog-label {
+      display: flex; justify-content: space-between;
+      font-size: .8rem; margin-bottom: .35rem;
+    }
+    .prog-label span:last-child { color: var(--muted); }
+    .prog-bar {
+      height: 7px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .prog-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--accent2);
+      transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+    .prog-fill.red  { background: var(--accent); }
+    .prog-fill.warn { background: var(--warn); }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn .2s ease;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 540px;
+      padding: 2rem;
+      animation: slideUp .3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 1.4rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+    input, select {
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem .8rem;
+      font-size: .88rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus { border-color: var(--accent2); background: #fff; }
+    .form-actions {
+      display: flex;
+      gap: .75rem;
+      justify-content: flex-end;
+      margin-top: 1.4rem;
+    }
+    .btn-ghost {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: .45rem 1rem;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      transition: border-color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: var(--ink);
+      color: #fff;
+      padding: .85rem 1.4rem;
+      border-radius: 10px;
+      font-size: .85rem;
+      font-weight: 500;
+      z-index: 999;
+      display: none;
+      animation: slideUp .3s ease;
+    }
+    .toast.show { display: block; }
+    .toast.success { background: var(--accent2); }
+    .toast.error   { background: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">RN<span>P</span>I</div>
+  <div class="nav-links">
+    <a href="#" class="active">Dashboard</a>
+    <a href="#">Menores</a>
+    <a href="#">Células</a>
+    <a href="#">Personal</a>
+    <a href="#">Reportes</a>
+  </div>
+  <div class="nav-user">
+    <div class="avatar">DG</div>
+    Director General
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="page-header">
+    <h1>Panel de Control</h1>
+    <p>Sistema de Gestión de Menores Beneficiarios — Nuevo León</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card" id="card-total">
+      <div class="stat-label">Total menores</div>
+      <div class="stat-value" id="stat-total">—</div>
+      <div class="stat-sub" id="sub-total">Cargando...</div>
+    </div>
+    <div class="stat-card green" id="card-aprobados">
+      <div class="stat-label">Aprobados</div>
+      <div class="stat-value" id="stat-aprobados">—</div>
+      <div class="stat-sub up" id="sub-aprobados">Cargando...</div>
+    </div>
+    <div class="stat-card yellow" id="card-espera">
+      <div class="stat-label">En espera</div>
+      <div class="stat-value" id="stat-espera">—</div>
+      <div class="stat-sub warn" id="sub-espera">Cargando...</div>
+    </div>
+    <div class="stat-card gray" id="card-celulas">
+      <div class="stat-label">Células activas</div>
+      <div class="stat-value" id="stat-celulas">—</div>
+      <div class="stat-sub" id="sub-celulas">Cargando...</div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="two-col">
+
+    <!-- TABLE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Menores registrados</span>
+        <button class="btn accent" onclick="abrirModal()">+ Registrar menor</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>CURP</th>
+            <th>Célula</th>
+            <th>Estatus</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-menores">
+          <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:2rem">Cargando datos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="side-stack">
+
+      <!-- Distribución por estatus -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Distribución</span>
+        </div>
+        <div class="progress-wrap" id="distribucion">
+          <p style="color:var(--muted);font-size:.85rem">Cargando...</p>
+        </div>
+      </div>
+
+      <!-- Células -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Células</span>
+          <button class="btn" onclick="cargarCelulas()">↻</button>
+        </div>
+        <ul class="mini-list" id="lista-celulas">
+          <li><span class="meta">Cargando...</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- MODAL REGISTRO -->
+<div class="modal-backdrop" id="modal" onclick="cerrarModalFuera(event)">
+  <div class="modal">
+    <h2>Registrar nuevo menor</h2>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Nombre completo</label>
+        <input type="text" id="f-nombre" placeholder="Ej. Juan Pérez González"/>
+      </div>
+      <div class="form-group">
+        <label>CURP</label>
+        <input type="text" id="f-curp" placeholder="18 caracteres" maxlength="18"/>
+      </div>
+      <div class="form-group">
+        <label>Fecha de nacimiento</label>
+        <input type="date" id="f-fecha"/>
+      </div>
+      <div class="form-group">
+        <label>Célula asignada</label>
+        <select id="f-celula">
+          <option value="">Seleccionar...</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estatus inicial</label>
+        <select id="f-estatus">
+          <option value="">Seleccionar...</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-ghost" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn accent" id="btn-guardar" onclick="registrarMenor()">
+        Guardar registro
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const API = 'http://localhost:8000';
+
+  // ── TOAST ──
+  function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show ' + type;
+    setTimeout(() => t.className = 'toast', 3000);
+  }
+
+  // ── BADGE ESTATUS ──
+  function badge(texto) {
+    const t = (texto || '').toLowerCase();
+    if (t.includes('aprobado'))   return `<span class="badge badge-green">${texto}</span>`;
+    if (t.includes('espera'))     return `<span class="badge badge-yellow">${texto}</span>`;
+    if (t.includes('no candid'))  return `<span class="badge badge-red">${texto}</span>`;
+    return `<span class="badge badge-gray">${texto}</span>`;
+  }
+
+  // ── CARGAR MENORES ──
+  async function cargarMenores() {
+    try {
+      const res = await fetch(`${API}/menores/`);
+      const data = await res.json();
+      const tbody = document.getElementById('tabla-menores');
+
+      if (!data.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:2rem">Sin registros aún</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.map(m => `
+        <tr>
+          <td><strong>${m.nombre_completo}</strong></td>
+          <td style="font-family:monospace;font-size:.8rem">${m.curp}</td>
+          <td>${m.id_celula_asignada}</td>
+          <td>${badge(m.id_estatus)}</td>
+        </tr>
+      `).join('');
+
+      // Stats
+      document.getElementById('stat-total').textContent = data.length;
+      document.getElementById('sub-total').textContent = 'en el sistema';
+
+      calcularDistribucion(data);
+    } catch(e) {
+      document.getElementById('tabla-menores').innerHTML =
+        '<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:2rem">No se pudo conectar con la API</td></tr>';
+    }
+  }
+
+  // ── CALCULAR DISTRIBUCIÓN ──
+  function calcularDistribucion(data) {
+    const total = data.length || 1;
+    // Agrupar por estatus id
+    const grupos = {};
+    data.forEach(m => {
+      grupos[m.id_estatus] = (grupos[m.id_estatus] || 0) + 1;
+    });
+    const colores = ['', 'red', 'warn', ''];
+    const div = document.getElementById('distribucion');
+    div.innerHTML = Object.entries(grupos).map(([id, cnt], i) => `
+      <div class="prog-item">
+        <div class="prog-label">
+          <span>Estatus ${id}</span>
+          <span>${cnt} menores</span>
+        </div>
+        <div class="prog-bar">
+          <div class="prog-fill ${colores[i] || ''}" style="width:${Math.round(cnt/total*100)}%"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ── CARGAR CÉLULAS ──
+  async function cargarCelulas() {
+    try {
+      const res = await fetch(`${API}/celulas/`);
+      const data = await res.json();
+      const lista = document.getElementById('lista-celulas');
+      const select = document.getElementById('f-celula');
+
+      lista.innerHTML = data.map(c => `
+        <li>
+          <div>
+            <div class="name">${c.nombre_celula}</div>
+            <div class="meta">Municipio ${c.id_municipio}</div>
+          </div>
+          <span class="badge badge-green">Activa</span>
+        </li>
+      `).join('') || '<li><span class="meta">Sin células</span></li>';
+
+      select.innerHTML = '<option value="">Seleccionar...</option>' +
+        data.map(c => `<option value="${c.id_celula}">${c.nombre_celula}</option>`).join('');
+
+      document.getElementById('stat-celulas').textContent = data.length;
+      document.getElementById('sub-celulas').textContent = 'operando';
+    } catch(e) {
+      document.getElementById('lista-celulas').innerHTML = '<li><span class="meta">No disponible</span></li>';
+    }
+  }
+
+  // ── CARGAR ESTATUS ──
+  async function cargarEstatus() {
+    try {
+      const res = await fetch(`${API}/catalogos/estatus`);
+      const data = await res.json();
+      const select = document.getElementById('f-estatus');
+      select.innerHTML = '<option value="">Seleccionar...</option>' +
+        data.map(e => `<option value="${e.id_estatus}">${e.descripcion}</option>`).join('');
+    } catch(e) {}
+  }
+
+  // ── MODAL ──
+  function abrirModal() {
+    document.getElementById('modal').classList.add('open');
+  }
+  function cerrarModal() {
+    document.getElementById('modal').classList.remove('open');
+    limpiarForm();
+  }
+  function cerrarModalFuera(e) {
+    if (e.target.id === 'modal') cerrarModal();
+  }
+  function limpiarForm() {
+    ['f-nombre','f-curp','f-fecha'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-celula').value = '';
+    document.getElementById('f-estatus').value = '';
+  }
+
+  // ── REGISTRAR MENOR ──
+  async function registrarMenor() {
+    const nombre  = document.getElementById('f-nombre').value.trim();
+    const curp    = document.getElementById('f-curp').value.trim().toUpperCase();
+    const fecha   = document.getElementById('f-fecha').value;
+    const celula  = document.getElementById('f-celula').value;
+    const estatus = document.getElementById('f-estatus').value;
+
+    if (!nombre || !curp || !fecha || !celula || !estatus) {
+      showToast('Completa todos los campos', 'error'); return;
+    }
+    if (curp.length !== 18) {
+      showToast('El CURP debe tener 18 caracteres', 'error'); return;
+    }
+
+    const btn = document.getElementById('btn-guardar');
+    const spinner = document.getElementById('spinner');
+    btn.disabled = true;
+    spinner.style.display = 'inline-block';
+
+    try {
+      const res = await fetch(`${API}/menores/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre_completo:    nombre,
+          curp:               curp,
+          fecha_nacimiento:   fecha,
+          id_celula_asignada: parseInt(celula),
+          id_estatus:         parseInt(estatus)
+        })
+      });
+
+      if (res.ok) {
+        showToast('Menor registrado exitosamente', 'success');
+        cerrarModal();
+        cargarMenores();
+      } else {
+        const err = await res.json();
+        showToast('Error: ' + (err.detail || 'Intenta de nuevo'), 'error');
+      }
+    } catch(e) {
+      showToast('No se pudo conectar con la API', 'error');
+    } finally {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+    }
+  }
+
+  // ── INIT ──
+  cargarMenores();
+  cargarCelulas();
+  cargarEstatus();
+</script>
+</body>
+</html>

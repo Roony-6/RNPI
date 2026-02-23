@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Personal</title>
+</head>
+<body>
+  <h1>Personal</h1>
+
+  <!-- FORMULARIO REGISTRO -->
+  <h2>Registrar personal</h2>
+  <input type="text"  id="f-nombre"  placeholder="Nombre completo"/><br/><br/>
+  <input type="text"  id="f-rfc"     placeholder="RFC (13 caracteres)"/><br/><br/>
+  <input type="text"  id="f-curp"    placeholder="CURP (18 caracteres)"/><br/><br/>
+  <input type="email" id="f-correo"  placeholder="Correo electrónico"/><br/><br/>
+  <input type="password" id="f-pass" placeholder="Contraseña"/><br/><br/>
+  <select id="f-rol">
+    <option value="">Seleccionar rol...</option>
+  </select><br/><br/>
+  <button onclick="registrar()">Registrar</button>
+  <p id="msg-registro"></p>
+
+  <hr/>
+
+  <!-- LISTA -->
+  <h2>Lista de personal</h2>
+  <button onclick="cargarPersonal()">Actualizar lista</button><br/><br/>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>RFC</th>
+        <th>Rol</th>
+        <th>Activo</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-personal">
+      <tr><td colspan="7">Cargando...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const API = 'http://localhost:8000';
+
+    async function cargarRoles() {
+  try {
+    const res = await fetch(`${API}/catalogos/roles`);
+    
+    if (!res.ok) {
+        console.error("Error en el servidor:", res.status);
+        return;
+    }
+
+    const data = await res.json();
+    console.log("¿Qué llegó de roles?", data); // <--- ESTO ES VITAL
+
+    const sel = document.getElementById('f-rol');
+    
+    if (data.length === 0) {
+        console.warn("La tabla cat_roles está vacía en la base de datos.");
+        return;
+    }
+
+    // Limpiamos por si acaso
+    sel.innerHTML = '<option value="">Seleccionar rol...</option>';
+
+    data.forEach(r => {
+      console.log("Insertando rol:", r); // Para ver si entra al ciclo
+      const opt = document.createElement('option');
+      opt.value = r.id_rol;
+      opt.textContent = r.nombre_rol;
+      sel.appendChild(opt);
+    });
+  } catch (err) {
+    console.error("Error fatal en fetch:", err);
+  }
+}
+
+    async function registrar() {
+      const body = {
+        nombre_completo: document.getElementById('f-nombre').value,
+        rfc:             document.getElementById('f-rfc').value,
+        curp:            document.getElementById('f-curp').value,
+        correo:          document.getElementById('f-correo').value,
+        contrasena:      document.getElementById('f-pass').value,
+        id_rol:          parseInt(document.getElementById('f-rol').value)
+      };
+
+      const res  = await fetch(`${API}/personal/`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(body)
+      });
+      const data = await res.json();
+
+      document.getElementById('msg-registro').textContent =
+        res.ok ? '✅ Registrado correctamente' : '❌ Error: ' + JSON.stringify(data.detail);
+
+      if (res.ok) cargarPersonal();
+    }
+
+    async function cargarPersonal() {
+      const res   = await fetch(`${API}/personal/`);
+      const data  = await res.json();
+      const tbody = document.getElementById('tabla-personal');
+
+      tbody.innerHTML = data.map(p => `
+        <tr>
+          <td>${p.id_personal}</td>
+          <td>${p.nombre_completo}</td>
+          <td>${p.correo}</td>
+          <td>${p.rfc}</td>
+          <td>${p.id_rol}</td>
+          <td>${p.activo ? 'Sí' : 'No'}</td>
+          <td>
+            ${p.activo
+              ? `<button onclick="desactivar(${p.id_personal})">Desactivar</button>`
+              : `<button onclick="reactivar(${p.id_personal})">Reactivar</button>`}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function desactivar(id) {
+      await fetch(`${API}/personal/${id}`, { method: 'DELETE' });
+      cargarPersonal();
+    }
+
+    async function reactivar(id) {
+      await fetch(`${API}/personal/${id}/reactivar`, { method: 'PATCH' });
+      cargarPersonal();
+    }
+
+    cargarRoles();
+    cargarPersonal();
+  </script>
+</body>
+</html>

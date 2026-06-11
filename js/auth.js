@@ -1,5 +1,7 @@
 // auth.js — Manejo de sesión: token, usuario actual y visibilidad por rol.
-// Roles del sistema (cat_roles): 1 = Director, 2 = Médico, 3 = Desarrollador.
+// Roles del sistema (cat_roles): 1=Abogado, 2=Director General,
+// 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social,
+// 8=Voluntario.
 
 import { setToken, loginRequest } from './api.js';
 

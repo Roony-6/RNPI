@@ -1,14 +1,15 @@
-# RNPI - Guía de Desarrollo y Estilo
+# Reglas Globales del Proyecto RNPI
 
-## Comandos de Ejecución Rápida
-- Ejecutar servidor: `python main.py`
-- Instalar dependencias: `pip install -r requirements.txt`
+## Stack Tecnológico
+* **Backend:** Python, FastAPI, SQLAlchemy, Pydantic.
+* **Base de Datos:** PostgreSQL.
+* **Frontend:** HTML5, CSS y Vanilla JavaScript (ESTRICTAMENTE prohibido usar React, Angular, Vue o librerías pesadas).
 
-## Guía de Estilo y Convenciones
-- **Idioma:** Código y documentación técnica estrictamente en español.
-- **Python:** Seguir estándares PEP 8, usar type hints siempre que sea posible.
-- **Base de Datos:** Los nombres de atributos en los esquemas SQL deben usar estrictamente la convención `snake_case`.
-- **Restricciones:** NO busques archivos de forma masiva en la terminal; si necesitas una ruta, pregúntame o lee el archivo de restructuración.
+## Convenciones de Código y Base de Datos
+* **Nomenclatura DB:** Usa estrictamente `snake_case` para todas las tablas, columnas y atributos. Cero tolerancia al camelCase en la base de datos.
+* **Modularidad Frontend:** Todo el JavaScript debe vivir en `static/js/` en archivos modulares (ej. `api.js`, `auth.js`). El archivo `index.html` solo debe contener la estructura visual.
+* **Respuestas de API:** El backend siempre debe retornar JSON puro. El renderizado visual es responsabilidad exclusiva del frontend.
 
-## Arquitectura del Proyecto
-- El proyecto se encuentra actualmente en fase de reestructuración modular. Consultar el archivo `RESTRUCTURACION.md` para verificar la ubicación final de los módulos, catálogos y esquemas antes de escribir código nuevo.
+## Comportamiento del Agente
+* Si vas a refactorizar un archivo de más de 500 líneas, planifica la estructura en tu pensamiento antes de modificar el código.
+* Ejecuta scripts de inyección de datos (Python/Pandas) solo cuando la estructura SQL haya sido confirmada.

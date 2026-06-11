@@ -1,0 +1,89 @@
+id_bloque,id_capitulo,codigo_inicio,codigo_fin,descripcion
+1,1,A00,A09,Enfermedades intestinales infecciosas
+2,1,A15,A19,Tuberculosis
+3,1,A20,A28,Ciertas zoonosis bacterianas
+4,1,A30,A49,Otras enfermedades bacterianas
+5,1,A50,A64,Infecciones con modo de transmision predominantemente sexual
+6,1,A65,A69,Otras enfermedades por espiroquetas
+7,1,A70,A74,Otras enfermedades causadas por clamidias
+8,1,A75,A79,Rickettsiosis
+9,1,A80,A89,Infecciones viricas del sistema nervioso central
+10,1,A90,A99,Fiebres viricas transmitidas por artropodos y fiebres viricas hemorragicas
+11,1,B00,B09,Infecciones viricas caracterizadas por lesiones de la piel y de las membranas mucosas
+12,1,B15,B19,Hepatitis virica
+13,1,B20,B24,Enfermedad por virus de la inmunodeficiencia humana (VIH)
+14,1,B25,B34,Otras enfermedades viricas
+15,1,B35,B49,Micosis
+16,1,B50,B64,Enfermedades debidas a protozoarios
+17,1,B65,B83,Helmintiasis
+18,1,B85,B89,Piojos sarna y otras infestaciones
+19,1,B90,B94,Secuelas de enfermedades infecciosas y parasitarias
+20,1,B95,B97,Agentes bacterianos viricos y otros agentes infecciosos
+21,1,B99,B99,Otras enfermedades infecciosas
+22,2,C00,C14,Tumor maligno de labio cavidad bucal y faringe
+23,2,C15,C26,Tumor maligno de los organos digestivos
+24,2,C30,C39,Tumor maligno de los organos respiratorios e intratoracicos
+25,2,C40,C41,Tumor maligno de los huesos y de los cartilagos articulares
+26,2,C43,C44,Melanoma y otros tumores malignos de la piel
+27,2,C45,C49,Tumor maligno del tejido mesotelio y tejidos blandos
+28,2,C50,C50,Tumor maligno de la mama
+29,2,C51,C58,Tumor maligno de los organos genitales femeninos
+30,2,C60,C63,Tumor maligno de los organos genitales masculinos
+31,2,C64,C68,Tumor maligno de las vias urinarias
+32,2,C69,C72,Tumor maligno del ojo del encefalo y de otras partes del sistema nervioso central
+33,2,C73,C75,Tumor maligno de la glandula tiroides y de otras glandulas endocrinas
+34,2,C76,C80,Tumores malignos de sitios mal definidos secundarios y de sitios no especificados
+35,2,C81,C96,Tumores malignos declarados o presuntos del tejido linfatico hematopoyetico y tejidos afines
+36,3,D50,D53,Anemias nutricionales
+37,3,D55,D59,Anemias hemoliticas
+38,3,D60,D64,Anemias aplasticas y otras anemias
+39,3,D65,D69,Defectos de la coagulacion purpura y otras afecciones hemorragicas
+40,3,D70,D77,Otras enfermedades de la sangre y de los organos hematopoyeticos
+41,3,D80,D89,Ciertos trastornos que afectan el mecanismo de la inmunidad
+42,4,E00,E07,Trastornos de la glandula tiroides
+43,4,E10,E14,Diabetes mellitus
+44,4,E15,E16,Otros trastornos de la regulacion de la glucosa y de la secrecion interna del pancreas
+45,4,E20,E35,Trastornos de otras glandulas endocrinas
+46,4,E40,E46,Desnutricion
+47,4,E50,E64,Otras deficiencias nutricionales
+48,4,E65,E68,Obesidad y otros tipos de hiperalimentacion
+49,4,E70,E90,Trastornos metabolicos
+50,5,F00,F09,Trastornos mentales organicos incluidos los trastornos mentales sintomaticos
+51,5,F10,F19,Trastornos mentales y del comportamiento debidos al uso de sustancias psicoactivas
+52,5,F20,F29,Esquizofrenia trastornos esquizotipicos y trastornos delirantes
+53,5,F30,F39,Trastornos del humor (afectivos)
+54,5,F40,F48,Trastornos neuroticos trastornos relacionados con el estres y trastornos somatomorfos
+55,5,F50,F59,Sindromes del comportamiento asociados con alteraciones fisiologicas y factores fisicos
+56,5,F60,F69,Trastornos de la personalidad y del comportamiento en adultos
+57,5,F70,F79,Retraso mental
+58,5,F80,F89,Trastornos del desarrollo psicologico
+59,5,F90,F98,Trastornos emocionales y del comportamiento que aparecen habitualmente en la ninez y adolescencia
+60,6,G00,G09,Enfermedades inflamatorias del sistema nervioso central
+61,6,G10,G13,Atrofias sistematicas que afectan principalmente el sistema nervioso central
+62,6,G20,G26,Trastornos extrapiramidales y del movimiento
+63,6,G30,G32,Otras enfermedades degenerativas del sistema nervioso
+64,6,G35,G37,Enfermedades desmielinizantes del sistema nervioso central
+65,6,G40,G47,Trastornos episodicos y paroxisticos
+66,6,G50,G59,Trastornos de los nervios raices nerviosas y plexos nerviosos
+67,6,G60,G64,Polineuropatias y otros trastornos del sistema nervioso periferico
+68,6,G70,G73,Enfermedades de la union mioneuronal y de los musculos
+69,6,G80,G83,Paralisis cerebral y otros sindromes paraliticos
+70,9,I00,I02,Fiebre reumatica aguda
+71,9,I05,I09,Enfermedades reumaticas cronicas del corazon
+72,9,I10,I15,Enfermedades hipertensivas
+73,9,I20,I25,Enfermedades isquemicas del corazon
+74,9,I26,I28,Enfermedad cardiopulmonar y enfermedades de la circulacion pulmonar
+75,9,I30,I52,Otras formas de enfermedad del corazon
+76,9,I60,I69,Enfermedades cerebrovasculares
+77,9,I70,I79,Enfermedades de las arterias arteriolas y vasos capilares
+78,9,I80,I89,Enfermedades de las venas linfaticas y ganglios linfaticos no clasificadas en otra parte
+79,10,J00,J06,Infecciones agudas de las vias respiratorias superiores
+80,10,J09,J18,Influenza (gripe) y neumonia
+81,10,J20,J22,Otras infecciones agudas de las vias respiratorias inferiores
+82,10,J30,J39,Otras enfermedades de las vias respiratorias superiores
+83,10,J40,J47,Enfermedades cronicas de las vias respiratorias inferiores
+84,10,J60,J70,Enfermedades del pulmon debidas a agentes externos
+85,10,J80,J84,Otras enfermedades respiratorias que afectan principalmente el intersticio
+86,10,J85,J86,Afecciones supurativas y necroticas de las vias respiratorias inferiores
+87,10,J90,J94,Otras enfermedades de la pleura
+88,10,J95,J99,Otras enfermedades del sistema respiratorio

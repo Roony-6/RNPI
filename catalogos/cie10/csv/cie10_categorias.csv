@@ -1,0 +1,126 @@
+id_categoria,id_bloque,codigo,descripcion
+1,1,A00,Colera
+2,1,A01,Fiebres tifoidea y paratifoidea
+3,1,A02,Otras infecciones debidas a salmonela
+4,1,A03,Shigelosis
+5,1,A04,Otras infecciones intestinales bacterianas
+6,1,A05,Otras intoxicaciones alimentarias bacterianas
+7,1,A06,Amibiasis
+8,1,A07,Otras enfermedades intestinales debidas a protozoarios
+9,1,A08,Infecciones intestinales viricas y otras infecciones intestinales especificadas
+10,1,A09,Diarrea y gastroenteritis de presunto origen infeccioso
+11,2,A15,Tuberculosis respiratoria confirmada bacteriologica e histologicamente
+12,2,A16,Tuberculosis de las vias respiratorias sin confirmacion bacteriologica o histologica
+13,2,A17,Tuberculosis del sistema nervioso
+14,2,A18,Tuberculosis de otros organos
+15,2,A19,Tuberculosis miliar
+16,5,A50,Sifilis congenita
+17,5,A51,Sifilis precoz
+18,5,A52,Sifilis tardia
+19,5,A53,Otras formas de sifilis y las no especificadas
+20,5,A54,Infeccion gonococica
+21,5,A55,Linfogranuloma (venereo) por clamidias
+22,5,A56,Otras enfermedades de transmision sexual debidas a clamidias
+23,5,A57,Chancro blando
+24,5,A58,Granuloma inguinal
+25,5,A59,Tricomoniasis
+26,5,A60,Infeccion anogenital debida a virus del herpes (herpes simple)
+27,5,A63,Otras enfermedades de transmision predominantemente sexual no clasificadas en otra parte
+28,5,A64,Enfermedad de transmision sexual no especificada
+29,13,B20,Enfermedad por VIH resultante en enfermedades infecciosas y parasitarias
+30,13,B21,Enfermedad por VIH resultante en tumores malignos
+31,13,B22,Enfermedad por VIH resultante en otras enfermedades especificadas
+32,13,B23,Enfermedad por VIH resultante en otras afecciones
+33,13,B24,Enfermedad por virus de la inmunodeficiencia humana (VIH) sin otra especificacion
+34,36,D50,Anemia por deficiencia de hierro
+35,36,D51,Anemia por deficiencia de vitamina B12
+36,36,D52,Anemia por deficiencia de folatos
+37,36,D53,Otras anemias nutricionales
+38,38,D60,Aplasia adquirida pura de celulas rojas (eritroblastopenia)
+39,38,D61,Otras anemias aplasticas
+40,38,D62,Anemia posthemorragica aguda
+41,38,D63,Anemia en enfermedades cronicas clasificadas en otra parte
+42,38,D64,Otras anemias
+43,46,E40,Kwashiorkor
+44,46,E41,Marasmo nutricional
+45,46,E42,Kwashiorkor marasmatico
+46,46,E43,Desnutricion proteicocaloritica grave no especificada
+47,46,E44,Desnutricion proteicocaloritica de grado moderado y leve
+48,46,E45,Retraso del desarrollo debido a desnutricion proteicocaloritica
+49,46,E46,Desnutricion proteicocaloritica no especificada
+50,43,E10,Diabetes mellitus insulinodependiente (tipo 1)
+51,43,E11,Diabetes mellitus no insulinodependiente (tipo 2)
+52,43,E12,Diabetes mellitus asociada con desnutricion
+53,43,E13,Otras diabetes mellitus especificadas
+54,43,E14,Diabetes mellitus no especificada
+55,48,E65,Adiposidad localizada
+56,48,E66,Obesidad
+57,48,E67,Otros tipos de hiperalimentacion
+58,48,E68,Secuelas de hiperalimentacion
+59,42,E00,Sindrome congenito de deficiencia de yodo
+60,42,E01,Trastornos tiroideos y afecciones relacionadas debidas a deficiencia de yodo
+61,42,E02,Hipotiroidismo subclinico por deficiencia de yodo
+62,42,E03,Otros hipotiroidismos
+63,42,E04,Bocio no toxico
+64,42,E05,Tirotoxicosis (hipertiroidismo)
+65,42,E06,Tiroiditis
+66,42,E07,Otros trastornos de la glandula tiroides
+67,57,F70,Retraso mental leve
+68,57,F71,Retraso mental moderado
+69,57,F72,Retraso mental grave
+70,57,F73,Retraso mental profundo
+71,57,F78,Otro retraso mental
+72,57,F79,Retraso mental no especificado
+73,58,F80,Trastornos especificos del desarrollo del habla y del lenguaje
+74,58,F81,Trastornos especificos del desarrollo del aprendizaje escolar
+75,58,F82,Trastorno especifico del desarrollo psicomotor
+76,58,F83,Trastornos especificos del desarrollo mixto
+77,58,F84,Trastornos generalizados del desarrollo
+78,58,F88,Otros trastornos del desarrollo psicologico
+79,58,F89,Trastorno del desarrollo psicologico no especificado
+80,59,F90,Trastornos hipercineticos
+81,59,F91,Trastornos de la conducta
+82,59,F92,Trastornos mixtos de la conducta y de las emociones
+83,59,F93,Trastornos de las emociones de comienzo habitual en la ninez
+84,59,F94,Trastornos del funcionamiento social de comienzo habitual en la ninez y adolescencia
+85,59,F95,Trastornos de tics
+86,59,F98,Otros trastornos emocionales y del comportamiento que aparecen habitualmente en la ninez y adolescencia
+87,72,I10,Hipertension esencial (primaria)
+88,72,I11,Enfermedad cardiaca hipertensiva
+89,72,I12,Enfermedad renal hipertensiva
+90,72,I13,Enfermedad cardiaca y renal hipertensiva
+91,72,I15,Hipertension secundaria
+92,73,I20,Angina de pecho
+93,73,I21,Infarto agudo del miocardio
+94,73,I22,Infarto subsiguiente del miocardio
+95,73,I23,Ciertas complicaciones actuales del infarto agudo del miocardio
+96,73,I24,Otras enfermedades isquemicas agudas del corazon
+97,73,I25,Enfermedad isquemica cronica del corazon
+98,79,J00,Rinofaringitis aguda (resfriado comun)
+99,79,J01,Sinusitis aguda
+100,79,J02,Faringitis aguda
+101,79,J03,Amigdalitis aguda
+102,79,J04,Laringitis y traqueitis agudas
+103,79,J05,Laringotraqueitis obstructiva aguda y epiglotitis
+104,79,J06,Infecciones agudas de las vias respiratorias superiores de sitios multiples o no especificados
+105,80,J09,Influenza (gripe) debida a ciertos virus de la influenza identificados
+106,80,J10,Influenza (gripe) debida a otro virus de la influenza identificado
+107,80,J11,Influenza (gripe) debida a virus no identificado
+108,80,J12,Neumonia viral no clasificada en otra parte
+109,80,J13,Neumonia debida a Streptococcus pneumoniae
+110,80,J14,Neumonia debida a Haemophilus influenzae
+111,80,J15,Neumonia bacteriana no clasificada en otra parte
+112,80,J16,Neumonia debida a otros microorganismos infecciosos no clasificados en otra parte
+113,80,J17,Neumonia en enfermedades clasificadas en otra parte
+114,80,J18,Neumonia organismo no especificado
+115,81,J20,Bronquitis aguda
+116,81,J21,Bronquiolitis aguda
+117,81,J22,Infeccion aguda no especificada de las vias respiratorias inferiores
+118,83,J40,Bronquitis no especificada como aguda o cronica
+119,83,J41,Bronquitis cronica simple y mucopurulenta
+120,83,J42,Bronquitis cronica no especificada
+121,83,J43,Enfisema
+122,83,J44,Otras enfermedades pulmonares obstructivas cronicas (EPOC)
+123,83,J45,Asma
+124,83,J46,Estado asmatico
+125,83,J47,Bronquiectasia

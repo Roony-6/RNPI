@@ -1,0 +1,180 @@
+id_municipio,id_estado,nombre
+1,1,Aguascalientes
+2,1,Asientos
+3,1,Calvillo
+4,1,Jesús María
+5,1,Rincón de Romos
+6,2,Ensenada
+7,2,Mexicali
+8,2,Tecate
+9,2,Tijuana
+10,2,Playas de Rosarito
+11,3,Comondú
+12,3,La Paz
+13,3,Los Cabos
+14,3,Loreto
+15,3,Mulegé
+16,4,Calkiní
+17,4,Campeche
+18,4,Carmen
+19,4,Champotón
+20,4,Escárcega
+21,5,Saltillo
+22,5,Torreón
+23,5,Monclova
+24,5,Piedras Negras
+25,5,Acuña
+26,6,Colima
+27,6,Manzanillo
+28,6,Tecomán
+29,6,Villa de Álvarez
+30,6,Armería
+31,7,Tuxtla Gutiérrez
+32,7,San Cristóbal de las Casas
+33,7,Tapachula
+34,7,Ocosingo
+35,7,Palenque
+36,7,Comitán de Domínguez
+37,8,Chihuahua
+38,8,Ciudad Juárez
+39,8,Delicias
+40,8,Hidalgo del Parral
+41,8,Cuauhtémoc
+42,9,Álvaro Obregón
+43,9,Azcapotzalco
+44,9,Benito Juárez
+45,9,Coyoacán
+46,9,Cuajimalpa de Morelos
+47,9,Cuauhtémoc
+48,9,Gustavo A. Madero
+49,9,Iztacalco
+50,9,Iztapalapa
+51,9,La Magdalena Contreras
+52,9,Miguel Hidalgo
+53,9,Milpa Alta
+54,9,Tláhuac
+55,9,Tlalpan
+56,9,Venustiano Carranza
+57,9,Xochimilco
+58,10,Durango
+59,10,Gómez Palacio
+60,10,Lerdo
+61,10,Santiago Papasquiaro
+62,10,El Salto
+63,11,Guanajuato
+64,11,León
+65,11,Irapuato
+66,11,Celaya
+67,11,Salamanca
+68,11,Silao de la Victoria
+69,12,Chilpancingo de los Bravo
+70,12,Acapulco de Juárez
+71,12,Iguala de la Independencia
+72,12,Zihuatanejo de Azueta
+73,12,Taxco de Alarcón
+74,13,Pachuca de Soto
+75,13,Tulancingo de Bravo
+76,13,Tula de Allende
+77,13,Ixmiquilpan
+78,13,Huejutla de Reyes
+79,14,Guadalajara
+80,14,Zapopan
+81,14,San Pedro Tlaquepaque
+82,14,Tonalá
+83,14,Puerto Vallarta
+84,14,Lagos de Moreno
+85,15,Toluca
+86,15,Ecatepec de Morelos
+87,15,Nezahualcóyotl
+88,15,Tlalnepantla de Baz
+89,15,Naucalpan de Juárez
+90,15,Chimalhuacán
+91,15,Texcoco
+92,15,Ixtapaluca
+93,16,Morelia
+94,16,Uruapan
+95,16,Zamora
+96,16,Lázaro Cárdenas
+97,16,Apatzingán
+98,17,Cuernavaca
+99,17,Jiutepec
+100,17,Cuautla
+101,17,Temixco
+102,17,Yautepec
+103,18,Tepic
+104,18,Bahía de Banderas
+105,18,Compostela
+106,18,Santiago Ixcuintla
+107,18,Xalisco
+108,19,Monterrey
+109,19,Guadalupe
+110,19,San Nicolás de los Garza
+111,19,Apodaca
+112,19,General Escobedo
+113,19,Santa Catarina
+114,20,Oaxaca de Juárez
+115,20,San Juan Bautista Tuxtepec
+116,20,Heroica Ciudad de Juchitán de Zaragoza
+117,20,Salina Cruz
+118,20,Heroica Ciudad de Huajuapan de León
+119,21,Puebla
+120,21,Tehuacán
+121,21,San Martín Texmelucan
+122,21,Atlixco
+123,21,San Andrés Cholula
+124,22,Querétaro
+125,22,San Juan del Río
+126,22,Corregidora
+127,22,El Marqués
+128,22,Tequisquiapan
+129,23,Othón P. Blanco
+130,23,Benito Juárez
+131,23,Isla Mujeres
+132,23,Cozumel
+133,23,Felipe Carrillo Puerto
+134,24,San Luis Potosí
+135,24,Soledad de Graciano Sánchez
+136,24,Matehuala
+137,24,Ciudad Valles
+138,24,Rioverde
+139,25,Culiacán
+140,25,Mazatlán
+141,25,Ahome
+142,25,Guasave
+143,25,Navolato
+144,26,Hermosillo
+145,26,Cajeme
+146,26,Nogales
+147,26,San Luis Río Colorado
+148,26,Guaymas
+149,27,Villahermosa
+150,27,Cárdenas
+151,27,Comalcalco
+152,27,Cunduacán
+153,27,Nacajuca
+154,28,Tampico
+155,28,Reynosa
+156,28,Matamoros
+157,28,Nuevo Laredo
+158,28,Altamira
+159,29,Tlaxcala
+160,29,Apizaco
+161,29,Chiautempan
+162,29,Huamantla
+163,29,Zacatelco
+164,30,Xalapa
+165,30,Veracruz
+166,30,Coatzacoalcos
+167,30,Boca del Río
+168,30,Córdoba
+169,30,Poza Rica de Hidalgo
+170,31,Mérida
+171,31,Kanasín
+172,31,Valladolid
+173,31,Umán
+174,31,Progreso
+175,32,Zacatecas
+176,32,Fresnillo
+177,32,Guadalupe
+178,32,Jerez de García Salinas
+179,32,Loreto

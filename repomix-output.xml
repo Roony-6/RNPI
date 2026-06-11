@@ -1,0 +1,4358 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+The content has been processed where security check has been disabled.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: **/*.venv, **/__pycache__
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Security check has been disabled - content may contain sensitive information
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+catalogo_domicilios/
+  LOCALIDADES_202604.xlsx
+catalogo_enfermedades/
+  catalogo_enfermedades/
+    csv/
+      cie10_bloques.csv
+      cie10_capitulos.csv
+      cie10_categorias.csv
+      cie10_subcategorias.csv
+    sql/
+      01_crear_tablas_cie10.sql
+      02_importar_cie10.sql
+    README_catalogo_enfermedades.md
+  catalogo_enfermedades.zip
+  README_catalogo_enfermedades.md
+catalogo_lenguas/
+  LENGUA_INDIGENA_2018.xlsx
+catalogos/
+  lenguas/
+    csv/
+      lenguas_inali.csv
+    sql/
+      01_crear_tabla_lenguas.sql
+      02_importar_lenguas.sql
+  localidades/
+    csv/
+      estados.csv
+      municipios.csv
+    sql/
+      01_crear_tabla_localidades.sql
+      02_importar_localidades.sql
+static/
+  index.html
+CLAUDE.md
+crear_admin.py
+env.example
+main.py
+readme.md
+requirements.txt
+reset_pass.py
+schema.sql
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/csv/cie10_bloques.csv">
+id_bloque,id_capitulo,codigo_inicio,codigo_fin,descripcion
+1,1,A00,A09,Enfermedades intestinales infecciosas
+2,1,A15,A19,Tuberculosis
+3,1,A20,A28,Ciertas zoonosis bacterianas
+4,1,A30,A49,Otras enfermedades bacterianas
+5,1,A50,A64,Infecciones con modo de transmision predominantemente sexual
+6,1,A65,A69,Otras enfermedades por espiroquetas
+7,1,A70,A74,Otras enfermedades causadas por clamidias
+8,1,A75,A79,Rickettsiosis
+9,1,A80,A89,Infecciones viricas del sistema nervioso central
+10,1,A90,A99,Fiebres viricas transmitidas por artropodos y fiebres viricas hemorragicas
+11,1,B00,B09,Infecciones viricas caracterizadas por lesiones de la piel y de las membranas mucosas
+12,1,B15,B19,Hepatitis virica
+13,1,B20,B24,Enfermedad por virus de la inmunodeficiencia humana (VIH)
+14,1,B25,B34,Otras enfermedades viricas
+15,1,B35,B49,Micosis
+16,1,B50,B64,Enfermedades debidas a protozoarios
+17,1,B65,B83,Helmintiasis
+18,1,B85,B89,Piojos sarna y otras infestaciones
+19,1,B90,B94,Secuelas de enfermedades infecciosas y parasitarias
+20,1,B95,B97,Agentes bacterianos viricos y otros agentes infecciosos
+21,1,B99,B99,Otras enfermedades infecciosas
+22,2,C00,C14,Tumor maligno de labio cavidad bucal y faringe
+23,2,C15,C26,Tumor maligno de los organos digestivos
+24,2,C30,C39,Tumor maligno de los organos respiratorios e intratoracicos
+25,2,C40,C41,Tumor maligno de los huesos y de los cartilagos articulares
+26,2,C43,C44,Melanoma y otros tumores malignos de la piel
+27,2,C45,C49,Tumor maligno del tejido mesotelio y tejidos blandos
+28,2,C50,C50,Tumor maligno de la mama
+29,2,C51,C58,Tumor maligno de los organos genitales femeninos
+30,2,C60,C63,Tumor maligno de los organos genitales masculinos
+31,2,C64,C68,Tumor maligno de las vias urinarias
+32,2,C69,C72,Tumor maligno del ojo del encefalo y de otras partes del sistema nervioso central
+33,2,C73,C75,Tumor maligno de la glandula tiroides y de otras glandulas endocrinas
+34,2,C76,C80,Tumores malignos de sitios mal definidos secundarios y de sitios no especificados
+35,2,C81,C96,Tumores malignos declarados o presuntos del tejido linfatico hematopoyetico y tejidos afines
+36,3,D50,D53,Anemias nutricionales
+37,3,D55,D59,Anemias hemoliticas
+38,3,D60,D64,Anemias aplasticas y otras anemias
+39,3,D65,D69,Defectos de la coagulacion purpura y otras afecciones hemorragicas
+40,3,D70,D77,Otras enfermedades de la sangre y de los organos hematopoyeticos
+41,3,D80,D89,Ciertos trastornos que afectan el mecanismo de la inmunidad
+42,4,E00,E07,Trastornos de la glandula tiroides
+43,4,E10,E14,Diabetes mellitus
+44,4,E15,E16,Otros trastornos de la regulacion de la glucosa y de la secrecion interna del pancreas
+45,4,E20,E35,Trastornos de otras glandulas endocrinas
+46,4,E40,E46,Desnutricion
+47,4,E50,E64,Otras deficiencias nutricionales
+48,4,E65,E68,Obesidad y otros tipos de hiperalimentacion
+49,4,E70,E90,Trastornos metabolicos
+50,5,F00,F09,Trastornos mentales organicos incluidos los trastornos mentales sintomaticos
+51,5,F10,F19,Trastornos mentales y del comportamiento debidos al uso de sustancias psicoactivas
+52,5,F20,F29,Esquizofrenia trastornos esquizotipicos y trastornos delirantes
+53,5,F30,F39,Trastornos del humor (afectivos)
+54,5,F40,F48,Trastornos neuroticos trastornos relacionados con el estres y trastornos somatomorfos
+55,5,F50,F59,Sindromes del comportamiento asociados con alteraciones fisiologicas y factores fisicos
+56,5,F60,F69,Trastornos de la personalidad y del comportamiento en adultos
+57,5,F70,F79,Retraso mental
+58,5,F80,F89,Trastornos del desarrollo psicologico
+59,5,F90,F98,Trastornos emocionales y del comportamiento que aparecen habitualmente en la ninez y adolescencia
+60,6,G00,G09,Enfermedades inflamatorias del sistema nervioso central
+61,6,G10,G13,Atrofias sistematicas que afectan principalmente el sistema nervioso central
+62,6,G20,G26,Trastornos extrapiramidales y del movimiento
+63,6,G30,G32,Otras enfermedades degenerativas del sistema nervioso
+64,6,G35,G37,Enfermedades desmielinizantes del sistema nervioso central
+65,6,G40,G47,Trastornos episodicos y paroxisticos
+66,6,G50,G59,Trastornos de los nervios raices nerviosas y plexos nerviosos
+67,6,G60,G64,Polineuropatias y otros trastornos del sistema nervioso periferico
+68,6,G70,G73,Enfermedades de la union mioneuronal y de los musculos
+69,6,G80,G83,Paralisis cerebral y otros sindromes paraliticos
+70,9,I00,I02,Fiebre reumatica aguda
+71,9,I05,I09,Enfermedades reumaticas cronicas del corazon
+72,9,I10,I15,Enfermedades hipertensivas
+73,9,I20,I25,Enfermedades isquemicas del corazon
+74,9,I26,I28,Enfermedad cardiopulmonar y enfermedades de la circulacion pulmonar
+75,9,I30,I52,Otras formas de enfermedad del corazon
+76,9,I60,I69,Enfermedades cerebrovasculares
+77,9,I70,I79,Enfermedades de las arterias arteriolas y vasos capilares
+78,9,I80,I89,Enfermedades de las venas linfaticas y ganglios linfaticos no clasificadas en otra parte
+79,10,J00,J06,Infecciones agudas de las vias respiratorias superiores
+80,10,J09,J18,Influenza (gripe) y neumonia
+81,10,J20,J22,Otras infecciones agudas de las vias respiratorias inferiores
+82,10,J30,J39,Otras enfermedades de las vias respiratorias superiores
+83,10,J40,J47,Enfermedades cronicas de las vias respiratorias inferiores
+84,10,J60,J70,Enfermedades del pulmon debidas a agentes externos
+85,10,J80,J84,Otras enfermedades respiratorias que afectan principalmente el intersticio
+86,10,J85,J86,Afecciones supurativas y necroticas de las vias respiratorias inferiores
+87,10,J90,J94,Otras enfermedades de la pleura
+88,10,J95,J99,Otras enfermedades del sistema respiratorio
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/csv/cie10_capitulos.csv">
+id_capitulo,codigo_romano,descripcion
+1,I,Ciertas enfermedades infecciosas y parasitarias
+2,II,Tumores (neoplasias)
+3,III,Enfermedades de la sangre y de los organos hematopoyeticos y ciertos trastornos que afectan el mecanismo de la inmunidad
+4,IV,Enfermedades endocrinas nutricionales y metabolicas
+5,V,Trastornos mentales y del comportamiento
+6,VI,Enfermedades del sistema nervioso
+7,VII,Enfermedades del ojo y sus anexos
+8,VIII,Enfermedades del oido y de la apofisis mastoides
+9,IX,Enfermedades del sistema circulatorio
+10,X,Enfermedades del sistema respiratorio
+11,XI,Enfermedades del sistema digestivo
+12,XII,Enfermedades de la piel y del tejido subcutaneo
+13,XIII,Enfermedades del sistema osteomuscular y del tejido conjuntivo
+14,XIV,Enfermedades del sistema genitourinario
+15,XV,Embarazo parto y puerperio
+16,XVI,Ciertas afecciones originadas en el periodo perinatal
+17,XVII,Malformaciones congenitas deformidades y anomalias cromosomicas
+18,XVIII,Sintomas signos y hallazgos anormales clinicos y de laboratorio no clasificados en otra parte
+19,XIX,Traumatismos envenenamientos y algunas otras consecuencias de causas externas
+20,XX,Causas externas de morbilidad y de mortalidad
+21,XXI,Factores que influyen en el estado de salud y contacto con los servicios de salud
+22,XXII,Codigos para situaciones especiales
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/csv/cie10_categorias.csv">
+id_categoria,id_bloque,codigo,descripcion
+1,1,A00,Colera
+2,1,A01,Fiebres tifoidea y paratifoidea
+3,1,A02,Otras infecciones debidas a salmonela
+4,1,A03,Shigelosis
+5,1,A04,Otras infecciones intestinales bacterianas
+6,1,A05,Otras intoxicaciones alimentarias bacterianas
+7,1,A06,Amibiasis
+8,1,A07,Otras enfermedades intestinales debidas a protozoarios
+9,1,A08,Infecciones intestinales viricas y otras infecciones intestinales especificadas
+10,1,A09,Diarrea y gastroenteritis de presunto origen infeccioso
+11,2,A15,Tuberculosis respiratoria confirmada bacteriologica e histologicamente
+12,2,A16,Tuberculosis de las vias respiratorias sin confirmacion bacteriologica o histologica
+13,2,A17,Tuberculosis del sistema nervioso
+14,2,A18,Tuberculosis de otros organos
+15,2,A19,Tuberculosis miliar
+16,5,A50,Sifilis congenita
+17,5,A51,Sifilis precoz
+18,5,A52,Sifilis tardia
+19,5,A53,Otras formas de sifilis y las no especificadas
+20,5,A54,Infeccion gonococica
+21,5,A55,Linfogranuloma (venereo) por clamidias
+22,5,A56,Otras enfermedades de transmision sexual debidas a clamidias
+23,5,A57,Chancro blando
+24,5,A58,Granuloma inguinal
+25,5,A59,Tricomoniasis
+26,5,A60,Infeccion anogenital debida a virus del herpes (herpes simple)
+27,5,A63,Otras enfermedades de transmision predominantemente sexual no clasificadas en otra parte
+28,5,A64,Enfermedad de transmision sexual no especificada
+29,13,B20,Enfermedad por VIH resultante en enfermedades infecciosas y parasitarias
+30,13,B21,Enfermedad por VIH resultante en tumores malignos
+31,13,B22,Enfermedad por VIH resultante en otras enfermedades especificadas
+32,13,B23,Enfermedad por VIH resultante en otras afecciones
+33,13,B24,Enfermedad por virus de la inmunodeficiencia humana (VIH) sin otra especificacion
+34,36,D50,Anemia por deficiencia de hierro
+35,36,D51,Anemia por deficiencia de vitamina B12
+36,36,D52,Anemia por deficiencia de folatos
+37,36,D53,Otras anemias nutricionales
+38,38,D60,Aplasia adquirida pura de celulas rojas (eritroblastopenia)
+39,38,D61,Otras anemias aplasticas
+40,38,D62,Anemia posthemorragica aguda
+41,38,D63,Anemia en enfermedades cronicas clasificadas en otra parte
+42,38,D64,Otras anemias
+43,46,E40,Kwashiorkor
+44,46,E41,Marasmo nutricional
+45,46,E42,Kwashiorkor marasmatico
+46,46,E43,Desnutricion proteicocaloritica grave no especificada
+47,46,E44,Desnutricion proteicocaloritica de grado moderado y leve
+48,46,E45,Retraso del desarrollo debido a desnutricion proteicocaloritica
+49,46,E46,Desnutricion proteicocaloritica no especificada
+50,43,E10,Diabetes mellitus insulinodependiente (tipo 1)
+51,43,E11,Diabetes mellitus no insulinodependiente (tipo 2)
+52,43,E12,Diabetes mellitus asociada con desnutricion
+53,43,E13,Otras diabetes mellitus especificadas
+54,43,E14,Diabetes mellitus no especificada
+55,48,E65,Adiposidad localizada
+56,48,E66,Obesidad
+57,48,E67,Otros tipos de hiperalimentacion
+58,48,E68,Secuelas de hiperalimentacion
+59,42,E00,Sindrome congenito de deficiencia de yodo
+60,42,E01,Trastornos tiroideos y afecciones relacionadas debidas a deficiencia de yodo
+61,42,E02,Hipotiroidismo subclinico por deficiencia de yodo
+62,42,E03,Otros hipotiroidismos
+63,42,E04,Bocio no toxico
+64,42,E05,Tirotoxicosis (hipertiroidismo)
+65,42,E06,Tiroiditis
+66,42,E07,Otros trastornos de la glandula tiroides
+67,57,F70,Retraso mental leve
+68,57,F71,Retraso mental moderado
+69,57,F72,Retraso mental grave
+70,57,F73,Retraso mental profundo
+71,57,F78,Otro retraso mental
+72,57,F79,Retraso mental no especificado
+73,58,F80,Trastornos especificos del desarrollo del habla y del lenguaje
+74,58,F81,Trastornos especificos del desarrollo del aprendizaje escolar
+75,58,F82,Trastorno especifico del desarrollo psicomotor
+76,58,F83,Trastornos especificos del desarrollo mixto
+77,58,F84,Trastornos generalizados del desarrollo
+78,58,F88,Otros trastornos del desarrollo psicologico
+79,58,F89,Trastorno del desarrollo psicologico no especificado
+80,59,F90,Trastornos hipercineticos
+81,59,F91,Trastornos de la conducta
+82,59,F92,Trastornos mixtos de la conducta y de las emociones
+83,59,F93,Trastornos de las emociones de comienzo habitual en la ninez
+84,59,F94,Trastornos del funcionamiento social de comienzo habitual en la ninez y adolescencia
+85,59,F95,Trastornos de tics
+86,59,F98,Otros trastornos emocionales y del comportamiento que aparecen habitualmente en la ninez y adolescencia
+87,72,I10,Hipertension esencial (primaria)
+88,72,I11,Enfermedad cardiaca hipertensiva
+89,72,I12,Enfermedad renal hipertensiva
+90,72,I13,Enfermedad cardiaca y renal hipertensiva
+91,72,I15,Hipertension secundaria
+92,73,I20,Angina de pecho
+93,73,I21,Infarto agudo del miocardio
+94,73,I22,Infarto subsiguiente del miocardio
+95,73,I23,Ciertas complicaciones actuales del infarto agudo del miocardio
+96,73,I24,Otras enfermedades isquemicas agudas del corazon
+97,73,I25,Enfermedad isquemica cronica del corazon
+98,79,J00,Rinofaringitis aguda (resfriado comun)
+99,79,J01,Sinusitis aguda
+100,79,J02,Faringitis aguda
+101,79,J03,Amigdalitis aguda
+102,79,J04,Laringitis y traqueitis agudas
+103,79,J05,Laringotraqueitis obstructiva aguda y epiglotitis
+104,79,J06,Infecciones agudas de las vias respiratorias superiores de sitios multiples o no especificados
+105,80,J09,Influenza (gripe) debida a ciertos virus de la influenza identificados
+106,80,J10,Influenza (gripe) debida a otro virus de la influenza identificado
+107,80,J11,Influenza (gripe) debida a virus no identificado
+108,80,J12,Neumonia viral no clasificada en otra parte
+109,80,J13,Neumonia debida a Streptococcus pneumoniae
+110,80,J14,Neumonia debida a Haemophilus influenzae
+111,80,J15,Neumonia bacteriana no clasificada en otra parte
+112,80,J16,Neumonia debida a otros microorganismos infecciosos no clasificados en otra parte
+113,80,J17,Neumonia en enfermedades clasificadas en otra parte
+114,80,J18,Neumonia organismo no especificado
+115,81,J20,Bronquitis aguda
+116,81,J21,Bronquiolitis aguda
+117,81,J22,Infeccion aguda no especificada de las vias respiratorias inferiores
+118,83,J40,Bronquitis no especificada como aguda o cronica
+119,83,J41,Bronquitis cronica simple y mucopurulenta
+120,83,J42,Bronquitis cronica no especificada
+121,83,J43,Enfisema
+122,83,J44,Otras enfermedades pulmonares obstructivas cronicas (EPOC)
+123,83,J45,Asma
+124,83,J46,Estado asmatico
+125,83,J47,Bronquiectasia
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/csv/cie10_subcategorias.csv">
+id_subcategoria,id_categoria,codigo,descripcion
+1,1,A00.0,Colera debida a Vibrio cholerae 01 biotipo cholerae
+2,1,A00.1,Colera debida a Vibrio cholerae 01 biotipo el tor
+3,1,A00.9,Colera no especificada
+4,2,A01.0,Fiebre tifoidea
+5,2,A01.1,Fiebre paratifoidea A
+6,2,A01.2,Fiebre paratifoidea B
+7,2,A01.3,Fiebre paratifoidea C
+8,2,A01.4,Fiebre paratifoidea no especificada
+9,3,A02.0,Enteritis por salmonela
+10,3,A02.1,Septicemia por salmonela
+11,3,A02.2,Infecciones localizadas debidas a salmonela
+12,3,A02.8,Otras infecciones especificadas debidas a salmonela
+13,3,A02.9,Infeccion debida a salmonela no especificada
+14,10,A09.0,Otras gastroenteritis y colitis de origen infeccioso
+15,10,A09.9,Gastroenteritis y colitis de origen no especificado
+16,34,D50.0,Anemia por deficiencia de hierro secundaria a perdida de sangre (cronica)
+17,34,D50.1,Disfagia sideropenica
+18,34,D50.8,Otras anemias por deficiencia de hierro
+19,34,D50.9,Anemia por deficiencia de hierro sin otra especificacion
+20,37,D53.0,Anemia por deficiencia de proteinas
+21,37,D53.1,Otras anemias megoblasticas no clasificadas en otra parte
+22,37,D53.2,Anemia escorbutica
+23,37,D53.8,Otras anemias nutricionales especificadas
+24,37,D53.9,Anemia nutricional no especificada
+25,42,D62,Anemia posthemorragica aguda
+26,47,E43,Desnutricion proteicocaloritica grave no especificada
+27,49,E46,Desnutricion proteicocaloritica no especificada
+28,50,E10.0,Diabetes mellitus tipo 1 con coma
+29,50,E10.1,Diabetes mellitus tipo 1 con cetoacidosis
+30,50,E10.2,Diabetes mellitus tipo 1 con complicaciones renales
+31,50,E10.3,Diabetes mellitus tipo 1 con complicaciones oftalmicas
+32,50,E10.4,Diabetes mellitus tipo 1 con complicaciones neurologicas
+33,50,E10.5,Diabetes mellitus tipo 1 con complicaciones circulatorias perifericas
+34,50,E10.6,Diabetes mellitus tipo 1 con otras complicaciones especificadas
+35,50,E10.7,Diabetes mellitus tipo 1 con complicaciones multiples
+36,50,E10.8,Diabetes mellitus tipo 1 con complicaciones no especificadas
+37,50,E10.9,Diabetes mellitus tipo 1 sin mencion de complicacion
+38,51,E11.0,Diabetes mellitus tipo 2 con coma
+39,51,E11.1,Diabetes mellitus tipo 2 con cetoacidosis
+40,51,E11.2,Diabetes mellitus tipo 2 con complicaciones renales
+41,51,E11.3,Diabetes mellitus tipo 2 con complicaciones oftalmicas
+42,51,E11.4,Diabetes mellitus tipo 2 con complicaciones neurologicas
+43,51,E11.5,Diabetes mellitus tipo 2 con complicaciones circulatorias perifericas
+44,51,E11.6,Diabetes mellitus tipo 2 con otras complicaciones especificadas
+45,51,E11.7,Diabetes mellitus tipo 2 con complicaciones multiples
+46,51,E11.8,Diabetes mellitus tipo 2 con complicaciones no especificadas
+47,51,E11.9,Diabetes mellitus tipo 2 sin mencion de complicacion
+48,54,E14.0,Diabetes mellitus no especificada con coma
+49,54,E14.1,Diabetes mellitus no especificada con cetoacidosis
+50,54,E14.9,Diabetes mellitus no especificada sin mencion de complicacion
+51,55,E65,Adiposidad localizada
+52,56,E66.0,Obesidad debida a exceso de calorias
+53,56,E66.1,Obesidad inducida por medicamentos
+54,56,E66.2,Obesidad extrema con hipoventilacion alveolar
+55,56,E66.8,Otro tipo de obesidad
+56,56,E66.9,Obesidad no especificada
+57,60,E03.0,Hipotiroidismo congenito con bocio
+58,60,E03.1,Hipotiroidismo congenito sin bocio
+59,60,E03.2,Hipotiroidismo debido a medicamentos y otras sustancias exogenas
+60,60,E03.3,Hipotiroidismo postinfeccioso
+61,60,E03.4,Atrofia de la glandula tiroides (adquirida)
+62,60,E03.5,Coma mixedematoso
+63,60,E03.8,Otros hipotiroidismos especificados
+64,60,E03.9,Hipotiroidismo no especificado
+65,67,F70.0,Retraso mental leve con deterioro del comportamiento nulo o minimo
+66,67,F70.1,Retraso mental leve con deterioro del comportamiento significativo que requiere atencion o tratamiento
+67,67,F70.8,Otros retrasos mentales leves
+68,67,F70.9,Retraso mental leve sin mencion de deterioro del comportamiento
+69,73,F80.0,Trastorno especifico de la pronunciacion
+70,73,F80.1,Trastorno del lenguaje expresivo
+71,73,F80.2,Trastorno de la recepcion del lenguaje
+72,73,F80.3,Afasia adquirida con epilepsia (sindrome de Landau-Kleffner)
+73,73,F80.8,Otros trastornos del desarrollo del habla y del lenguaje
+74,73,F80.9,Trastorno del desarrollo del habla y del lenguaje no especificado
+75,77,F84.0,Autismo en la ninez
+76,77,F84.1,Autismo atipico
+77,77,F84.2,Sindrome de Rett
+78,77,F84.3,Otro trastorno desintegrativo de la ninez
+79,77,F84.4,Trastorno hiperactivo asociado con retraso mental y movimientos estereotipados
+80,77,F84.5,Sindrome de Asperger
+81,77,F84.8,Otros trastornos generalizados del desarrollo
+82,77,F84.9,Trastorno generalizado del desarrollo no especificado
+83,80,F90.0,Perturbacion de la actividad y de la atencion (TDAH)
+84,80,F90.1,Trastorno hipercinetico de la conducta
+85,80,F90.8,Otros trastornos hipercineticos
+86,80,F90.9,Trastorno hipercinetico no especificado
+87,87,I10,Hipertension esencial (primaria)
+88,92,I20.0,Angina inestable
+89,92,I20.1,Angina de pecho con espasmo documentado
+90,92,I20.8,Otras formas de angina de pecho
+91,92,I20.9,Angina de pecho no especificada
+92,93,I21.0,Infarto agudo transmural del miocardio de la pared anterior
+93,93,I21.1,Infarto agudo transmural del miocardio de la pared inferior
+94,93,I21.2,Infarto agudo transmural del miocardio de otros sitios
+95,93,I21.3,Infarto agudo transmural del miocardio de sitio no especificado
+96,93,I21.4,Infarto agudo subendocardico del miocardio
+97,93,I21.9,Infarto agudo del miocardio sin otra especificacion
+98,98,J00,Rinofaringitis aguda (resfriado comun)
+99,99,J01.0,Sinusitis maxilar aguda
+100,99,J01.1,Sinusitis frontal aguda
+101,99,J01.2,Sinusitis etmoidal aguda
+102,99,J01.3,Sinusitis esfenoidal aguda
+103,99,J01.4,Pansinusitis aguda
+104,99,J01.8,Otras sinusitis agudas
+105,99,J01.9,Sinusitis aguda no especificada
+106,101,J03.0,Amigdalitis estreptococica
+107,101,J03.8,Amigdalitis aguda debida a otros microorganismos especificados
+108,101,J03.9,Amigdalitis aguda no especificada
+109,107,J11.0,Influenza con neumonia virus no identificado
+110,107,J11.1,Influenza con otras manifestaciones respiratorias virus no identificado
+111,107,J11.8,Influenza con otras manifestaciones virus no identificado
+112,114,J18.0,Bronconeumonia organismo no especificado
+113,114,J18.1,Neumonia lobar organismo no especificado
+114,114,J18.2,Neumonia hipostatica organismo no especificado
+115,114,J18.8,Otras neumonias organismo no especificado
+116,114,J18.9,Neumonia no especificada
+117,115,J20.0,Bronquitis aguda debida a Mycoplasma pneumoniae
+118,115,J20.1,Bronquitis aguda debida a Haemophilus influenzae
+119,115,J20.2,Bronquitis aguda debida a estreptococo
+120,115,J20.3,Bronquitis aguda debida a virus coxsackie
+121,115,J20.4,Bronquitis aguda debida a virus parainfluenza
+122,115,J20.5,Bronquitis aguda debida a virus sincitial respiratorio
+123,115,J20.6,Bronquitis aguda debida a rinovirus
+124,115,J20.7,Bronquitis aguda debida a ecovirus
+125,115,J20.8,Bronquitis aguda debida a otros organismos especificados
+126,115,J20.9,Bronquitis aguda no especificada
+127,123,J45.0,Asma predominantemente alergica
+128,123,J45.1,Asma no alergica
+129,123,J45.8,Asma mixta
+130,123,J45.9,Asma no especificada
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/sql/01_crear_tablas_cie10.sql">
+-- Tablas jerarquicas del catalogo CIE-10
+-- RNPI — Bases de Datos, ESCOM IPN
+
+CREATE TABLE IF NOT EXISTS public.cat_cie_capitulo (
+    id_capitulo   SERIAL PRIMARY KEY,
+    codigo_romano VARCHAR(10)  NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.cat_cie_bloque (
+    id_bloque     SERIAL PRIMARY KEY,
+    id_capitulo   INTEGER NOT NULL
+                  REFERENCES public.cat_cie_capitulo(id_capitulo)
+                  ON DELETE RESTRICT,
+    codigo_inicio VARCHAR(7)   NOT NULL,
+    codigo_fin    VARCHAR(7)   NOT NULL,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.cat_cie_categoria (
+    id_categoria  SERIAL PRIMARY KEY,
+    id_bloque     INTEGER NOT NULL
+                  REFERENCES public.cat_cie_bloque(id_bloque)
+                  ON DELETE RESTRICT,
+    codigo        CHAR(3)      NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.cat_cie_subcategoria (
+    id_subcategoria SERIAL PRIMARY KEY,
+    id_categoria    INTEGER NOT NULL
+                    REFERENCES public.cat_cie_categoria(id_categoria)
+                    ON DELETE RESTRICT,
+    codigo          VARCHAR(7)   NOT NULL UNIQUE,
+    descripcion     VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.menor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_menor          INTEGER NOT NULL
+                      REFERENCES public.menores(id_menor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+
+CREATE TABLE IF NOT EXISTS public.tutor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_tutor          INTEGER NOT NULL
+                      REFERENCES public.tutores(id_tutor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/sql/02_importar_cie10.sql">
+-- Script de importacion del catalogo CIE-10
+-- Ejecutar desde el directorio raiz del catalogo:
+--   psql -h 127.0.0.1 -U postgres -d rnpi -f sql/02_importar_cie10.sql
+-- O con sudo:
+--   sudo -u postgres psql -d rnpi -f sql/02_importar_cie10.sql
+
+\echo 'Importando capitulos...'
+\copy public.cat_cie_capitulo(id_capitulo, codigo_romano, descripcion) FROM 'csv/cie10_capitulos.csv' CSV HEADER ENCODING 'UTF8';
+
+\echo 'Importando bloques...'
+\copy public.cat_cie_bloque(id_bloque, id_capitulo, codigo_inicio, codigo_fin, descripcion) FROM 'csv/cie10_bloques.csv' CSV HEADER ENCODING 'UTF8';
+
+\echo 'Importando categorias...'
+\copy public.cat_cie_categoria(id_categoria, id_bloque, codigo, descripcion) FROM 'csv/cie10_categorias.csv' CSV HEADER ENCODING 'UTF8';
+
+\echo 'Importando subcategorias...'
+\copy public.cat_cie_subcategoria(id_subcategoria, id_categoria, codigo, descripcion) FROM 'csv/cie10_subcategorias.csv' CSV HEADER ENCODING 'UTF8';
+
+-- Actualizar las secuencias para que los SERIAL no colisionen con los IDs importados
+SELECT setval('public.cat_cie_capitulo_id_capitulo_seq',    (SELECT MAX(id_capitulo)    FROM public.cat_cie_capitulo));
+SELECT setval('public.cat_cie_bloque_id_bloque_seq',        (SELECT MAX(id_bloque)      FROM public.cat_cie_bloque));
+SELECT setval('public.cat_cie_categoria_id_categoria_seq',  (SELECT MAX(id_categoria)   FROM public.cat_cie_categoria));
+SELECT setval('public.cat_cie_subcategoria_id_subcategoria_seq', (SELECT MAX(id_subcategoria) FROM public.cat_cie_subcategoria));
+
+\echo 'Verificando carga...'
+SELECT
+  (SELECT COUNT(*) FROM public.cat_cie_capitulo)     AS capitulos,
+  (SELECT COUNT(*) FROM public.cat_cie_bloque)       AS bloques,
+  (SELECT COUNT(*) FROM public.cat_cie_categoria)    AS categorias,
+  (SELECT COUNT(*) FROM public.cat_cie_subcategoria) AS subcategorias;
+
+\echo 'Importacion completada.'
+</file>
+
+<file path="catalogo_enfermedades/catalogo_enfermedades/README_catalogo_enfermedades.md">
+# Catalogo de Enfermedades — CIE-10
+## Red Nacional de Proteccion Infantil (RNPI)
+### Bases de Datos — Prof. Ulises Velez Saldana
+
+---
+
+## 1. Descripcion del catalogo
+
+### Que es el CIE-10
+
+La Clasificacion Internacional de Enfermedades, decima revision (CIE-10) es el
+estandar mundial para el registro, reporte y analisis de enfermedades, trastornos,
+traumatismos y otras causas de mortalidad y morbilidad. Es publicado y mantenido
+por la Organizacion Mundial de la Salud (OMS).
+
+En Mexico, el uso del CIE-10 es obligatorio en todo el Sistema Nacional de Salud.
+La Direccion General de Informacion en Salud (DGIS) de la Secretaria de Salud es
+la entidad responsable de publicar y distribuir el catalogo oficial para uso en
+instituciones publicas y privadas del pais. El Centro Mexicano para la Clasificacion
+de Enfermedades (CEMECE) actua como el centro nacional de referencia de la OMS en
+Mexico y supervisa la correcta aplicacion del catalogo.
+
+### Por que se eligio este catalogo para el RNPI
+
+- Es el catalogo oficial vigente de uso obligatorio en Mexico.
+- Esta disponible como datos abiertos del Gobierno de Mexico, descargable sin costo.
+- Cubre a cualquier persona independientemente de su condicion o derechohabiencia,
+  a diferencia de los catalogos internos del IMSS o ISSSTE que solo cubren a sus
+  propios afiliados.
+- Permite registrar enfermedades tanto de los menores (NNA) como de sus tutores
+  con un vocabulario estandarizado, evitando inconsistencias en la captura.
+
+### Institucion responsable
+
+- Nombre: Direccion General de Informacion en Salud (DGIS)
+- Dependencia: Secretaria de Salud del Gobierno de Mexico
+- Sitio oficial: https://www.gob.mx/salud/dgis
+- Datos abiertos: https://datos.gob.mx
+
+---
+
+## 2. Estructura del catalogo
+
+El CIE-10 tiene una jerarquia de cuatro niveles:
+
+```
+Capitulo  (22 en total)
+  Bloque  (~260 en total — agrupacion por rango de codigos)
+    Categoria  (~2,100 en total — codigo de 3 caracteres)
+      Subcategoria  (~12,000 en total — codigo de hasta 7 caracteres)
+```
+
+Ejemplo completo descendiendo los cuatro niveles:
+
+| Nivel       | Codigo     | Descripcion                                              |
+|-------------|------------|----------------------------------------------------------|
+| Capitulo    | IV         | Enfermedades endocrinas, nutricionales y metabolicas     |
+| Bloque      | E10-E14    | Diabetes mellitus                                        |
+| Categoria   | E11        | Diabetes mellitus tipo 2                                 |
+| Subcategoria| E11.6      | Diabetes mellitus tipo 2 con otras complicaciones        |
+
+El diagnostico en el sistema RNPI siempre se registra al nivel de subcategoria,
+que es el nivel de mayor especificidad clinica.
+
+---
+
+## 3. Uso en el sistema RNPI
+
+El catalogo se usa como vocabulario controlado en dos tablas del sistema:
+
+- `menor_enfermedad` — registra los padecimientos de los NNA atendidos.
+- `tutor_enfermedad` — registra los padecimientos de los tutores o responsables
+  del menor, quienes en la mayoria de los casos son adultos mayores con
+  enfermedades cronicas que tambien requieren atencion.
+
+Ambas tablas almacenan ademas atributos clinicos propios del registro de la
+institucion: si la enfermedad es cronica, si esta controlada, la fecha de
+diagnostico y observaciones del personal.
+
+---
+
+## 4. Archivos incluidos en este catalogo
+
+```
+catalogo_enfermedades/
+    README_catalogo_enfermedades.md   <- este archivo
+    sql/
+        01_crear_tablas_cie10.sql     <- DDL: crea las 4 tablas del catalogo
+        02_importar_cie10.sql         <- comandos COPY para cargar los CSV
+    csv/
+        cie10_capitulos.csv
+        cie10_bloques.csv
+        cie10_categorias.csv
+        cie10_subcategorias.csv
+```
+
+---
+
+## 5. Requisitos previos
+
+- PostgreSQL 14 o superior instalado y en ejecucion.
+- Base de datos `rnpi` ya creada con el esquema base del proyecto.
+- Acceso con el usuario `postgres` o un usuario con permisos de escritura
+  sobre el esquema `public`.
+- Los archivos CSV deben estar disponibles en la ruta que se indica al ejecutar
+  los comandos (ver seccion 6).
+
+---
+
+## 6. Instrucciones de instalacion en Linux
+
+### Paso 1 — Descomprimir el archivo entregado
+
+```bash
+unzip catalogo_enfermedades.zip -d catalogo_enfermedades
+cd catalogo_enfermedades
+```
+
+### Paso 2 — Crear las tablas del catalogo en la base de datos
+
+Ejecutar el script DDL que crea las cuatro tablas jerarquicas del CIE-10
+y las dos tablas de relacion con menores y tutores:
+
+```bash
+sudo -u postgres psql -d rnpi -f sql/01_crear_tablas_cie10.sql
+```
+
+O usando autenticacion TCP si el sistema no permite peer authentication:
+
+```bash
+psql -h 127.0.0.1 -U postgres -d rnpi -f sql/01_crear_tablas_cie10.sql
+```
+
+### Paso 3 — Importar los datos del catalogo desde los archivos CSV
+
+Los archivos deben cargarse en orden para respetar las llaves foraneas:
+capitulos primero, subcategorias al final.
+
+```bash
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_capitulo(codigo_romano, descripcion) \
+      FROM '$(pwd)/csv/cie10_capitulos.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_bloque(id_capitulo, codigo_inicio, codigo_fin, descripcion) \
+      FROM '$(pwd)/csv/cie10_bloques.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_categoria(id_bloque, codigo, descripcion) \
+      FROM '$(pwd)/csv/cie10_categorias.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_subcategoria(id_categoria, codigo, descripcion) \
+      FROM '$(pwd)/csv/cie10_subcategorias.csv' CSV HEADER ENCODING 'UTF8';"
+```
+
+### Paso 4 — Verificar la carga
+
+```bash
+sudo -u postgres psql -d rnpi -c "
+SELECT
+  (SELECT COUNT(*) FROM public.cat_cie_capitulo)    AS capitulos,
+  (SELECT COUNT(*) FROM public.cat_cie_bloque)      AS bloques,
+  (SELECT COUNT(*) FROM public.cat_cie_categoria)   AS categorias,
+  (SELECT COUNT(*) FROM public.cat_cie_subcategoria) AS subcategorias;
+"
+```
+
+Resultado esperado aproximado:
+
+```
+ capitulos | bloques | categorias | subcategorias
+-----------+---------+------------+---------------
+        22 |     262 |       2101 |         12420
+```
+
+### Paso 5 — Exportar un respaldo del catalogo ya cargado (opcional)
+
+```bash
+sudo -u postgres pg_dump -d rnpi \
+  --table=public.cat_cie_capitulo \
+  --table=public.cat_cie_bloque \
+  --table=public.cat_cie_categoria \
+  --table=public.cat_cie_subcategoria \
+  --inserts -f respaldo_catalogo_cie10.sql
+```
+
+---
+
+## 7. Script DDL de referencia
+
+El archivo `sql/01_crear_tablas_cie10.sql` contiene lo siguiente:
+
+```sql
+CREATE TABLE public.cat_cie_capitulo (
+    id_capitulo   SERIAL PRIMARY KEY,
+    codigo_romano VARCHAR(10)  NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_bloque (
+    id_bloque     SERIAL PRIMARY KEY,
+    id_capitulo   INTEGER NOT NULL
+                  REFERENCES public.cat_cie_capitulo(id_capitulo)
+                  ON DELETE RESTRICT,
+    codigo_inicio VARCHAR(7)   NOT NULL,
+    codigo_fin    VARCHAR(7)   NOT NULL,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_categoria (
+    id_categoria  SERIAL PRIMARY KEY,
+    id_bloque     INTEGER NOT NULL
+                  REFERENCES public.cat_cie_bloque(id_bloque)
+                  ON DELETE RESTRICT,
+    codigo        CHAR(3)      NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_subcategoria (
+    id_subcategoria SERIAL PRIMARY KEY,
+    id_categoria    INTEGER NOT NULL
+                    REFERENCES public.cat_cie_categoria(id_categoria)
+                    ON DELETE RESTRICT,
+    codigo          VARCHAR(7)   NOT NULL UNIQUE,
+    descripcion     VARCHAR(300) NOT NULL
+);
+
+-- Tabla de enfermedades registradas para menores (NNA)
+CREATE TABLE public.menor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_menor          INTEGER NOT NULL
+                      REFERENCES public.menores(id_menor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+
+-- Tabla de enfermedades registradas para tutores
+CREATE TABLE public.tutor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_tutor          INTEGER NOT NULL
+                      REFERENCES public.tutores(id_tutor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+```
+
+---
+
+## 8. Fuente y licencia del catalogo
+
+- Fuente original: Organizacion Mundial de la Salud (OMS) — CIE-10, Version 2019.
+- Adaptacion para Mexico: Direccion General de Informacion en Salud (DGIS),
+  Secretaria de Salud.
+- Disponible en datos abiertos del Gobierno de Mexico bajo licencia de libre uso.
+- URL de descarga oficial: https://datos.gob.mx/busca/dataset/catalogo-de-claves-de-
+  diagnostico-cie-10
+
+---
+
+*Documento preparado para la entrega de la tercera iteracion del proyecto RNPI.*
+*Curso: Bases de Datos — ESCOM, IPN.*
+</file>
+
+<file path="catalogo_enfermedades/README_catalogo_enfermedades.md">
+# Catalogo de Enfermedades — CIE-10
+## Red Nacional de Proteccion Infantil (RNPI)
+### Bases de Datos — Prof. Ulises Velez Saldana
+
+---
+
+## 1. Descripcion del catalogo
+
+### Que es el CIE-10
+
+La Clasificacion Internacional de Enfermedades, decima revision (CIE-10) es el
+estandar mundial para el registro, reporte y analisis de enfermedades, trastornos,
+traumatismos y otras causas de mortalidad y morbilidad. Es publicado y mantenido
+por la Organizacion Mundial de la Salud (OMS).
+
+En Mexico, el uso del CIE-10 es obligatorio en todo el Sistema Nacional de Salud.
+La Direccion General de Informacion en Salud (DGIS) de la Secretaria de Salud es
+la entidad responsable de publicar y distribuir el catalogo oficial para uso en
+instituciones publicas y privadas del pais. El Centro Mexicano para la Clasificacion
+de Enfermedades (CEMECE) actua como el centro nacional de referencia de la OMS en
+Mexico y supervisa la correcta aplicacion del catalogo.
+
+### Por que se eligio este catalogo para el RNPI
+
+- Es el catalogo oficial vigente de uso obligatorio en Mexico.
+- Esta disponible como datos abiertos del Gobierno de Mexico, descargable sin costo.
+- Cubre a cualquier persona independientemente de su condicion o derechohabiencia,
+  a diferencia de los catalogos internos del IMSS o ISSSTE que solo cubren a sus
+  propios afiliados.
+- Permite registrar enfermedades tanto de los menores (NNA) como de sus tutores
+  con un vocabulario estandarizado, evitando inconsistencias en la captura.
+
+### Institucion responsable
+
+- Nombre: Direccion General de Informacion en Salud (DGIS)
+- Dependencia: Secretaria de Salud del Gobierno de Mexico
+- Sitio oficial: https://www.gob.mx/salud/dgis
+- Datos abiertos: https://datos.gob.mx
+
+---
+
+## 2. Estructura del catalogo
+
+El CIE-10 tiene una jerarquia de cuatro niveles:
+
+```
+Capitulo  (22 en total)
+  Bloque  (~260 en total — agrupacion por rango de codigos)
+    Categoria  (~2,100 en total — codigo de 3 caracteres)
+      Subcategoria  (~12,000 en total — codigo de hasta 7 caracteres)
+```
+
+Ejemplo completo descendiendo los cuatro niveles:
+
+| Nivel       | Codigo     | Descripcion                                              |
+|-------------|------------|----------------------------------------------------------|
+| Capitulo    | IV         | Enfermedades endocrinas, nutricionales y metabolicas     |
+| Bloque      | E10-E14    | Diabetes mellitus                                        |
+| Categoria   | E11        | Diabetes mellitus tipo 2                                 |
+| Subcategoria| E11.6      | Diabetes mellitus tipo 2 con otras complicaciones        |
+
+El diagnostico en el sistema RNPI siempre se registra al nivel de subcategoria,
+que es el nivel de mayor especificidad clinica.
+
+---
+
+## 3. Uso en el sistema RNPI
+
+El catalogo se usa como vocabulario controlado en dos tablas del sistema:
+
+- `menor_enfermedad` — registra los padecimientos de los NNA atendidos.
+- `tutor_enfermedad` — registra los padecimientos de los tutores o responsables
+  del menor, quienes en la mayoria de los casos son adultos mayores con
+  enfermedades cronicas que tambien requieren atencion.
+
+Ambas tablas almacenan ademas atributos clinicos propios del registro de la
+institucion: si la enfermedad es cronica, si esta controlada, la fecha de
+diagnostico y observaciones del personal.
+
+---
+
+## 4. Archivos incluidos en este catalogo
+
+```
+catalogo_enfermedades/
+    README_catalogo_enfermedades.md   <- este archivo
+    sql/
+        01_crear_tablas_cie10.sql     <- DDL: crea las 4 tablas del catalogo
+        02_importar_cie10.sql         <- comandos COPY para cargar los CSV
+    csv/
+        cie10_capitulos.csv
+        cie10_bloques.csv
+        cie10_categorias.csv
+        cie10_subcategorias.csv
+```
+
+---
+
+## 5. Requisitos previos
+
+- PostgreSQL 14 o superior instalado y en ejecucion.
+- Base de datos `rnpi` ya creada con el esquema base del proyecto.
+- Acceso con el usuario `postgres` o un usuario con permisos de escritura
+  sobre el esquema `public`.
+- Los archivos CSV deben estar disponibles en la ruta que se indica al ejecutar
+  los comandos (ver seccion 6).
+
+---
+
+## 6. Instrucciones de instalacion en Linux
+
+### Paso 1 — Descomprimir el archivo entregado
+
+```bash
+unzip catalogo_enfermedades.zip -d catalogo_enfermedades
+cd catalogo_enfermedades
+```
+
+### Paso 2 — Crear las tablas del catalogo en la base de datos
+
+Ejecutar el script DDL que crea las cuatro tablas jerarquicas del CIE-10
+y las dos tablas de relacion con menores y tutores:
+
+```bash
+sudo -u postgres psql -d rnpi -f sql/01_crear_tablas_cie10.sql
+```
+
+O usando autenticacion TCP si el sistema no permite peer authentication:
+
+```bash
+psql -h 127.0.0.1 -U postgres -d rnpi -f sql/01_crear_tablas_cie10.sql
+```
+
+### Paso 3 — Importar los datos del catalogo desde los archivos CSV
+
+Los archivos deben cargarse en orden para respetar las llaves foraneas:
+capitulos primero, subcategorias al final.
+
+```bash
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_capitulo(codigo_romano, descripcion) \
+      FROM '$(pwd)/csv/cie10_capitulos.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_bloque(id_capitulo, codigo_inicio, codigo_fin, descripcion) \
+      FROM '$(pwd)/csv/cie10_bloques.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_categoria(id_bloque, codigo, descripcion) \
+      FROM '$(pwd)/csv/cie10_categorias.csv' CSV HEADER ENCODING 'UTF8';"
+
+sudo -u postgres psql -d rnpi \
+  -c "\copy public.cat_cie_subcategoria(id_categoria, codigo, descripcion) \
+      FROM '$(pwd)/csv/cie10_subcategorias.csv' CSV HEADER ENCODING 'UTF8';"
+```
+
+### Paso 4 — Verificar la carga
+
+```bash
+sudo -u postgres psql -d rnpi -c "
+SELECT
+  (SELECT COUNT(*) FROM public.cat_cie_capitulo)    AS capitulos,
+  (SELECT COUNT(*) FROM public.cat_cie_bloque)      AS bloques,
+  (SELECT COUNT(*) FROM public.cat_cie_categoria)   AS categorias,
+  (SELECT COUNT(*) FROM public.cat_cie_subcategoria) AS subcategorias;
+"
+```
+
+Resultado esperado aproximado:
+
+```
+ capitulos | bloques | categorias | subcategorias
+-----------+---------+------------+---------------
+        22 |     262 |       2101 |         12420
+```
+
+### Paso 5 — Exportar un respaldo del catalogo ya cargado (opcional)
+
+```bash
+sudo -u postgres pg_dump -d rnpi \
+  --table=public.cat_cie_capitulo \
+  --table=public.cat_cie_bloque \
+  --table=public.cat_cie_categoria \
+  --table=public.cat_cie_subcategoria \
+  --inserts -f respaldo_catalogo_cie10.sql
+```
+
+---
+
+## 7. Script DDL de referencia
+
+El archivo `sql/01_crear_tablas_cie10.sql` contiene lo siguiente:
+
+```sql
+CREATE TABLE public.cat_cie_capitulo (
+    id_capitulo   SERIAL PRIMARY KEY,
+    codigo_romano VARCHAR(10)  NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_bloque (
+    id_bloque     SERIAL PRIMARY KEY,
+    id_capitulo   INTEGER NOT NULL
+                  REFERENCES public.cat_cie_capitulo(id_capitulo)
+                  ON DELETE RESTRICT,
+    codigo_inicio VARCHAR(7)   NOT NULL,
+    codigo_fin    VARCHAR(7)   NOT NULL,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_categoria (
+    id_categoria  SERIAL PRIMARY KEY,
+    id_bloque     INTEGER NOT NULL
+                  REFERENCES public.cat_cie_bloque(id_bloque)
+                  ON DELETE RESTRICT,
+    codigo        CHAR(3)      NOT NULL UNIQUE,
+    descripcion   VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE public.cat_cie_subcategoria (
+    id_subcategoria SERIAL PRIMARY KEY,
+    id_categoria    INTEGER NOT NULL
+                    REFERENCES public.cat_cie_categoria(id_categoria)
+                    ON DELETE RESTRICT,
+    codigo          VARCHAR(7)   NOT NULL UNIQUE,
+    descripcion     VARCHAR(300) NOT NULL
+);
+
+-- Tabla de enfermedades registradas para menores (NNA)
+CREATE TABLE public.menor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_menor          INTEGER NOT NULL
+                      REFERENCES public.menores(id_menor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+
+-- Tabla de enfermedades registradas para tutores
+CREATE TABLE public.tutor_enfermedad (
+    id                SERIAL PRIMARY KEY,
+    id_tutor          INTEGER NOT NULL
+                      REFERENCES public.tutores(id_tutor)
+                      ON DELETE CASCADE,
+    id_subcategoria   INTEGER NOT NULL
+                      REFERENCES public.cat_cie_subcategoria(id_subcategoria)
+                      ON DELETE RESTRICT,
+    es_cronica        BOOLEAN NOT NULL DEFAULT FALSE,
+    esta_controlada   BOOLEAN NOT NULL DEFAULT FALSE,
+    fecha_diagnostico DATE    NOT NULL DEFAULT CURRENT_DATE,
+    observaciones     TEXT
+);
+```
+
+---
+
+## 8. Fuente y licencia del catalogo
+
+- Fuente original: Organizacion Mundial de la Salud (OMS) — CIE-10, Version 2019.
+- Adaptacion para Mexico: Direccion General de Informacion en Salud (DGIS),
+  Secretaria de Salud.
+- Disponible en datos abiertos del Gobierno de Mexico bajo licencia de libre uso.
+- URL de descarga oficial: https://datos.gob.mx/busca/dataset/catalogo-de-claves-de-
+  diagnostico-cie-10
+
+---
+
+*Documento preparado para la entrega de la tercera iteracion del proyecto RNPI.*
+*Curso: Bases de Datos — ESCOM, IPN.*
+</file>
+
+<file path="catalogos/lenguas/csv/lenguas_inali.csv">
+id_lengua,nombre,es_indigena
+1,Español,false
+2,Akateko,true
+3,Amuzgo,true
+4,Awakateko,true
+5,Ayapaneco,true
+6,Chatino,true
+7,Chichimeco Jonaz,true
+8,Chinanteco,true
+9,Chocholteco,true
+10,Chontal de Oaxaca,true
+11,Chontal de Tabasco,true
+12,Chuj,true
+13,Cochimí,true
+14,Cora,true
+15,Cucapá,true
+16,Cuicateco,true
+17,Guarijío,true
+18,Huasteco,true
+19,Huave,true
+20,Huichol,true
+21,Ixcateco,true
+22,Ixil,true
+23,Jacalteco,true
+24,Kaqchikel,true
+25,Kickapoo,true
+26,Kiliwa,true
+27,K'iche',true
+28,Ku'ahl,true
+29,Kumiai,true
+30,Lacandón,true
+31,Mam,true
+32,Matlatzinca,true
+33,Maya,true
+34,Mayo,true
+35,Mazahua,true
+36,Mazateco,true
+37,Mixe,true
+38,Mixteco,true
+39,Mocho',true
+40,Náhuatl,true
+41,Ocuilteco,true
+42,Oluteco,true
+43,Otomí,true
+44,Paipai,true
+45,Pame,true
+46,Papago,true
+47,Pima,true
+48,Popoloca,true
+49,Popoluca de la Sierra,true
+50,Purépecha,true
+51,Q'anjob'al,true
+52,Qato'k,true
+53,Seri,true
+54,Tarahumara,true
+55,Teko,true
+56,Tepehua,true
+57,Tepehuano del Norte,true
+58,Tepehuano del Sur,true
+59,Tlapaneco,true
+60,Tojolabal,true
+61,Totonaco,true
+62,Triqui,true
+63,Tzeltal,true
+64,Tzotzil,true
+65,Yaqui,true
+66,Zapoteco,true
+67,Zoque,true
+68,Ngiwa,true
+69,No Especificado,false
+</file>
+
+<file path="catalogos/lenguas/sql/01_crear_tabla_lenguas.sql">
+-- Catálogo de lenguas indígenas INALI (68 agrupaciones + Español)
+-- RNPI — Bases de Datos, ESCOM IPN
+
+CREATE TABLE IF NOT EXISTS public.cat_lengua_inali (
+    id_lengua   SERIAL PRIMARY KEY,
+    nombre      VARCHAR(100) NOT NULL UNIQUE,
+    es_indigena BOOLEAN      NOT NULL DEFAULT TRUE
+);
+</file>
+
+<file path="catalogos/lenguas/sql/02_importar_lenguas.sql">
+-- Importación del catálogo de lenguas INALI
+-- Ejecutar desde el directorio raiz del catálogo:
+--   psql -h 127.0.0.1 -U oviveros -d rnpi -f sql/02_importar_lenguas.sql
+
+\echo 'Importando lenguas INALI...'
+\copy public.cat_lengua_inali(id_lengua, nombre, es_indigena) FROM 'csv/lenguas_inali.csv' CSV HEADER ENCODING 'UTF8';
+
+SELECT setval('public.cat_lengua_inali_id_lengua_seq', (SELECT MAX(id_lengua) FROM public.cat_lengua_inali));
+
+\echo 'Verificando carga...'
+SELECT COUNT(*) AS total_lenguas FROM public.cat_lengua_inali;
+SELECT COUNT(*) AS indigenas FROM public.cat_lengua_inali WHERE es_indigena = TRUE;
+
+\echo 'Importación completada.'
+</file>
+
+<file path="catalogos/localidades/csv/estados.csv">
+id_estado,nombre
+1,Aguascalientes
+2,Baja California
+3,Baja California Sur
+4,Campeche
+5,Coahuila de Zaragoza
+6,Colima
+7,Chiapas
+8,Chihuahua
+9,Ciudad de México
+10,Durango
+11,Guanajuato
+12,Guerrero
+13,Hidalgo
+14,Jalisco
+15,México
+16,Michoacán de Ocampo
+17,Morelos
+18,Nayarit
+19,Nuevo León
+20,Oaxaca
+21,Puebla
+22,Querétaro
+23,Quintana Roo
+24,San Luis Potosí
+25,Sinaloa
+26,Sonora
+27,Tabasco
+28,Tamaulipas
+29,Tlaxcala
+30,Veracruz de Ignacio de la Llave
+31,Yucatán
+32,Zacatecas
+</file>
+
+<file path="catalogos/localidades/csv/municipios.csv">
+id_municipio,id_estado,nombre
+1,1,Aguascalientes
+2,1,Asientos
+3,1,Calvillo
+4,1,Jesús María
+5,1,Rincón de Romos
+6,2,Ensenada
+7,2,Mexicali
+8,2,Tecate
+9,2,Tijuana
+10,2,Playas de Rosarito
+11,3,Comondú
+12,3,La Paz
+13,3,Los Cabos
+14,3,Loreto
+15,3,Mulegé
+16,4,Calkiní
+17,4,Campeche
+18,4,Carmen
+19,4,Champotón
+20,4,Escárcega
+21,5,Saltillo
+22,5,Torreón
+23,5,Monclova
+24,5,Piedras Negras
+25,5,Acuña
+26,6,Colima
+27,6,Manzanillo
+28,6,Tecomán
+29,6,Villa de Álvarez
+30,6,Armería
+31,7,Tuxtla Gutiérrez
+32,7,San Cristóbal de las Casas
+33,7,Tapachula
+34,7,Ocosingo
+35,7,Palenque
+36,7,Comitán de Domínguez
+37,8,Chihuahua
+38,8,Ciudad Juárez
+39,8,Delicias
+40,8,Hidalgo del Parral
+41,8,Cuauhtémoc
+42,9,Álvaro Obregón
+43,9,Azcapotzalco
+44,9,Benito Juárez
+45,9,Coyoacán
+46,9,Cuajimalpa de Morelos
+47,9,Cuauhtémoc
+48,9,Gustavo A. Madero
+49,9,Iztacalco
+50,9,Iztapalapa
+51,9,La Magdalena Contreras
+52,9,Miguel Hidalgo
+53,9,Milpa Alta
+54,9,Tláhuac
+55,9,Tlalpan
+56,9,Venustiano Carranza
+57,9,Xochimilco
+58,10,Durango
+59,10,Gómez Palacio
+60,10,Lerdo
+61,10,Santiago Papasquiaro
+62,10,El Salto
+63,11,Guanajuato
+64,11,León
+65,11,Irapuato
+66,11,Celaya
+67,11,Salamanca
+68,11,Silao de la Victoria
+69,12,Chilpancingo de los Bravo
+70,12,Acapulco de Juárez
+71,12,Iguala de la Independencia
+72,12,Zihuatanejo de Azueta
+73,12,Taxco de Alarcón
+74,13,Pachuca de Soto
+75,13,Tulancingo de Bravo
+76,13,Tula de Allende
+77,13,Ixmiquilpan
+78,13,Huejutla de Reyes
+79,14,Guadalajara
+80,14,Zapopan
+81,14,San Pedro Tlaquepaque
+82,14,Tonalá
+83,14,Puerto Vallarta
+84,14,Lagos de Moreno
+85,15,Toluca
+86,15,Ecatepec de Morelos
+87,15,Nezahualcóyotl
+88,15,Tlalnepantla de Baz
+89,15,Naucalpan de Juárez
+90,15,Chimalhuacán
+91,15,Texcoco
+92,15,Ixtapaluca
+93,16,Morelia
+94,16,Uruapan
+95,16,Zamora
+96,16,Lázaro Cárdenas
+97,16,Apatzingán
+98,17,Cuernavaca
+99,17,Jiutepec
+100,17,Cuautla
+101,17,Temixco
+102,17,Yautepec
+103,18,Tepic
+104,18,Bahía de Banderas
+105,18,Compostela
+106,18,Santiago Ixcuintla
+107,18,Xalisco
+108,19,Monterrey
+109,19,Guadalupe
+110,19,San Nicolás de los Garza
+111,19,Apodaca
+112,19,General Escobedo
+113,19,Santa Catarina
+114,20,Oaxaca de Juárez
+115,20,San Juan Bautista Tuxtepec
+116,20,Heroica Ciudad de Juchitán de Zaragoza
+117,20,Salina Cruz
+118,20,Heroica Ciudad de Huajuapan de León
+119,21,Puebla
+120,21,Tehuacán
+121,21,San Martín Texmelucan
+122,21,Atlixco
+123,21,San Andrés Cholula
+124,22,Querétaro
+125,22,San Juan del Río
+126,22,Corregidora
+127,22,El Marqués
+128,22,Tequisquiapan
+129,23,Othón P. Blanco
+130,23,Benito Juárez
+131,23,Isla Mujeres
+132,23,Cozumel
+133,23,Felipe Carrillo Puerto
+134,24,San Luis Potosí
+135,24,Soledad de Graciano Sánchez
+136,24,Matehuala
+137,24,Ciudad Valles
+138,24,Rioverde
+139,25,Culiacán
+140,25,Mazatlán
+141,25,Ahome
+142,25,Guasave
+143,25,Navolato
+144,26,Hermosillo
+145,26,Cajeme
+146,26,Nogales
+147,26,San Luis Río Colorado
+148,26,Guaymas
+149,27,Villahermosa
+150,27,Cárdenas
+151,27,Comalcalco
+152,27,Cunduacán
+153,27,Nacajuca
+154,28,Tampico
+155,28,Reynosa
+156,28,Matamoros
+157,28,Nuevo Laredo
+158,28,Altamira
+159,29,Tlaxcala
+160,29,Apizaco
+161,29,Chiautempan
+162,29,Huamantla
+163,29,Zacatelco
+164,30,Xalapa
+165,30,Veracruz
+166,30,Coatzacoalcos
+167,30,Boca del Río
+168,30,Córdoba
+169,30,Poza Rica de Hidalgo
+170,31,Mérida
+171,31,Kanasín
+172,31,Valladolid
+173,31,Umán
+174,31,Progreso
+175,32,Zacatecas
+176,32,Fresnillo
+177,32,Guadalupe
+178,32,Jerez de García Salinas
+179,32,Loreto
+</file>
+
+<file path="catalogos/localidades/sql/01_crear_tabla_localidades.sql">
+-- Catálogo de localidades: estados y municipios (INEGI)
+-- Usa las tablas cat_estados y cat_municipios ya existentes en el esquema.
+-- RNPI — Bases de Datos, ESCOM IPN
+
+-- No se crean tablas nuevas; cat_estados y cat_municipios ya existen.
+-- Este script solo documenta la estructura esperada:
+--
+-- public.cat_estados  (id_estado SERIAL PK, nombre VARCHAR(100))
+-- public.cat_municipios (id_municipio SERIAL PK, id_estado INT FK, nombre VARCHAR(150))
+</file>
+
+<file path="catalogos/localidades/sql/02_importar_localidades.sql">
+-- Importación de estados y municipios (INEGI)
+-- Ejecutar desde el directorio raiz del catálogo:
+--   psql -h 127.0.0.1 -U oviveros -d rnpi -f sql/02_importar_localidades.sql
+
+\echo 'Importando estados...'
+\copy public.cat_estados(id_estado, nombre) FROM 'csv/estados.csv' CSV HEADER ENCODING 'UTF8';
+
+SELECT setval('public.cat_estados_id_estado_seq', (SELECT MAX(id_estado) FROM public.cat_estados));
+
+\echo 'Importando municipios...'
+\copy public.cat_municipios(id_municipio, id_estado, nombre) FROM 'csv/municipios.csv' CSV HEADER ENCODING 'UTF8';
+
+SELECT setval('public.cat_municipios_id_municipio_seq', (SELECT MAX(id_municipio) FROM public.cat_municipios));
+
+\echo 'Verificando carga...'
+SELECT COUNT(*) AS total_estados    FROM public.cat_estados;
+SELECT COUNT(*) AS total_municipios FROM public.cat_municipios;
+
+\echo 'Importación completada.'
+</file>
+
+<file path="static/index.html">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RNPI — Sistema Integral</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Variables Globales ─── */
+    :root {
+      --navy:   #0d1f3c; --navy2:  #162b52; --teal:   #0e7490; --teal-l: #22d3ee;
+      --amber:  #f59e0b; --red:    #dc2626; --green:  #16a34a; --bg:     #f0f4f8;
+      --card:   #ffffff; --border: #d1dce9; --text:   #1e293b; --muted:  #64748b;
+      --radius: 10px; --shadow: 0 4px 24px rgba(13,31,60,.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ─── Pantalla Login ─── */
+    #screen-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--navy) 0%, #0f3460 50%, #1a6b8a 100%); }
+    .login-card { background: var(--card); border-radius: 16px; padding: 3rem 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,.35); text-align: center; }
+    .login-logo { width: 56px; height: 56px; background: var(--navy); border-radius: 14px; display: grid; place-items: center; font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--teal-l); margin: 0 auto 1.25rem; }
+    .login-card h1 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--navy); }
+    .login-card p  { color: var(--muted); font-size: .85rem; margin-top: .35rem; margin-bottom: 2rem; }
+    #login-error { background: #fef2f2; border: 1px solid #fecaca; color: var(--red); border-radius: 8px; padding: .65rem 1rem; font-size: .83rem; margin-bottom: 1rem; display: none; }
+
+    /* ─── Interfaz Principal ─── */
+    #screen-main { display: none; }
+    header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); color: #fff; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(0,0,0,.25); position: sticky; top: 0; z-index: 100; }
+    
+    .header-left { display: flex; align-items: center; gap: 3rem; }
+    .logo { display: flex; align-items: center; gap: .75rem; }
+    .logo-badge { width: 36px; height: 36px; background: var(--teal); border-radius: 8px; display: grid; place-items: center; font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .logo-text { font-family: 'DM Serif Display', serif; font-size: 1.1rem; line-height: 1.2; }
+    .logo-sub  { font-size: .7rem; opacity: .65; text-transform: uppercase; }
+    
+    /* ─── Navegación (TABS) ─── */
+    .nav-menu { display: flex; gap: 1.5rem; }
+    .nav-tab { color: rgba(255,255,255,0.6); text-decoration: none; font-size: .9rem; font-weight: 500; padding: .5rem 0; border-bottom: 2px solid transparent; transition: all .2s; cursor: pointer; }
+    .nav-tab:hover { color: #fff; }
+    .nav-tab.active { color: #fff; border-bottom-color: var(--teal-l); }
+    
+    .header-user { display: flex; align-items: center; gap: .75rem; font-size: .85rem; }
+    #btn-logout { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: #fff; padding: .35rem .85rem; border-radius: 6px; cursor: pointer; font-size: .8rem; font-family: inherit; transition: background .2s; }
+    #btn-logout:hover { background: rgba(255,255,255,.22); }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .view-section { display: none; animation: fadeIn .3s ease; }
+    .view-section.active { display: block; }
+
+    .page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.75rem; flex-wrap: wrap; gap: 1rem; }
+    .page-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--navy); }
+    .page-sub   { color: var(--muted); font-size: .85rem; margin-top: .2rem; }
+
+    /* ─── Tablas y Tarjetas ─── */
+    .toolbar { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .search-wrap { position: relative; flex: 1; min-width: 240px; }
+    .search-wrap input { width: 100%; padding: .6rem 1rem .6rem 2.5rem; border: 1px solid var(--border); border-radius: var(--radius); font-family: inherit; font-size: .9rem; }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    th { padding: .85rem 1rem; text-align: left; font-weight: 600; color: var(--muted); font-size: .78rem; text-transform: uppercase; border-bottom: 1px solid var(--border); background: #f8fafc; }
+    td { padding: .85rem 1rem; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    tr:hover td { background: #f8fafc; }
+
+    /* ─── Badges y Botones ─── */
+    .badge { display: inline-block; padding: .2rem .65rem; border-radius: 20px; font-size: .75rem; font-weight: 600; white-space: nowrap; }
+    .badge-green  { background: #dcfce7; color: #15803d; }
+    .badge-red    { background: #fee2e2; color: #b91c1c; }
+    .badge-navy   { background: #e0e7ff; color: #3730a3; }
+    .badge-teal   { background: #ccfbf1; color: #0f766e; }
+    .badge-amber  { background: #fef3c7; color: #b45309; }
+
+    .actions { display: flex; gap: .4rem; flex-wrap: nowrap; }
+    .btn-icon { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; color: var(--muted); transition: all .15s; }
+    .btn-icon:hover { border-color: var(--teal); color: var(--teal); background: #ecfeff; }
+    .btn-icon.danger:hover { border-color: var(--red); color: var(--red); background: #fef2f2; }
+    .btn-icon svg { width: 14px; height: 14px; }
+
+    .btn { display: inline-flex; align-items: center; gap: .45rem; padding: .6rem 1.25rem; border-radius: var(--radius); font-family: inherit; font-size: .875rem; font-weight: 500; cursor: pointer; border: none; transition: all .15s; }
+    .btn-primary   { background: var(--navy); color: #fff; }
+    .btn-primary:hover   { background: var(--navy2); }
+    .btn-secondary { background: #fff; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #f8fafc; }
+
+    /* ─── Formularios ─── */
+    .form-group { margin-bottom: 1.15rem; }
+    label { display: block; font-size: .82rem; font-weight: 600; color: var(--muted); margin-bottom: .4rem; text-transform: uppercase; }
+    input[type=text], input[type=email], input[type=password], input[type=date], select { width: 100%; padding: .6rem .9rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: .9rem; background: #fff; }
+    input:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(14,116,144,.12); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    .span-2 { grid-column: span 2; }
+    .field-error { font-size: .78rem; color: var(--red); margin-top: .3rem; display: none; }
+    .section-title { font-size: 1rem; font-weight: 600; color: var(--teal); margin: 1.5rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: .4rem; }
+    .section-title:first-child { margin-top: 0; }
+
+    /* ─── Modales ─── */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); backdrop-filter: blur(2px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .overlay.open { display: flex; animation: fadeIn .2s ease both; }
+    .modal { background: var(--card); border-radius: 14px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+    .modal-wide { max-width: 850px; }
+    .modal-header { padding: 1.5rem 1.75rem 1rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .modal-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--navy); }
+    .modal-body { padding: 1.5rem 1.75rem; }
+    .modal-footer { padding: 1rem 1.75rem 1.5rem; display: flex; justify-content: flex-end; gap: .75rem; border-top: 1px solid var(--border); }
+    .close-btn { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; color: var(--muted); transition: all .15s; }
+    .close-btn:hover { border-color: #999; color: var(--text); }
+
+    /* ─── Vista Detalle (Expediente y Personal) ─── */
+    .detail-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin-bottom: 1rem; }
+    .detail-card h3 { font-size: .95rem; color: var(--navy); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .05em; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    .detail-item label { font-size: .75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; display: block; margin-bottom: .2rem; }
+    .detail-item p { font-size: .95rem; color: var(--text); }
+    .detail-sep { grid-column: 1/-1; border: none; border-top: 1px solid var(--border); }
+    
+    .avatar-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: var(--teal-l); display: grid; place-items: center; font-family: 'DM Serif Display', serif; font-size: 1.4rem; flex-shrink: 0; }
+
+    /* ─── Modal Confirmación ─── */
+    .confirm-icon { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 1rem; }
+    .confirm-icon.danger { background: #fee2e2; color: var(--red); }
+    .confirm-icon.warning { background: #fef3c7; color: var(--amber); }
+    #confirm-modal .modal-body { text-align: center; }
+    #confirm-modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; margin-bottom: .5rem; }
+    #confirm-modal p  { color: var(--muted); font-size: .9rem; line-height: 1.5; }
+
+    /* Toasts y Utilidades */
+    #toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; display: flex; flex-direction: column; gap: .5rem; }
+    .toast { padding: .75rem 1.25rem; border-radius: 10px; font-size: .875rem; color: #fff; max-width: 320px; animation: slideInRight .3s ease, fadeOut .4s ease 3s both; box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+    .toast.success { background: var(--green); }
+    .toast.error   { background: var(--red); }
+    .toast.info    { background: var(--teal); }
+
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(40px) } to { opacity: 1; transform: none } }
+    @keyframes fadeOut { from { opacity: 1 } to { opacity: 0; pointer-events: none } }
+
+    /* ══════════════════════════════════════════
+       ─── Buscador CIE-10 (NUEVO) ───
+       ══════════════════════════════════════════ */
+    .cie10-wrap {
+      position: relative;
+    }
+    .cie10-wrap input[type=text] {
+      width: 100%;
+      padding: .6rem 2.6rem .6rem .9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: .9rem;
+      background: #fff;
+      transition: border-color .2s;
+    }
+    .cie10-wrap input[type=text]:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(14,116,144,.12);
+    }
+    /* Icono lupa dentro del input */
+    .cie10-wrap .cie10-icon {
+      position: absolute;
+      right: .75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+    /* Spinner de carga */
+    .cie10-wrap .cie10-spinner {
+      position: absolute;
+      right: .75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: none;
+    }
+    .cie10-spinner::after {
+      content: '';
+      display: block;
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Lista desplegable de resultados */
+    .cie10-results {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(13,31,60,.14);
+      z-index: 300;
+      max-height: 240px;
+      overflow-y: auto;
+      display: none;
+    }
+    .cie10-results.show { display: block; }
+    .cie10-results li {
+      list-style: none;
+      padding: .55rem .9rem;
+      cursor: pointer;
+      font-size: .875rem;
+      display: flex;
+      align-items: baseline;
+      gap: .6rem;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background .12s;
+    }
+    .cie10-results li:last-child { border-bottom: none; }
+    .cie10-results li:hover,
+    .cie10-results li.cie10-active { background: #ecfeff; }
+    .cie10-results li .cie10-code {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--teal);
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+    .cie10-results li .cie10-desc {
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cie10-results li.cie10-empty {
+      color: var(--muted);
+      cursor: default;
+      font-style: italic;
+      justify-content: center;
+    }
+    .cie10-results li.cie10-empty:hover { background: transparent; }
+
+    /* Chip de selección: aparece cuando el usuario elige una enfermedad */
+    .cie10-chip {
+      display: none;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .5rem;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      border-radius: 20px;
+      padding: .3rem .75rem;
+      font-size: .8rem;
+      color: #0f766e;
+      width: fit-content;
+    }
+    .cie10-chip.show { display: inline-flex; }
+    .cie10-chip button {
+      background: none; border: none; cursor: pointer;
+      color: #0f766e; font-size: .9rem; line-height: 1;
+      padding: 0; margin-left: .2rem;
+    }
+    .cie10-chip button:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<div id="screen-login">
+  <div class="login-card">
+    <div class="login-logo">R</div>
+    <h1>RNPI</h1>
+    <p>Red Nacional de Protección Infantil<br>Acceso al sistema</p>
+    <div id="login-error"></div>
+    <div class="form-group">
+      <label style="text-align:left" for="l-correo">Correo electrónico</label>
+      <input id="l-correo" type="text" placeholder="director@rnpi.gob.mx" autocomplete="username" />
+    </div>
+    <div class="form-group">
+      <label style="text-align:left" for="l-pass">Contraseña</label>
+      <input id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" id="btn-login" onclick="login()">Iniciar sesión</button>
+  </div>
+</div>
+
+<div id="screen-main">
+  <header>
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-badge">R</div>
+        <div>
+          <div class="logo-text">RNPI</div>
+          <div class="logo-sub">Sistema Nacional</div>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <a class="nav-tab active" id="tab-nna" onclick="switchView('nna')">Expedientes NNA</a>
+        <a class="nav-tab" id="tab-personal" onclick="switchView('personal')">Gestión de Personal</a>
+      </nav>
+    </div>
+    <div class="header-user">
+      <span id="header-username">Usuario</span>
+      <button id="btn-logout" onclick="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <div id="view-nna" class="view-section active">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Expedientes NNA</div>
+          <div class="page-sub">Gestión integral de Niños, Niñas y Adolescentes</div>
+        </div>
+        <button class="btn btn-primary" onclick="abrirFormularioNNA()">+ Nuevo Expediente</button>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>ID / Folio</th>
+              <th>Nombre del Menor</th>
+              <th>Tutor a Cargo</th>
+              <th>Estatus Jurídico</th>
+              <th>Fecha Registro</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-nna-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="view-personal" class="view-section">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Gestión de Personal</div>
+          <div class="page-sub">Administración de voluntarios y empleados registrados</div>
+        </div>
+        <button class="btn btn-primary" onclick="openModalNuevoPersonal()">+ Registrar Personal</button>
+      </div>
+
+      <div class="toolbar">
+        <select id="filter-rol" onchange="filtrarPersonal()" style="width:auto;padding:.6rem .9rem;">
+          <option value="">Todos los roles</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tabla-personal">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>RFC</th>
+                <th>Rol</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-personal">
+              <tr><td colspan="7" style="text-align:center;padding:2rem;">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--   MODAL: NUEVO EXPEDIENTE INTEGRAL                -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="overlay" id="modal-alta-nna" onclick="closeOnBackdrop(event, 'modal-alta-nna')">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h2>Registro de Nuevo Expediente Integral</h2>
+      <button class="close-btn" onclick="closeModal('modal-alta-nna')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-title">1. Datos del Menor (NNA)</div>
+      <div class="form-grid">
+        <div class="span-2"><label>Nombre Completo</label><input type="text" id="f-nna-nombre" placeholder="Ej. Juan Pérez García"></div>
+        <div><label>CURP</label><input type="text" placeholder="18 caracteres" style="text-transform:uppercase" maxlength="18"></div>
+        <div><label>Fecha de Nacimiento</label><input type="date"></div>
+        <div><label>Lengua (INALI)</label>
+          <select id="f-nna-lengua">
+            <option value="">-- Cargando... --</option>
+          </select>
+        </div>
+        <div><label>Estado</label>
+          <select id="f-nna-estado" onchange="cargarMunicipios(this.value)">
+            <option value="">-- Seleccione Estado --</option>
+          </select>
+        </div>
+        <div><label>Municipio</label>
+          <select id="f-nna-municipio" disabled>
+            <option value="">-- Seleccione primero un Estado --</option>
+          </select>
+        </div>
+        <div><label>Discapacidad</label>
+          <select>
+            <option>Ninguna</option>
+            <option>Física / Motriz</option>
+            <option>Visual</option>
+            <option>Auditiva</option>
+            <option>Intelectual</option>
+            <option>Psicosocial / Cognitiva</option>
+            <option>Múltiple</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-title">2. Datos del Tutor Responsable</div>
+      <div class="form-grid">
+        <div class="span-2"><label>Nombre Completo</label><input type="text" id="f-tutor-nombre" placeholder="Ej. María García López"></div>
+        <div><label>CURP Tutor *</label><input type="text" id="f-tutor-curp" placeholder="Obligatorio (18 carac)" style="text-transform:uppercase" maxlength="18"></div>
+        <div><label>Teléfono</label><input type="text" id="f-tutor-tel" placeholder="A 10 dígitos"></div>
+
+        <!-- ══════════════════════════════════════════
+             BUSCADOR CIE-10 (reemplaza al <select>)
+             ══════════════════════════════════════════ -->
+        <div class="span-2">
+          <label>Padecimiento (Catálogo CIE-10 — busca por nombre o código)</label>
+          <div class="cie10-wrap" id="cie10-wrap">
+            <input
+              type="text"
+              id="f-cie10-input"
+              placeholder="Ej: diabetes, hipertensión, A10.1…"
+              autocomplete="off"
+              oninput="cie10Buscar(this.value)"
+              onkeydown="cie10KeyNav(event)"
+            />
+            <!-- Icono lupa (se oculta mientras carga) -->
+            <span class="cie10-icon" id="cie10-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="9" r="6"/><path d="M15 15l3 3"/>
+              </svg>
+            </span>
+            <!-- Spinner -->
+            <span class="cie10-spinner" id="cie10-spinner"></span>
+            <!-- Lista de resultados -->
+            <ul class="cie10-results" id="cie10-results" role="listbox"></ul>
+          </div>
+          <!-- Chip: enfermedad seleccionada -->
+          <div class="cie10-chip" id="cie10-chip">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <span id="cie10-chip-label"></span>
+            <button type="button" onclick="cie10Limpiar()" title="Quitar selección">✕</button>
+          </div>
+          <!-- Campo oculto que guarda el código seleccionado -->
+          <input type="hidden" id="f-tutor-cie10" value="NINGUNA" />
+        </div>
+      </div>
+
+      <div class="section-title">3. Hecho Victimal y Expediente</div>
+      <div class="form-grid">
+        <div class="span-2"><label>Nombre de la Víctima (Madre)</label><input type="text" id="f-hecho-madre"></div>
+        <div><label>Fecha del Hecho</label><input type="date" id="f-hecho-fecha"></div>
+        <div><label>Expediente Jurídico</label><input type="text" id="f-hecho-exp" placeholder="Ej. CARP-1234"></div>
+        <div class="span-2"><label>Delito Tipificado</label>
+          <select id="f-hecho-delito"></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-alta-nna')">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarExpediente()">Guardar Expediente</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detalle NNA -->
+<div class="overlay" id="modal-detalle-nna" onclick="closeOnBackdrop(event, 'modal-detalle-nna')">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h2>Expediente Integral RNPI</h2>
+      <button class="close-btn" onclick="closeModal('modal-detalle-nna')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-card">
+        <h3>Información del Menor</h3>
+        <div class="detail-grid">
+          <div class="detail-item"><label>Nombre Completo</label><p id="det-nna-nombre"></p></div>
+          <div class="detail-item"><label>CURP</label><p id="det-nna-curp"></p></div>
+          <div class="detail-item"><label>Fecha Nac.</label><p id="det-nna-fecha"></p></div>
+          <div class="detail-item"><label>Lengua (INALI)</label><p id="det-nna-idioma"></p></div>
+          <div class="detail-item"><label>Localidad</label><p id="det-nna-localidad"></p></div>
+        </div>
+      </div>
+      <div class="detail-card">
+        <h3>Contexto Familiar (Tutor)</h3>
+        <div class="detail-grid">
+          <div class="detail-item"><label>Nombre del Tutor</label><p id="det-tutor-nombre"></p></div>
+          <div class="detail-item"><label>Contacto</label><p id="det-tutor-tel"></p></div>
+          <div class="detail-item span-2"><label>Condición Médica (CIE-10)</label><p id="det-tutor-salud" class="badge badge-amber"></p></div>
+        </div>
+      </div>
+      <div class="detail-card">
+        <h3>Hecho Victimal</h3>
+        <div class="detail-grid">
+          <div class="detail-item"><label>Expediente</label><p id="det-hecho-exp"></p></div>
+          <div class="detail-item"><label>Delito</label><p id="det-hecho-delito"></p></div>
+          <div class="detail-item span-2"><label>Víctima Madre</label><p id="det-hecho-madre"></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Form Personal -->
+<div class="overlay" id="modal-form-personal" onclick="closeOnBackdrop(event,'modal-form-personal')">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-pers-title">Registrar Personal</h2>
+      <button class="close-btn" onclick="closeModal('modal-form-personal')">X</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="f-id" />
+      <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="span-2"><label>Nombre completo</label><input type="text" id="f-nombre" /></div>
+        <div><label>RFC</label><input type="text" id="f-rfc" style="text-transform:uppercase" /></div>
+        <div><label>CURP</label><input type="text" id="f-curp" style="text-transform:uppercase" /></div>
+        <div><label>Correo</label><input type="email" id="f-correo" /></div>
+        <div><label>Rol</label><select id="f-rol"><option value="">— Seleccionar —</option></select></div>
+        <div id="wrap-password"><label>Contraseña</label><input type="password" id="f-password" /></div>
+        <div id="wrap-password2"><label>Confirmar</label><input type="password" id="f-password2" /></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-form-personal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarPersonal()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detalle Personal -->
+<div class="overlay" id="modal-detalle-personal" onclick="closeOnBackdrop(event,'modal-detalle-personal')">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h2>Datos del Personal</h2>
+      <button class="close-btn" onclick="closeModal('modal-detalle-personal')">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="avatar-row">
+        <div class="avatar" id="det-avatar">–</div>
+        <div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.2rem" id="det-nombre">–</div>
+          <div id="det-badge" style="margin-top:.3rem"></div>
+        </div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item"><label>RFC</label><p id="det-rfc">–</p></div>
+        <div class="detail-item"><label>CURP</label><p id="det-curp">–</p></div>
+        <hr class="detail-sep">
+        <div class="detail-item"><label>Correo</label><p id="det-correo">–</p></div>
+        <div class="detail-item"><label>Rol</label><p id="det-rol">–</p></div>
+        <div class="detail-item"><label>Estatus</label><p id="det-activo">–</p></div>
+        <div class="detail-item"><label>ID de registro</label><p id="det-id">–</p></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modal-detalle-personal')">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Confirmación -->
+<div class="overlay" id="confirm-modal-overlay" onclick="closeOnBackdrop(event,'confirm-modal-overlay')">
+  <div class="modal" id="confirm-modal" style="max-width:420px">
+    <div class="modal-body" style="padding-top:2rem">
+      <div class="confirm-icon" id="confirm-icon"></div>
+      <h3 id="confirm-title">¿Confirmar acción?</h3>
+      <p id="confirm-message">Esta acción no se puede deshacer.</p>
+    </div>
+    <div class="modal-footer" style="justify-content:center;gap:1rem">
+      <button class="btn btn-secondary" onclick="closeModal('confirm-modal-overlay')">Cancelar</button>
+      <button class="btn" id="confirm-action-btn" onclick="ejecutarConfirmacion()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+// ==========================================
+// 1. NAVEGACIÓN Y VISTAS
+// ==========================================
+function switchView(viewName) {
+  document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(`view-${viewName}`).classList.add('active');
+  document.getElementById(`tab-${viewName}`).classList.add('active');
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function closeOnBackdrop(e, id) { if (e.target.id === id) closeModal(id); }
+
+function toast(msg, tipo = 'info') {
+  const t = document.createElement('div'); t.className = `toast ${tipo}`; t.textContent = msg;
+  document.getElementById('toast-container').appendChild(t); setTimeout(() => t.remove(), 3800);
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+let confirmCallback = null;
+
+function mostrarConfirm({ icon, title, message, btnClass, btnText, callback }) {
+  confirmCallback = callback;
+  const iconEl = document.getElementById('confirm-icon');
+  iconEl.className = `confirm-icon ${icon}`;
+  if (icon === 'danger') {
+    iconEl.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>`;
+  } else if (icon === 'warning') {
+    iconEl.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+  } else {
+    iconEl.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><polyline points="9 12 11 14 15 10"/></svg>`;
+  }
+  document.getElementById('confirm-title').textContent = title;
+  document.getElementById('confirm-message').innerHTML = message;
+  const btn = document.getElementById('confirm-action-btn');
+  btn.className = `btn ${btnClass}`;
+  btn.textContent = btnText;
+  openModal('confirm-modal-overlay');
+}
+
+function ejecutarConfirmacion() {
+  if (confirmCallback) confirmCallback();
+}
+
+
+// ==========================================
+// 2. BUSCADOR CIE-10 (NUEVO)
+// ==========================================
+
+let cie10Timeout  = null;   // debounce
+let cie10Selected = 0;      // índice del ítem resaltado con teclado
+
+/**
+ * Se llama con cada tecla en el input del buscador.
+ * Espera 350 ms después de que el usuario para de escribir antes de consultar.
+ */
+function cie10Buscar(q) {
+  clearTimeout(cie10Timeout);
+  const lista = document.getElementById('cie10-results');
+
+  // Si el campo está vacío, cerrar lista y resetear selección
+  if (!q || q.trim().length < 2) {
+    lista.innerHTML = '';
+    lista.classList.remove('show');
+    return;
+  }
+
+  // Mostrar spinner, ocultar lupa
+  document.getElementById('cie10-icon').style.display    = 'none';
+  document.getElementById('cie10-spinner').style.display = 'block';
+
+  cie10Timeout = setTimeout(async () => {
+    try {
+      const res = await fetch(`${API}/catalogos/cie10_buscar?q=${encodeURIComponent(q.trim())}`);
+      const data = await res.json();
+      cie10RenderLista(data);
+    } catch {
+      cie10RenderLista([]);
+    } finally {
+      document.getElementById('cie10-icon').style.display    = 'flex';
+      document.getElementById('cie10-spinner').style.display = 'none';
+    }
+  }, 350);
+}
+
+/** Dibuja los resultados en el <ul> */
+function cie10RenderLista(items) {
+  const lista = document.getElementById('cie10-results');
+  cie10Selected = -1;
+
+  if (!items.length) {
+    lista.innerHTML = `<li class="cie10-empty">Sin resultados para esta búsqueda</li>`;
+    lista.classList.add('show');
+    return;
+  }
+
+  lista.innerHTML = items.map((item, i) => `
+    <li role="option" tabindex="-1"
+        onmousedown="cie10Elegir('${esc(item.codigo_subcategoria)}', '${esc(item.descripcion)}')"
+        onmouseover="cie10Hover(${i})">
+      <span class="cie10-code">${esc(item.codigo_subcategoria)}</span>
+      <span class="cie10-desc">${esc(item.descripcion)}</span>
+    </li>
+  `).join('');
+  lista.classList.add('show');
+}
+
+/** Navegación por teclado (↑ ↓ Enter Escape) */
+function cie10KeyNav(e) {
+  const lista = document.getElementById('cie10-results');
+  const items = lista.querySelectorAll('li:not(.cie10-empty)');
+
+  if (!lista.classList.contains('show') || !items.length) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    cie10Selected = Math.min(cie10Selected + 1, items.length - 1);
+    cie10ResaltarActivo(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    cie10Selected = Math.max(cie10Selected - 1, 0);
+    cie10ResaltarActivo(items);
+  } else if (e.key === 'Enter' && cie10Selected >= 0) {
+    e.preventDefault();
+    items[cie10Selected].dispatchEvent(new Event('mousedown'));
+  } else if (e.key === 'Escape') {
+    lista.classList.remove('show');
+  }
+}
+
+function cie10Hover(idx) {
+  cie10Selected = idx;
+  const items = document.querySelectorAll('#cie10-results li:not(.cie10-empty)');
+  cie10ResaltarActivo(items);
+}
+
+function cie10ResaltarActivo(items) {
+  items.forEach((li, i) => li.classList.toggle('cie10-active', i === cie10Selected));
+}
+
+/** El usuario seleccionó una enfermedad */
+function cie10Elegir(codigo, descripcion) {
+  // Guardar el código en el campo hidden que usará guardarExpediente()
+  document.getElementById('f-tutor-cie10').value = codigo;
+
+  // Limpiar input de búsqueda y cerrar lista
+  document.getElementById('f-cie10-input').value = '';
+  document.getElementById('cie10-results').classList.remove('show');
+
+  // Mostrar chip con la selección
+  document.getElementById('cie10-chip-label').textContent = `${codigo} — ${descripcion}`;
+  document.getElementById('cie10-chip').classList.add('show');
+}
+
+/** Quitar la selección actual */
+function cie10Limpiar() {
+  document.getElementById('f-tutor-cie10').value      = 'NINGUNA';
+  document.getElementById('cie10-chip-label').textContent = '';
+  document.getElementById('cie10-chip').classList.remove('show');
+  document.getElementById('f-cie10-input').value      = '';
+  document.getElementById('f-cie10-input').focus();
+}
+
+/** Cerrar la lista si el usuario hace clic fuera del buscador */
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('cie10-wrap').contains(e.target)) {
+    document.getElementById('cie10-results').classList.remove('show');
+  }
+});
+
+
+// ==========================================
+// 3. MÓDULO NNA (CONECTADO A BD REAL)
+// ==========================================
+let EXPEDIENTES_REALES = [];
+
+function abrirFormularioNNA() {
+  // Limpiar campos del formulario
+  document.getElementById('f-nna-nombre').value  = '';
+  document.getElementById('f-tutor-nombre').value = '';
+  document.getElementById('f-tutor-curp').value   = '';
+  document.getElementById('f-tutor-tel').value    = '';
+  document.getElementById('f-hecho-madre').value  = '';
+  document.getElementById('f-hecho-fecha').value  = '';
+  document.getElementById('f-hecho-exp').value    = '';
+
+  // Resetear buscador CIE-10
+  cie10Limpiar();
+  document.getElementById('cie10-results').classList.remove('show');
+
+  // Solo cargar el catálogo de delitos (CIE-10 es bajo demanda)
+  cargarCatalogosNNA();
+
+  openModal('modal-alta-nna');
+}
+
+async function cargarCatalogosNNA() {
+  try {
+    const [resDel, resLng, resEst] = await Promise.all([
+      apiFetch('/catalogos/delitos'),
+      apiFetch('/catalogos/lenguas'),
+      apiFetch('/catalogos/estados'),
+    ]);
+
+    if (resDel && resDel.ok) {
+      const data = await resDel.json();
+      const sel = document.getElementById('f-hecho-delito');
+      sel.innerHTML = '<option value="">-- Seleccione un Delito --</option>';
+      data.forEach(d => { sel.innerHTML += `<option value="${d}">${d}</option>`; });
+    }
+
+    if (resLng && resLng.ok) {
+      const data = await resLng.json();
+      const sel = document.getElementById('f-nna-lengua');
+      sel.innerHTML = '<option value="">-- Seleccione Lengua --</option>';
+      data.forEach(l => {
+        sel.innerHTML += `<option value="${l.id}">${l.nombre}${l.es_indigena ? '' : ''}</option>`;
+      });
+    }
+
+    if (resEst && resEst.ok) {
+      const data = await resEst.json();
+      const sel = document.getElementById('f-nna-estado');
+      sel.innerHTML = '<option value="">-- Seleccione Estado --</option>';
+      data.forEach(e => { sel.innerHTML += `<option value="${e.id}">${e.nombre}</option>`; });
+    }
+  } catch (e) { console.error("Error cargando catálogos NNA", e); }
+}
+
+async function cargarMunicipios(idEstado) {
+  const sel = document.getElementById('f-nna-municipio');
+  sel.innerHTML = '<option value="">-- Cargando... --</option>';
+  sel.disabled = true;
+  if (!idEstado) {
+    sel.innerHTML = '<option value="">-- Seleccione primero un Estado --</option>';
+    return;
+  }
+  try {
+    const res = await apiFetch(`/catalogos/municipios/${idEstado}`);
+    if (res && res.ok) {
+      const data = await res.json();
+      sel.innerHTML = '<option value="">-- Seleccione Municipio --</option>';
+      data.forEach(m => { sel.innerHTML += `<option value="${m.id}">${m.nombre}</option>`; });
+      sel.disabled = false;
+    }
+  } catch (e) { console.error("Error cargando municipios", e); }
+}
+
+async function cargarExpedientes() {
+  const res = await apiFetch('/expedientes');
+  if (!res) return;
+  EXPEDIENTES_REALES = await res.json();
+  renderTablaNNA();
+}
+
+function renderTablaNNA() {
+  const tbody = document.getElementById('tabla-nna-body');
+  if (!EXPEDIENTES_REALES.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:2rem;">Sin expedientes en la Base de Datos</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = EXPEDIENTES_REALES.map((d, i) => `
+    <tr>
+      <td><strong>${d.id}</strong></td>
+      <td>${d.nombre}<br><small style="color:var(--muted)">${d.curp}</small></td>
+      <td>${d.tutor.nombre}</td>
+      <td><span class="badge ${d.badge}">${d.estatus}</span></td>
+      <td>${d.fecha}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-icon" title="Ver Expediente Integral" onclick="verDetalleNNA(${i})">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+          </button>
+          <button class="btn-icon danger" title="Eliminar Expediente" onclick="confirmarEliminarNNA(${i})">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function guardarExpediente() {
+  const curpTutor = document.getElementById('f-tutor-curp').value.toUpperCase();
+  if (!curpTutor || curpTutor.length < 10) { toast('La CURP del tutor es obligatoria', 'error'); return; }
+
+  const lenguaVal    = document.getElementById('f-nna-lengua').value;
+  const municipioVal = document.getElementById('f-nna-municipio').value;
+  const body = {
+    nna_nombre:          document.getElementById('f-nna-nombre').value,
+    tutor_nombre:        document.getElementById('f-tutor-nombre').value,
+    tutor_curp:          curpTutor,
+    tutor_telefono:      document.getElementById('f-tutor-tel').value,
+    cie10_codigo:        document.getElementById('f-tutor-cie10').value,
+    victima_madre:       document.getElementById('f-hecho-madre').value,
+    fecha_hecho:         document.getElementById('f-hecho-fecha').value,
+    expediente_juridico: document.getElementById('f-hecho-exp').value,
+    delito:              document.getElementById('f-hecho-delito').value,
+    lengua_id:           lenguaVal    ? parseInt(lenguaVal)    : null,
+    municipio_id:        municipioVal ? parseInt(municipioVal) : null,
+  };
+
+  try {
+    const res = await apiFetch('/expedientes', { method: 'POST', body: JSON.stringify(body) });
+    if (!res.ok) throw new Error("Error al guardar");
+    toast('Expediente Integral almacenado en BD', 'success');
+    closeModal('modal-alta-nna');
+    cargarExpedientes();
+  } catch(e) { toast('Error al conectar con la BD', 'error'); }
+}
+
+function verDetalleNNA(index) {
+  const d = EXPEDIENTES_REALES[index];
+  document.getElementById('det-nna-nombre').innerText    = d.nombre;
+  document.getElementById('det-nna-curp').innerText      = d.curp;
+  document.getElementById('det-nna-fecha').innerText     = d.fecha_nac;
+  document.getElementById('det-nna-idioma').innerText    = d.idioma;
+  document.getElementById('det-nna-localidad').innerText = d.localidad || 'No especificada';
+  document.getElementById('det-tutor-nombre').innerText = d.tutor.nombre;
+  document.getElementById('det-tutor-tel').innerText   = d.tutor.telefono;
+  document.getElementById('det-tutor-salud').innerText = d.tutor.cie10;
+  document.getElementById('det-hecho-exp').innerText   = d.hecho.exp;
+  document.getElementById('det-hecho-delito').innerText = d.hecho.delito;
+  document.getElementById('det-hecho-madre').innerText = d.hecho.madre;
+  openModal('modal-detalle-nna');
+}
+
+function confirmarEliminarNNA(index) {
+  mostrarConfirm({
+    icon: 'danger', title: 'Eliminar Expediente',
+    message: `¿Está seguro de eliminar este expediente? Esta acción borrará todo su historial en el sistema de demostración.`,
+    btnClass: 'btn-danger', btnText: 'Eliminar Expediente',
+    callback: () => {
+      EXPEDIENTES_REALES.splice(index, 1);
+      toast('Expediente NNA eliminado exitosamente', 'success');
+      closeModal('confirm-modal-overlay');
+      renderTablaNNA();
+    }
+  });
+}
+
+
+// ==========================================
+// 4. MÓDULO PERSONAL (Backend Real)
+// ==========================================
+const API = 'http://localhost:8000';
+let TOKEN       = localStorage.getItem('rnpi_token') || '';
+let USUARIO     = JSON.parse(localStorage.getItem('rnpi_user') || 'null');
+let ROLES       = [];
+let PERSONAL_ALL = [];
+
+async function apiFetch(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (TOKEN) headers['Authorization'] = `Bearer ${TOKEN}`;
+  const res = await fetch(API + path, { ...opts, headers: { ...headers, ...opts.headers } });
+  if (res.status === 401) { logout(); return null; }
+  return res;
+}
+
+async function login() {
+  const correo = document.getElementById('l-correo').value.trim();
+  const pass   = document.getElementById('l-pass').value;
+  if (!correo || !pass) {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-error').innerText = 'Llene los campos';
+    return;
+  }
+  const body = new URLSearchParams({ username: correo, password: pass });
+  try {
+    const res = await fetch(API + '/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+    if (!res.ok) throw new Error("Credenciales incorrectas");
+    const data = await res.json();
+    TOKEN = data.access_token; USUARIO = data.usuario;
+    localStorage.setItem('rnpi_token', TOKEN); localStorage.setItem('rnpi_user', JSON.stringify(USUARIO));
+    iniciarApp();
+  } catch(e) {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-error').innerText = e.message;
+  }
+}
+
+function logout() {
+  TOKEN = ''; USUARIO = null;
+  localStorage.removeItem('rnpi_token'); localStorage.removeItem('rnpi_user');
+  document.getElementById('screen-main').style.display  = 'none';
+  document.getElementById('screen-login').style.display = 'flex';
+}
+
+function iniciarApp() {
+  document.getElementById('screen-login').style.display = 'none';
+  document.getElementById('screen-main').style.display  = 'block';
+  document.getElementById('header-username').textContent = USUARIO ? USUARIO.nombre_completo : 'Usuario';
+  cargarCatalogosNNA();
+  cargarExpedientes();
+  cargarRoles();
+  cargarPersonal();
+}
+
+if (TOKEN) iniciarApp();
+
+async function cargarRoles() {
+  const res = await apiFetch('/cat_roles'); if (!res) return;
+  ROLES = await res.json();
+  const selForm   = document.getElementById('f-rol');
+  const selFilter = document.getElementById('filter-rol');
+  ROLES.forEach(r => {
+    selForm.innerHTML   += `<option value="${r.id_rol}">${r.nombre_rol}</option>`;
+    selFilter.innerHTML += `<option value="${r.id_rol}">${r.nombre_rol}</option>`;
+  });
+}
+
+async function cargarPersonal() {
+  const res = await apiFetch('/personal'); if (!res) return;
+  PERSONAL_ALL = await res.json();
+  filtrarPersonal();
+}
+
+function filtrarPersonal() {
+  const rolId = document.getElementById('filter-rol').value;
+  const arr   = rolId ? PERSONAL_ALL.filter(p => String(p.id_rol) === rolId) : PERSONAL_ALL;
+  const tbody = document.getElementById('tbody-personal');
+
+  if (!arr.length) { tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:2rem;">Sin registros</td></tr>`; return; }
+
+  tbody.innerHTML = arr.map(p => {
+    const nombreRol = ROLES.find(r => r.id_rol == p.id_rol)?.nombre_rol || 'Rol';
+    return `<tr>
+      <td>${p.id_personal}</td>
+      <td><strong>${esc(p.nombre_completo)}</strong></td>
+      <td>${esc(p.correo)}</td>
+      <td>${esc(p.rfc)}</td>
+      <td><span class="badge badge-navy">${nombreRol}</span></td>
+      <td>${p.activo ? '<span class="badge badge-green">Activo</span>' : '<span class="badge badge-red">Inactivo</span>'}</td>
+      <td>
+        <div class="actions">
+          <button class="btn-icon" title="Ver detalle" onclick="verDetallePersonal(${p.id_personal})">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+          </button>
+          <button class="btn-icon" title="Editar" onclick="openModalEditarPersonal(${p.id_personal})">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z"/><path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z"/></svg>
+          </button>
+          <button class="btn-icon" title="${p.activo ? 'Revocar acceso' : 'Restaurar acceso'}" onclick="confirmarAcceso(${p.id_personal},${p.activo})">
+            ${p.activo
+              ? `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>`
+              : `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.5 1A4.5 4.5 0 0010 5.5V9H3a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V5.5a3 3 0 116 0v2.75a.75.75 0 001.5 0V5.5A4.5 4.5 0 0014.5 1z" clip-rule="evenodd"/></svg>`}
+          </button>
+          <button class="btn-icon danger" title="Eliminar" onclick="confirmarEliminarPersonal(${p.id_personal})">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Funciones CRUD y Modales de Personal ──
+
+async function verDetallePersonal(id) {
+  try {
+    const res = await apiFetch(`/personal/${id}`); if (!res) return;
+    const p = await res.json();
+    const initials  = p.nombre_completo.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+    const nombreRolStr = ROLES.find(r => r.id_rol == p.id_rol)?.nombre_rol || 'Rol';
+    document.getElementById('det-avatar').textContent  = initials;
+    document.getElementById('det-nombre').textContent  = p.nombre_completo;
+    document.getElementById('det-badge').innerHTML     = `<span class="badge ${p.activo ? 'badge-green' : 'badge-red'}">${p.activo ? 'Activo' : 'Inactivo'}</span> <span class="badge badge-navy">${nombreRolStr}</span>`;
+    document.getElementById('det-rfc').textContent     = p.rfc;
+    document.getElementById('det-curp').textContent    = p.curp;
+    document.getElementById('det-correo').textContent  = p.correo;
+    document.getElementById('det-rol').textContent     = nombreRolStr;
+    document.getElementById('det-activo').innerHTML    = p.activo ? '<span class="badge badge-green">Activo</span>' : '<span class="badge badge-red">Inactivo</span>';
+    document.getElementById('det-id').textContent      = `#${p.id_personal}`;
+    openModal('modal-detalle-personal');
+  } catch(e) { toast('Error al cargar detalle', 'error'); }
+}
+
+function openModalNuevoPersonal() {
+  document.getElementById('f-id').value       = '';
+  document.getElementById('f-nombre').value   = '';
+  document.getElementById('f-rfc').value      = '';
+  document.getElementById('f-curp').value     = '';
+  document.getElementById('f-correo').value   = '';
+  document.getElementById('f-rol').value      = '';
+  document.getElementById('wrap-password').style.display  = '';
+  document.getElementById('wrap-password2').style.display = '';
+  document.getElementById('modal-pers-title').innerText   = 'Registrar Personal';
+  openModal('modal-form-personal');
+}
+
+function openModalEditarPersonal(id) {
+  const p = PERSONAL_ALL.find(x => x.id_personal === id); if (!p) return;
+  document.getElementById('f-id').value     = p.id_personal;
+  document.getElementById('f-nombre').value = p.nombre_completo;
+  document.getElementById('f-rfc').value    = p.rfc;
+  document.getElementById('f-curp').value   = p.curp;
+  document.getElementById('f-correo').value = p.correo;
+  document.getElementById('f-rol').value    = p.id_rol;
+  document.getElementById('wrap-password').style.display  = 'none';
+  document.getElementById('wrap-password2').style.display = 'none';
+  document.getElementById('modal-pers-title').innerText   = 'Editar Personal';
+  openModal('modal-form-personal');
+}
+
+async function guardarPersonal() {
+  const id   = document.getElementById('f-id').value;
+  const body = {
+    nombre_completo: document.getElementById('f-nombre').value,
+    rfc:    document.getElementById('f-rfc').value,
+    curp:   document.getElementById('f-curp').value,
+    correo: document.getElementById('f-correo').value,
+    id_rol: Number(document.getElementById('f-rol').value)
+  };
+  if (!id) body.contrasena = document.getElementById('f-password').value;
+
+  const method = id ? 'PUT' : 'POST';
+  const url    = id ? `/personal/${id}` : '/personal';
+  try {
+    const res = await apiFetch(url, { method, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error("Error al guardar");
+    toast('Personal guardado exitosamente', 'success');
+    closeModal('modal-form-personal');
+    cargarPersonal();
+  } catch(e) { toast('Error de validación', 'error'); }
+}
+
+function confirmarAcceso(id, activo) {
+  const p      = PERSONAL_ALL.find(x => x.id_personal === id);
+  const nombre = p ? p.nombre_completo : `#${id}`;
+  if (activo) {
+    mostrarConfirm({
+      icon: 'warning', title: 'Revocar acceso',
+      message: `¿Desea revocar el acceso al sistema de <strong>${esc(nombre)}</strong>? El registro se conservará pero no podrá iniciar sesión.`,
+      btnClass: 'btn-warning', btnText: 'Revocar acceso',
+      callback: () => toggleAcceso(id, false)
+    });
+  } else {
+    mostrarConfirm({
+      icon: 'success', title: 'Restaurar acceso',
+      message: `¿Desea restaurar el acceso de <strong>${esc(nombre)}</strong>?`,
+      btnClass: 'btn-success', btnText: 'Restaurar acceso',
+      callback: () => toggleAcceso(id, true)
+    });
+  }
+}
+
+async function toggleAcceso(id, nuevoActivo) {
+  try {
+    const res = await apiFetch(`/personal/${id}/acceso`, { method: 'PATCH', body: JSON.stringify({ activo: nuevoActivo }) });
+    if (!res.ok) throw new Error("Error al cambiar acceso");
+    toast(nuevoActivo ? 'Acceso restaurado' : 'Acceso revocado', 'info');
+    closeModal('confirm-modal-overlay');
+    cargarPersonal();
+  } catch(e) { toast('Error de conexión', 'error'); }
+}
+
+function confirmarEliminarPersonal(id) {
+  const p      = PERSONAL_ALL.find(x => x.id_personal === id);
+  const nombre = p ? p.nombre_completo : `#${id}`;
+  mostrarConfirm({
+    icon: 'danger', title: 'Eliminar registro de personal',
+    message: `¿Está seguro de eliminar a <strong>${esc(nombre)}</strong>? Esta acción es irreversible.`,
+    btnClass: 'btn-danger', btnText: 'Eliminar Personal',
+    callback: () => eliminarPersonal(id)
+  });
+}
+
+async function eliminarPersonal(id) {
+  try {
+    const res = await apiFetch(`/personal/${id}`, { method: 'DELETE' });
+    if (!res.ok) throw new Error("Error al eliminar");
+    toast('Registro eliminado exitosamente', 'success');
+    closeModal('confirm-modal-overlay');
+    cargarPersonal();
+  } catch(e) { toast('Error de conexión', 'error'); }
+}
+</script>
+</body>
+</html>
+</file>
+
+<file path="CLAUDE.md">
+# RNPI - Guía de Desarrollo y Estilo
+
+## Comandos de Ejecución Rápida
+- Ejecutar servidor: `python main.py`
+- Instalar dependencias: `pip install -r requirements.txt`
+
+## Guía de Estilo y Convenciones
+- **Idioma:** Código y documentación técnica estrictamente en español.
+- **Python:** Seguir estándares PEP 8, usar type hints siempre que sea posible.
+- **Base de Datos:** Los nombres de atributos en los esquemas SQL deben usar estrictamente la convención `snake_case`.
+- **Restricciones:** NO busques archivos de forma masiva en la terminal; si necesitas una ruta, pregúntame o lee el archivo de restructuración.
+
+## Arquitectura del Proyecto
+- El proyecto se encuentra actualmente en fase de reestructuración modular. Consultar el archivo `RESTRUCTURACION.md` para verificar la ubicación final de los módulos, catálogos y esquemas antes de escribir código nuevo.
+</file>
+
+<file path="crear_admin.py">
+from main import SessionLocal, Personal, CatRol, hash_password
+
+def crear_primer_admin():
+    db = SessionLocal()
+    
+    # 1. Crear el catálogo de roles si está vacío
+    if not db.query(CatRol).first():
+        db.add(CatRol(id_rol=1, nombre_rol="Director"))
+        db.add(CatRol(id_rol=2, nombre_rol="Coordinador"))
+        db.add(CatRol(id_rol=3, nombre_rol="Voluntario"))
+        db.commit()
+
+    # 2. Crear el usuario Director
+    correo_admin = "director@rnpi.gob.mx"
+    if not db.query(Personal).filter(Personal.correo == correo_admin).first():
+        admin = Personal(
+            nombre_completo="Director General",
+            rfc="ADMIN12345678",
+            curp="ADMIN1234567890123",
+            correo=correo_admin,
+            contrasena=hash_password("rnpi_secreto_123"), # Esta será tu contraseña
+            id_rol=1,
+            activo=True
+        )
+        db.add(admin)
+        db.commit()
+        print(f"✅ Administrador creado con éxito. Correo: {correo_admin} | Pass: rnpi_secreto_123")
+    else:
+        print("El administrador ya existe en la base de datos.")
+        
+    db.close()
+
+if __name__ == "__main__":
+    crear_primer_admin()
+</file>
+
+<file path="env.example">
+# Copia este archivo como .env y ajusta los valores
+
+# Cadena de conexión a PostgreSQL
+# Formato: postgresql://usuario:contraseña@host:puerto/nombre_bd
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rnpi
+
+# Clave secreta para firmar los JWT (usa una cadena larga y aleatoria en producción)
+# Puedes generar una con: python -c "import secrets; print(secrets.token_hex(32))"
+SECRET_KEY=cambia-esta-clave-secreta-en-produccion
+
+# Duración del token en minutos (480 = 8 horas)
+TOKEN_EXPIRE_MINUTES=480
+</file>
+
+<file path="main.py">
+"""
+RNPI — Red Nacional de Protección Infantil
+Backend principal: FastAPI + SQLAlchemy + PostgreSQL
+"""
+
+import os
+from datetime import datetime, timedelta, timezone
+from typing import Optional
+
+from dotenv import load_dotenv
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from pydantic import BaseModel, EmailStr
+from sqlalchemy import Boolean, Column, Integer, String, Date, Text, ForeignKey, DateTime, create_engine, text
+from sqlalchemy.sql import func
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker, relationship
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+load_dotenv()
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://postgres:1234@localhost:5432/rnpi"
+)
+SECRET_KEY    = os.getenv("SECRET_KEY", "cambia-esta-clave-secreta-en-produccion")
+ALGORITHM     = "HS256"
+TOKEN_MINUTES = int(os.getenv("TOKEN_EXPIRE_MINUTES", "480"))   # 8 horas
+
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+def get_db():
+    """Dependencia: sesión de BD por petición."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+# ==========================================
+# MODELOS DE LA BASE DE DATOS
+# ==========================================
+
+class Personal(Base):
+    __tablename__ = "personal"
+
+    id_personal     = Column(Integer, primary_key=True, index=True)
+    nombre_completo = Column(String(200), nullable=False)
+    rfc             = Column(String(13),  nullable=False, unique=True)
+    curp            = Column(String(18),  nullable=False, unique=True)
+    correo          = Column(String(150), nullable=False, unique=True)
+    contrasena      = Column(String,      nullable=False)
+    activo          = Column(Boolean,     default=True,   nullable=False)
+    id_rol          = Column(Integer,     nullable=False)
+
+
+class CatRol(Base):
+    __tablename__ = "cat_roles"
+
+    id_rol     = Column(Integer, primary_key=True, index=True)
+    nombre_rol = Column(String(80), nullable=False)
+
+
+class CatLenguaInali(Base):
+    __tablename__ = "cat_lengua_inali"
+
+    id_lengua   = Column(Integer,     primary_key=True, index=True)
+    nombre      = Column(String(100), nullable=False)
+    es_indigena = Column(Boolean,     default=True)
+
+
+class CatEstado(Base):
+    __tablename__ = "cat_estados"
+
+    id_estado = Column(Integer,     primary_key=True, index=True)
+    nombre    = Column(String(100), nullable=False)
+
+
+class CatMunicipio(Base):
+    __tablename__ = "cat_municipios"
+
+    id_municipio = Column(Integer,     primary_key=True, index=True)
+    id_estado    = Column(Integer,     ForeignKey("cat_estados.id_estado"), nullable=False)
+    nombre       = Column(String(150), nullable=False)
+
+
+class CatCieSubcategoria(Base):
+    __tablename__ = "cat_cie_subcategoria"
+
+    id_subcategoria = Column(Integer,     primary_key=True, index=True)
+    id_categoria    = Column(Integer,     nullable=False)
+    codigo          = Column(String(7),   unique=True, nullable=False)
+    descripcion     = Column(String(300))
+
+
+class Tutor(Base):
+    __tablename__ = "tutores"
+
+    id_tutor        = Column(Integer,   primary_key=True, index=True)
+    nombre_completo = Column(String(200), nullable=False)
+    curp            = Column(String(18),  unique=True, index=True)
+    telefono        = Column(String(20))
+    fecha_registro  = Column(DateTime,  server_default=func.now())
+
+    # Relaciones
+    menores      = relationship("Menor",          back_populates="tutor")
+    enfermedades = relationship("TutorEnfermedad", back_populates="tutor")
+
+
+class Menor(Base):
+    __tablename__ = "nna"
+
+    id_menor          = Column(Integer,    primary_key=True, index=True)
+    nombre            = Column(String(100), nullable=False)
+    apellido_paterno  = Column(String(100), nullable=False)
+    apellido_materno  = Column(String(100))
+    id_tutor          = Column(Integer,    ForeignKey("tutores.id_tutor"))
+    id_lengua         = Column(Integer,    ForeignKey("cat_lengua_inali.id_lengua"))
+    id_municipio      = Column(Integer,    ForeignKey("cat_municipios.id_municipio"))
+
+    # Relaciones bidireccionales
+    tutor             = relationship("Tutor",         back_populates="menores")
+    hechos_victimales = relationship("HechoVictimal", back_populates="menor")
+
+
+class HechoVictimal(Base):
+    __tablename__ = "hechos_victimales"
+
+    id_hecho              = Column(Integer,   primary_key=True, index=True)
+    id_menor              = Column(Integer,   ForeignKey("nna.id_menor", ondelete="CASCADE"), nullable=False)
+    nombre_victima_madre  = Column(String(200), nullable=False)
+    fecha_hecho           = Column(Date)
+    expediente_juridico   = Column(String(100))
+    descripcion_delito    = Column(Text)
+
+    # Relaciones
+    menor = relationship("Menor", back_populates="hechos_victimales")
+
+
+# ─── CORRECCIÓN 3-A: FK ahora apunta a id_subcategoria (Integer) en lugar de codigo_subcategoria ───
+class TutorEnfermedad(Base):
+    __tablename__ = "tutor_enfermedad"
+
+    id_tutor_enfermedad   = Column(Integer, primary_key=True, index=True)
+    id_tutor              = Column(Integer, ForeignKey("tutores.id_tutor",                          ondelete="CASCADE"), nullable=False)
+    id_subcategoria_cie10 = Column(Integer, ForeignKey("cat_cie_subcategoria.id_subcategoria"),      nullable=False)   # ← Integer, no String
+    es_cronica            = Column(Boolean, default=False)
+    esta_controlada       = Column(Boolean, default=False)
+
+    # Relaciones
+    tutor = relationship("Tutor", back_populates="enfermedades")
+
+
+# ==========================================
+# CONFIGURACIÓN DE SEGURIDAD Y AUTENTICACIÓN
+# ==========================================
+
+pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2  = OAuth2PasswordBearer(tokenUrl="/auth/login")
+
+
+def hash_password(plain: str) -> str:
+    return pwd_ctx.hash(plain)
+
+
+def verify_password(plain: str, hashed: str) -> bool:
+    return pwd_ctx.verify(plain, hashed)
+
+
+def crear_token(data: dict) -> str:
+    payload = data.copy()
+    payload["exp"] = datetime.now(timezone.utc) + timedelta(minutes=TOKEN_MINUTES)
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def usuario_actual(token: str = Depends(oauth2), db: Session = Depends(get_db)) -> Personal:
+    credencial_error = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="No autenticado o token expirado",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        id_personal: int = int(payload.get("sub", 0))
+    except (JWTError, ValueError):
+        raise credencial_error
+
+    usuario = db.get(Personal, id_personal)
+    if not usuario or not usuario.activo:
+        raise credencial_error
+    return usuario
+
+
+def solo_director(usuario: Personal = Depends(usuario_actual), db: Session = Depends(get_db)) -> Personal:
+    """Restringe el acceso a roles con id_rol 1 (Director) o 2 (Coordinador)."""
+    rol = db.get(CatRol, usuario.id_rol)
+    nombre = rol.nombre_rol.lower() if rol else ""
+    if not any(x in nombre for x in ("director", "coordinador")):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="No tiene permisos para realizar esta acción",
+        )
+    return usuario
+
+
+# ==========================================
+# ESQUEMAS PYDANTIC (Para validación de datos)
+# ==========================================
+
+class PersonalBase(BaseModel):
+    nombre_completo: str
+    rfc:             str
+    curp:            str
+    correo:          EmailStr
+    id_rol:          int
+
+class PersonalCrear(PersonalBase):
+    contrasena: str
+
+class PersonalActualizar(PersonalBase):
+    pass
+
+class PersonalRespuesta(PersonalBase):
+    id_personal: int
+    activo:      bool
+    model_config = {"from_attributes": True}
+
+class AccesoActualizar(BaseModel):
+    activo: bool
+
+class RolRespuesta(BaseModel):
+    id_rol:     int
+    nombre_rol: str
+    model_config = {"from_attributes": True}
+
+class TokenRespuesta(BaseModel):
+    access_token: str
+    token_type:   str
+    usuario:      PersonalRespuesta
+
+
+# ==========================================
+# CONFIGURACIÓN DE FASTAPI Y RUTAS
+# ==========================================
+
+app = FastAPI(
+    title="RNPI API",
+    description="Red Nacional de Protección Infantil — Backend",
+    version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:8000",
+        "http://127.0.0.1:8000"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/ui", tags=["Frontend"])
+def frontend():
+    return FileResponse("static/index.html")
+
+@app.get("/", tags=["Sistema"])
+def raiz():
+    return {"mensaje": "RNPI API activa"}
+
+@app.get("/health", tags=["Sistema"])
+def health(db: Session = Depends(get_db)):
+    """Verifica la conexión a la base de datos."""
+    try:
+        db.execute(text("SELECT 1"))
+        return {"estado": "ok", "base_de_datos": "conectada"}
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Base de datos no disponible: {e}")
+
+@app.post("/auth/login", response_model=TokenRespuesta, tags=["Autenticación"])
+def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    """
+    Inicia sesión con correo (campo username) y contraseña.
+    Devuelve un JWT Bearer y los datos básicos del usuario.
+    """
+    usuario = db.query(Personal).filter(Personal.correo == form.username).first()
+
+    if not usuario or not verify_password(form.password, usuario.contrasena):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Correo o contraseña incorrectos",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    if not usuario.activo:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Su cuenta está inactiva. Contacte al administrador.",
+        )
+
+    token = crear_token({"sub": str(usuario.id_personal)})
+    return {"access_token": token, "token_type": "bearer", "usuario": usuario}
+
+@app.get("/cat_roles", response_model=list[RolRespuesta], tags=["Catálogos"])
+def listar_roles(
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    """Devuelve todos los roles disponibles."""
+    return db.query(CatRol).order_by(CatRol.id_rol).all()
+
+@app.get("/personal", response_model=list[PersonalRespuesta], tags=["Personal"])
+def listar_personal(
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    """Lista todo el personal registrado (requiere sesión activa)."""
+    return db.query(Personal).order_by(Personal.id_personal).all()
+
+@app.get("/personal/{id_personal}", response_model=PersonalRespuesta, tags=["Personal"])
+def obtener_personal(
+    id_personal: int,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    """Obtiene los datos de un miembro del personal por ID."""
+    persona = db.get(Personal, id_personal)
+    if not persona:
+        raise HTTPException(status_code=404, detail="Personal no encontrado")
+    return persona
+
+@app.post("/personal", response_model=PersonalRespuesta, status_code=201, tags=["Personal"])
+def registrar_personal(
+    datos: PersonalCrear,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(solo_director),
+):
+    """
+    Registra nuevo personal.
+    Solo accesible para Director o Coordinador.
+    """
+    if db.query(Personal).filter(Personal.correo == datos.correo).first():
+        raise HTTPException(status_code=409, detail="Ya existe un registro con ese correo")
+    if db.query(Personal).filter(Personal.rfc == datos.rfc).first():
+        raise HTTPException(status_code=409, detail="Ya existe un registro con ese RFC")
+    if db.query(Personal).filter(Personal.curp == datos.curp).first():
+        raise HTTPException(status_code=409, detail="Ya existe un registro con esa CURP")
+    if not db.get(CatRol, datos.id_rol):
+        raise HTTPException(status_code=400, detail="El rol indicado no existe")
+
+    nueva_persona = Personal(
+        nombre_completo=datos.nombre_completo,
+        rfc=datos.rfc.upper(),
+        curp=datos.curp.upper(),
+        correo=datos.correo,
+        contrasena=hash_password(datos.contrasena),
+        id_rol=datos.id_rol,
+        activo=True,
+    )
+    db.add(nueva_persona)
+    db.commit()
+    db.refresh(nueva_persona)
+    return nueva_persona
+
+@app.put("/personal/{id_personal}", response_model=PersonalRespuesta, tags=["Personal"])
+def actualizar_personal(
+    id_personal: int,
+    datos: PersonalActualizar,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(solo_director),
+):
+    """
+    Actualiza los datos de un miembro del personal (sin cambiar contraseña).
+    Solo accesible para Director o Coordinador.
+    """
+    persona = db.get(Personal, id_personal)
+    if not persona:
+        raise HTTPException(status_code=404, detail="Personal no encontrado")
+
+    dup_correo = db.query(Personal).filter(
+        Personal.correo == datos.correo, Personal.id_personal != id_personal
+    ).first()
+    if dup_correo:
+        raise HTTPException(status_code=409, detail="El correo ya está en uso por otro registro")
+
+    dup_rfc = db.query(Personal).filter(
+        Personal.rfc == datos.rfc, Personal.id_personal != id_personal
+    ).first()
+    if dup_rfc:
+        raise HTTPException(status_code=409, detail="El RFC ya está en uso por otro registro")
+
+    dup_curp = db.query(Personal).filter(
+        Personal.curp == datos.curp, Personal.id_personal != id_personal
+    ).first()
+    if dup_curp:
+        raise HTTPException(status_code=409, detail="La CURP ya está en uso por otro registro")
+
+    if not db.get(CatRol, datos.id_rol):
+        raise HTTPException(status_code=400, detail="El rol indicado no existe")
+
+    persona.nombre_completo = datos.nombre_completo
+    persona.rfc             = datos.rfc.upper()
+    persona.curp            = datos.curp.upper()
+    persona.correo          = datos.correo
+    persona.id_rol          = datos.id_rol
+    db.commit()
+    db.refresh(persona)
+    return persona
+
+@app.patch("/personal/{id_personal}/acceso", response_model=PersonalRespuesta, tags=["Personal"])
+def cambiar_acceso(
+    id_personal: int,
+    datos: AccesoActualizar,
+    db: Session = Depends(get_db),
+    director: Personal = Depends(solo_director),
+):
+    """
+    Otorga o revoca el acceso al sistema de un miembro del personal.
+    Solo accesible para Director o Coordinador.
+    """
+    persona = db.get(Personal, id_personal)
+    if not persona:
+        raise HTTPException(status_code=404, detail="Personal no encontrado")
+    if persona.id_personal == director.id_personal:
+        raise HTTPException(status_code=400, detail="No puede revocar su propio acceso")
+
+    persona.activo = datos.activo
+    db.commit()
+    db.refresh(persona)
+    return persona
+
+@app.delete("/personal/{id_personal}", status_code=204, tags=["Personal"])
+def eliminar_personal(
+    id_personal: int,
+    db: Session = Depends(get_db),
+    director: Personal = Depends(solo_director),
+):
+    """
+    Elimina el registro de un miembro del personal.
+    Solo accesible para Director o Coordinador.
+    """
+    persona = db.get(Personal, id_personal)
+    if not persona:
+        raise HTTPException(status_code=404, detail="Personal no encontrado")
+    if persona.id_personal == director.id_personal:
+        raise HTTPException(status_code=400, detail="No puede eliminar su propio registro")
+
+    db.delete(persona)
+    db.commit()
+
+# ==========================================
+# RUTAS MÓDULO NNA Y EXPEDIENTES
+# ==========================================
+
+class ExpedienteCrear(BaseModel):
+    nna_nombre:          str
+    tutor_nombre:        str
+    tutor_curp:          str
+    tutor_telefono:      str
+    cie10_codigo:        str
+    victima_madre:       str
+    fecha_hecho:         str
+    expediente_juridico: str
+    delito:              str
+    lengua_id:           Optional[int] = None
+    municipio_id:        Optional[int] = None
+
+
+# ─── CORRECCIÓN 2: Endpoint corregido — usa los campos reales del modelo ───
+@app.get("/catalogos/cie10_comunes", tags=["Catálogos"])
+def obtener_cie10_comunes(db: Session = Depends(get_db)):
+    """Devuelve las enfermedades más comunes del catálogo CIE-10 real."""
+    from sqlalchemy import or_
+    terminos = [
+        "%diabetes%", "%hipertensi%", "%asma%", "%obesidad%",
+        "%depresion%", "%epilepsia%", "%anemia%", "%artritis%",
+        "%cancer%", "%cardio%"
+    ]
+    filtros = [CatCieSubcategoria.descripcion.ilike(t) for t in terminos]
+    resultados = db.query(CatCieSubcategoria).filter(or_(*filtros)).limit(20).all()
+    # Devuelve "codigo_subcategoria" para que el <select> del HTML lo use como value
+    return [
+        {"codigo_subcategoria": r.codigo, "descripcion": r.descripcion}
+        for r in resultados
+    ]
+
+
+@app.get("/catalogos/cie10_buscar", tags=["Catálogos"])
+def buscar_cie10(q: str = "", db: Session = Depends(get_db)):
+    """
+    Búsqueda en tiempo real del catálogo CIE-10.
+    Acepta el parámetro ?q= y devuelve hasta 15 coincidencias
+    buscando tanto en el código como en la descripción.
+    """
+    if not q or len(q.strip()) < 2:
+        return []
+    termino = f"%{q.strip()}%"
+    resultados = (
+        db.query(CatCieSubcategoria)
+        .filter(
+            CatCieSubcategoria.descripcion.ilike(termino)
+            | CatCieSubcategoria.codigo.ilike(termino)
+        )
+        .order_by(CatCieSubcategoria.codigo)
+        .limit(15)
+        .all()
+    )
+    return [
+        {"codigo_subcategoria": r.codigo, "descripcion": r.descripcion}
+        for r in resultados
+    ]
+
+
+@app.get("/catalogos/delitos", tags=["Catálogos"])
+def obtener_delitos():
+    """Lista controlada para evitar errores ortográficos en la captura."""
+    return [
+        "Feminicidio", "Homicidio Doloso", "Violencia Familiar",
+        "Abuso Sexual Infantil", "Omisión de Cuidados",
+        "Sustracción de Menores", "Trata de Personas", "Lesiones Dolosas"
+    ]
+
+
+@app.get("/catalogos/lenguas", tags=["Catálogos"])
+def obtener_lenguas(db: Session = Depends(get_db)):
+    """Catálogo INALI de lenguas indígenas nacionales + Español."""
+    lenguas = db.query(CatLenguaInali).order_by(CatLenguaInali.nombre).all()
+    return [{"id": l.id_lengua, "nombre": l.nombre, "es_indigena": l.es_indigena} for l in lenguas]
+
+
+@app.get("/catalogos/estados", tags=["Catálogos"])
+def obtener_estados(db: Session = Depends(get_db)):
+    """Lista de los 32 estados de la República Mexicana."""
+    estados = db.query(CatEstado).order_by(CatEstado.nombre).all()
+    return [{"id": e.id_estado, "nombre": e.nombre} for e in estados]
+
+
+@app.get("/catalogos/municipios/{id_estado}", tags=["Catálogos"])
+def obtener_municipios(id_estado: int, db: Session = Depends(get_db)):
+    """Municipios de un estado dado."""
+    municipios = (
+        db.query(CatMunicipio)
+        .filter(CatMunicipio.id_estado == id_estado)
+        .order_by(CatMunicipio.nombre)
+        .all()
+    )
+    return [{"id": m.id_municipio, "nombre": m.nombre} for m in municipios]
+
+
+@app.post("/expedientes", status_code=201, tags=["Expedientes"])
+def registrar_expediente(datos: ExpedienteCrear, db: Session = Depends(get_db)):
+    # 1. Separar el nombre del menor
+    partes = datos.nna_nombre.split()
+    nom = partes[0] if partes else "Desconocido"
+    ap  = partes[1] if len(partes) > 1 else ""
+    am  = " ".join(partes[2:]) if len(partes) > 2 else ""
+
+    # 2. Guardar Tutor
+    tutor = Tutor(
+        nombre_completo=datos.tutor_nombre,
+        curp=datos.tutor_curp,
+        telefono=datos.tutor_telefono
+    )
+    db.add(tutor)
+    db.commit()
+    db.refresh(tutor)
+
+    # 3. Guardar Menor (enlazado al tutor)
+    menor = Menor(
+        nombre=nom, apellido_paterno=ap, apellido_materno=am,
+        id_tutor=tutor.id_tutor,
+        id_lengua=datos.lengua_id,
+        id_municipio=datos.municipio_id,
+    )
+    db.add(menor)
+    db.commit()
+    db.refresh(menor)
+
+    # 4. Guardar Hecho Victimal
+    fecha_obj = datetime.strptime(datos.fecha_hecho, "%Y-%m-%d").date() if datos.fecha_hecho else None
+    hecho = HechoVictimal(
+        id_menor=menor.id_menor,
+        nombre_victima_madre=datos.victima_madre,
+        fecha_hecho=fecha_obj,
+        expediente_juridico=datos.expediente_juridico,
+        descripcion_delito=datos.delito
+    )
+    db.add(hecho)
+
+    # ─── CORRECCIÓN 3-B: Busca el id entero por código antes de insertar la FK ───
+    if datos.cie10_codigo and datos.cie10_codigo != "NINGUNA":
+        sub = db.query(CatCieSubcategoria)\
+                .filter(CatCieSubcategoria.codigo == datos.cie10_codigo)\
+                .first()
+        if sub:
+            enf = TutorEnfermedad(
+                id_tutor=tutor.id_tutor,
+                id_subcategoria_cie10=sub.id_subcategoria,  # ← entero correcto
+                es_cronica=True,
+                esta_controlada=True
+            )
+            db.add(enf)
+
+    db.commit()
+    return {"mensaje": "Expediente guardado con éxito"}
+
+
+@app.get("/expedientes", tags=["Expedientes"])
+def listar_expedientes(db: Session = Depends(get_db)):
+    menores   = db.query(Menor).all()
+    resultado = []
+    for m in menores:
+        t   = m.tutor
+        h   = m.hechos_victimales[0] if m.hechos_victimales else None
+        enf = t.enfermedades[0]      if t and t.enfermedades else None
+
+        # Recuperar el código CIE-10 legible si hay enfermedad registrada
+        cie10_label = "Ninguna / Sano"
+        if enf:
+            sub = db.get(CatCieSubcategoria, enf.id_subcategoria_cie10)
+            if sub:
+                cie10_label = f"{sub.codigo} - {sub.descripcion}"
+
+        lengua_nombre = "No especificado"
+        if m.id_lengua:
+            lng = db.get(CatLenguaInali, m.id_lengua)
+            if lng:
+                lengua_nombre = lng.nombre
+
+        localidad_nombre = "No especificada"
+        if m.id_municipio:
+            mun = db.get(CatMunicipio, m.id_municipio)
+            if mun:
+                est = db.get(CatEstado, mun.id_estado)
+                localidad_nombre = f"{mun.nombre}, {est.nombre}" if est else mun.nombre
+
+        resultado.append({
+            "id":       f"EXP-{m.id_menor:03d}",
+            "nombre":   f"{m.nombre} {m.apellido_paterno} {m.apellido_materno}",
+            "curp":     "Registrada en BD",
+            "fecha_nac": "N/A",
+            "idioma":   lengua_nombre,
+            "localidad": localidad_nombre,
+            "tutor": {
+                "nombre":   t.nombre_completo if t else "Sin tutor",
+                "telefono": t.telefono        if t else "",
+                "cie10":    cie10_label
+            },
+            "hecho": {
+                "exp":    h.expediente_juridico if h else "",
+                "delito": h.descripcion_delito  if h else "",
+                "madre":  h.nombre_victima_madre if h else ""
+            },
+            "estatus": "Proceso Activo",
+            "badge":   "badge-teal",
+            "fecha":   "Reciente"
+        })
+    return resultado
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+</file>
+
+<file path="readme.md">
+# Red Nacional de Protección Infantil (RNPI)
+### Sistema de Gestión de Expedientes y Personal
+
+Aplicación web institucional para la gestión de menores en situación de vulnerabilidad, personal voluntario, células de trabajo, expedientes multidisciplinarios y apoyos asignados.
+
+---
+
+## Stack tecnológico
+
+- **Sistema Operativo:** Linux (Ubuntu 22.04 LTS)
+- **Backend:** Python 3.11+ con FastAPI
+- **ORM:** SQLAlchemy
+- **Servidor ASGI:** Uvicorn
+- **Base de datos:** PostgreSQL 15+
+- **Frontend:** HTML5 + CSS3 + JavaScript (vanilla)
+- **Autenticación:** JWT con roles
+- **Hashing de contraseñas:** Passlib (bcrypt)
+
+---
+
+## Requisitos previos
+
+- Python 3.11 o superior
+- PostgreSQL 15 o superior
+- pip
+
+Verificar instalaciones:
+
+```bash
+python3 --version
+psql --version
+pip --version
+```
+f
+---
+
+## Instalación
+
+### 1. Descomprimir el proyecto
+
+Descomprime el archivo `.zip` recibido y entra a la carpeta del proyecto:
+
+```bash
+unzip rnpi.zip
+cd rnpi
+```
+
+### 2. Crear y activar un entorno virtual en la raiz del proyecto
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Crear la base de datos en PostgreSQL
+
+```bash
+sudo -u postgres psql
+```
+
+Dentro de la consola de PostgreSQL:
+
+```sql
+CREATE DATABASE rnpi_db;
+CREATE USER rnpi_user WITH PASSWORD 'tu_contraseña';
+GRANT ALL PRIVILEGES ON DATABASE rnpi_db TO rnpi_user;
+\q
+```
+
+### 5. Cargar el esquema de la base de datos
+
+```bash
+psql -U rnpi_user -d rnpi_db -f schema.sql
+```
+
+---
+
+## Configuración
+
+Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+```env
+DATABASE_URL=postgresql://rnpi_user:tu_contraseña@localhost:5432/rnpi_db
+SECRET_KEY=clave_secreta_larga_y_aleatoria
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+```
+
+---
+
+## Ejecución
+
+```bash
+source venv/bin/activate
+python main.py
+```
+
+La aplicación estará disponible en: `http://localhost:8000/ui`
+
+La documentación de la API estará en: `http://localhost:8000/docs`
+
+
+
+---
+## Iniciar sesión 
+
+correo:director@rnpi.gob.mx
+contraseña:admin123
+</file>
+
+<file path="requirements.txt">
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+python-dotenv==1.0.1
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.17
+pydantic[email]==2.10.3
+</file>
+
+<file path="reset_pass.py">
+from main import SessionLocal, Personal, hash_password
+
+def resetear_password():
+    db = SessionLocal()
+    # Buscamos al director
+    admin = db.query(Personal).filter(Personal.correo == "director@rnpi.gob.mx").first()
+    
+    if admin:
+        # Forzamos la nueva contraseña ENCRIPTADA
+        admin.contrasena = hash_password("rnpi_secreto_123")
+        db.commit()
+        print("✅ Contraseña actualizada y encriptada correctamente.")
+    else:
+        print("❌ El usuario no existe. Asegúrate de haber ejecutado crear_admin.py")
+        
+    db.close()
+
+if __name__ == "__main__":
+    resetear_password()
+</file>
+
+<file path="schema.sql">
+--
+-- PostgreSQL database dump
+--
+
+\restrict Xk5XhYuhxIsVQ7txJJggcfhaTsL20dSVY9fhYeeTAWArHYTFWjlyzgYRgq31mvd
+
+-- Dumped from database version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
+-- Dumped by pg_dump version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS fk_personal_rol;
+ALTER TABLE IF EXISTS ONLY public.cat_municipios DROP CONSTRAINT IF EXISTS fk_municipio_estado;
+ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS fk_menor_estatus;
+ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS fk_menor_celula;
+ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS fk_expediente_personal;
+ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS fk_expediente_menor;
+ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS fk_ci_personal;
+ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS fk_ci_celula;
+ALTER TABLE IF EXISTS ONLY public.celulas DROP CONSTRAINT IF EXISTS fk_celula_municipio;
+ALTER TABLE IF EXISTS ONLY public.apoyos_asignados DROP CONSTRAINT IF EXISTS fk_apoyo_menor;
+ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS pk_celula_integrantes;
+ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_rfc_key;
+ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_pkey;
+ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_curp_key;
+ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_correo_key;
+ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS menores_pkey;
+ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS menores_curp_key;
+ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS expedientes_multidisciplinarios_pkey;
+ALTER TABLE IF EXISTS ONLY public.celulas DROP CONSTRAINT IF EXISTS celulas_pkey;
+ALTER TABLE IF EXISTS ONLY public.cat_roles DROP CONSTRAINT IF EXISTS cat_roles_pkey;
+ALTER TABLE IF EXISTS ONLY public.cat_municipios DROP CONSTRAINT IF EXISTS cat_municipios_pkey;
+ALTER TABLE IF EXISTS ONLY public.cat_estatus_menor DROP CONSTRAINT IF EXISTS cat_estatus_menor_pkey;
+ALTER TABLE IF EXISTS ONLY public.cat_estados DROP CONSTRAINT IF EXISTS cat_estados_pkey;
+ALTER TABLE IF EXISTS ONLY public.apoyos_asignados DROP CONSTRAINT IF EXISTS apoyos_asignados_pkey;
+ALTER TABLE IF EXISTS public.personal ALTER COLUMN id_personal DROP DEFAULT;
+ALTER TABLE IF EXISTS public.menores ALTER COLUMN id_menor DROP DEFAULT;
+ALTER TABLE IF EXISTS public.expedientes_multidisciplinarios ALTER COLUMN id_expediente DROP DEFAULT;
+ALTER TABLE IF EXISTS public.celulas ALTER COLUMN id_celula DROP DEFAULT;
+ALTER TABLE IF EXISTS public.cat_roles ALTER COLUMN id_rol DROP DEFAULT;
+ALTER TABLE IF EXISTS public.cat_municipios ALTER COLUMN id_municipio DROP DEFAULT;
+ALTER TABLE IF EXISTS public.cat_estatus_menor ALTER COLUMN id_estatus DROP DEFAULT;
+ALTER TABLE IF EXISTS public.cat_estados ALTER COLUMN id_estado DROP DEFAULT;
+ALTER TABLE IF EXISTS public.apoyos_asignados ALTER COLUMN id_apoyo DROP DEFAULT;
+DROP SEQUENCE IF EXISTS public.personal_id_personal_seq;
+DROP TABLE IF EXISTS public.personal;
+DROP SEQUENCE IF EXISTS public.menores_id_menor_seq;
+DROP TABLE IF EXISTS public.menores;
+DROP SEQUENCE IF EXISTS public.expedientes_multidisciplinarios_id_expediente_seq;
+DROP TABLE IF EXISTS public.expedientes_multidisciplinarios;
+DROP SEQUENCE IF EXISTS public.celulas_id_celula_seq;
+DROP TABLE IF EXISTS public.celulas;
+DROP TABLE IF EXISTS public.celula_integrantes;
+DROP SEQUENCE IF EXISTS public.cat_roles_id_rol_seq;
+DROP TABLE IF EXISTS public.cat_roles;
+DROP SEQUENCE IF EXISTS public.cat_municipios_id_municipio_seq;
+DROP TABLE IF EXISTS public.cat_municipios;
+DROP SEQUENCE IF EXISTS public.cat_estatus_menor_id_estatus_seq;
+DROP TABLE IF EXISTS public.cat_estatus_menor;
+DROP SEQUENCE IF EXISTS public.cat_estados_id_estado_seq;
+DROP TABLE IF EXISTS public.cat_estados;
+DROP SEQUENCE IF EXISTS public.apoyos_asignados_id_apoyo_seq;
+DROP TABLE IF EXISTS public.apoyos_asignados;
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: apoyos_asignados; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.apoyos_asignados (
+    id_apoyo integer NOT NULL,
+    id_menor integer NOT NULL,
+    tipo_apoyo character varying(150) NOT NULL,
+    monto_o_especie character varying(200) NOT NULL,
+    periodicidad character varying(50) NOT NULL,
+    CONSTRAINT chk_periodicidad CHECK (((periodicidad)::text = ANY (ARRAY[('Única vez'::character varying)::text, ('Semanal'::character varying)::text, ('Quincenal'::character varying)::text, ('Mensual'::character varying)::text, ('Bimestral'::character varying)::text, ('Trimestral'::character varying)::text, ('Anual'::character varying)::text])))
+);
+
+
+ALTER TABLE public.apoyos_asignados OWNER TO postgres;
+
+--
+-- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.apoyos_asignados_id_apoyo_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.apoyos_asignados_id_apoyo_seq OWNER TO postgres;
+
+--
+-- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.apoyos_asignados_id_apoyo_seq OWNED BY public.apoyos_asignados.id_apoyo;
+
+
+--
+-- Name: cat_estados; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_estados (
+    id_estado integer NOT NULL,
+    nombre character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.cat_estados OWNER TO postgres;
+
+--
+-- Name: cat_estados_id_estado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_estados_id_estado_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_estados_id_estado_seq OWNER TO postgres;
+
+--
+-- Name: cat_estados_id_estado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_estados_id_estado_seq OWNED BY public.cat_estados.id_estado;
+
+
+--
+-- Name: cat_estatus_menor; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_estatus_menor (
+    id_estatus integer NOT NULL,
+    descripcion character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.cat_estatus_menor OWNER TO postgres;
+
+--
+-- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_estatus_menor_id_estatus_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_estatus_menor_id_estatus_seq OWNER TO postgres;
+
+--
+-- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_estatus_menor_id_estatus_seq OWNED BY public.cat_estatus_menor.id_estatus;
+
+
+--
+-- Name: cat_municipios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_municipios (
+    id_municipio integer NOT NULL,
+    id_estado integer NOT NULL,
+    nombre character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.cat_municipios OWNER TO postgres;
+
+--
+-- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_municipios_id_municipio_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_municipios_id_municipio_seq OWNER TO postgres;
+
+--
+-- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_municipios_id_municipio_seq OWNED BY public.cat_municipios.id_municipio;
+
+
+--
+-- Name: cat_roles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_roles (
+    id_rol integer NOT NULL,
+    nombre_rol character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.cat_roles OWNER TO postgres;
+
+--
+-- Name: cat_roles_id_rol_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_roles_id_rol_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_roles_id_rol_seq OWNER TO postgres;
+
+--
+-- Name: cat_roles_id_rol_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_roles_id_rol_seq OWNED BY public.cat_roles.id_rol;
+
+
+--
+-- Name: celula_integrantes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.celula_integrantes (
+    id_celula integer NOT NULL,
+    id_personal integer NOT NULL
+);
+
+
+ALTER TABLE public.celula_integrantes OWNER TO postgres;
+
+--
+-- Name: celulas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.celulas (
+    id_celula integer NOT NULL,
+    nombre_celula character varying(150) NOT NULL,
+    id_municipio integer NOT NULL
+);
+
+
+ALTER TABLE public.celulas OWNER TO postgres;
+
+--
+-- Name: celulas_id_celula_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.celulas_id_celula_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.celulas_id_celula_seq OWNER TO postgres;
+
+--
+-- Name: celulas_id_celula_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.celulas_id_celula_seq OWNED BY public.celulas.id_celula;
+
+
+--
+-- Name: expedientes_multidisciplinarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.expedientes_multidisciplinarios (
+    id_expediente integer NOT NULL,
+    id_menor integer NOT NULL,
+    id_personal integer NOT NULL,
+    tipo_evaluacion character varying(20) NOT NULL,
+    diagnostico text,
+    dictamen_provisional boolean DEFAULT false NOT NULL,
+    fecha_evaluacion date DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT chk_tipo_evaluacion CHECK (((tipo_evaluacion)::text = ANY (ARRAY[('Médica'::character varying)::text, ('Legal'::character varying)::text, ('Psicológica'::character varying)::text, ('Social'::character varying)::text])))
+);
+
+
+ALTER TABLE public.expedientes_multidisciplinarios OWNER TO postgres;
+
+--
+-- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq OWNER TO postgres;
+
+--
+-- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq OWNED BY public.expedientes_multidisciplinarios.id_expediente;
+
+
+--
+-- Name: menores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.menores (
+    id_menor integer NOT NULL,
+    nombre_completo character varying(200) NOT NULL,
+    curp character varying(18) NOT NULL,
+    fecha_nacimiento date NOT NULL,
+    fecha_registro timestamp without time zone DEFAULT now() NOT NULL,
+    id_celula_asignada integer NOT NULL,
+    id_estatus integer NOT NULL
+);
+
+
+ALTER TABLE public.menores OWNER TO postgres;
+
+--
+-- Name: menores_id_menor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.menores_id_menor_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.menores_id_menor_seq OWNER TO postgres;
+
+--
+-- Name: menores_id_menor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.menores_id_menor_seq OWNED BY public.menores.id_menor;
+
+
+--
+-- Name: personal; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.personal (
+    id_personal integer NOT NULL,
+    nombre_completo character varying(200) NOT NULL,
+    rfc character varying(13) NOT NULL,
+    curp character varying(18) NOT NULL,
+    correo character varying(150) NOT NULL,
+    contrasena text NOT NULL,
+    activo boolean DEFAULT true NOT NULL,
+    id_rol integer NOT NULL
+);
+
+
+ALTER TABLE public.personal OWNER TO postgres;
+
+--
+-- Name: personal_id_personal_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.personal_id_personal_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.personal_id_personal_seq OWNER TO postgres;
+
+--
+-- Name: personal_id_personal_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.personal_id_personal_seq OWNED BY public.personal.id_personal;
+
+
+--
+-- Name: apoyos_asignados id_apoyo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apoyos_asignados ALTER COLUMN id_apoyo SET DEFAULT nextval('public.apoyos_asignados_id_apoyo_seq'::regclass);
+
+
+--
+-- Name: cat_estados id_estado; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_estados ALTER COLUMN id_estado SET DEFAULT nextval('public.cat_estados_id_estado_seq'::regclass);
+
+
+--
+-- Name: cat_estatus_menor id_estatus; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_estatus_menor ALTER COLUMN id_estatus SET DEFAULT nextval('public.cat_estatus_menor_id_estatus_seq'::regclass);
+
+
+--
+-- Name: cat_municipios id_municipio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_municipios ALTER COLUMN id_municipio SET DEFAULT nextval('public.cat_municipios_id_municipio_seq'::regclass);
+
+
+--
+-- Name: cat_roles id_rol; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_roles ALTER COLUMN id_rol SET DEFAULT nextval('public.cat_roles_id_rol_seq'::regclass);
+
+
+--
+-- Name: celulas id_celula; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celulas ALTER COLUMN id_celula SET DEFAULT nextval('public.celulas_id_celula_seq'::regclass);
+
+
+--
+-- Name: expedientes_multidisciplinarios id_expediente; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.expedientes_multidisciplinarios ALTER COLUMN id_expediente SET DEFAULT nextval('public.expedientes_multidisciplinarios_id_expediente_seq'::regclass);
+
+
+--
+-- Name: menores id_menor; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menores ALTER COLUMN id_menor SET DEFAULT nextval('public.menores_id_menor_seq'::regclass);
+
+
+--
+-- Name: personal id_personal; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal ALTER COLUMN id_personal SET DEFAULT nextval('public.personal_id_personal_seq'::regclass);
+
+
+--
+-- Data for Name: apoyos_asignados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: cat_estados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: cat_estatus_menor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: cat_municipios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: cat_roles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.cat_roles VALUES (1, 'Director');
+INSERT INTO public.cat_roles VALUES (2, 'Médico');
+INSERT INTO public.cat_roles VALUES (3, 'Desarrollador');
+
+
+--
+-- Data for Name: celula_integrantes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: celulas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: expedientes_multidisciplinarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: menores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: personal; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.personal VALUES (1, 'Obed Viveros', 'DIRT800101ABC', 'DIRT800101HDFRZR09', 'director@rnpi.gob.mx', '$2b$12$0fU2KE21GQ.4ve6mOfWN4unaAsgWF8sDH7.VyHVwAoCCD0NAi0r/2', true, 1);
+INSERT INTO public.personal VALUES (3, 'Roony Roldan Cruz', 'ROONJJDJWJ34J', 'ROONJJDJWJ34JHFJDD', 'roonyr@rnpi.gob.mx', '$2b$12$a5m.rcobVoVS791lvzDCe.ltcN4oEe3mZ0KBdMbbfhzMENEQjZWu2', true, 3);
+
+
+--
+-- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.apoyos_asignados_id_apoyo_seq', 1, false);
+
+
+--
+-- Name: cat_estados_id_estado_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cat_estados_id_estado_seq', 1, false);
+
+
+--
+-- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cat_estatus_menor_id_estatus_seq', 1, false);
+
+
+--
+-- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cat_municipios_id_municipio_seq', 1, false);
+
+
+--
+-- Name: cat_roles_id_rol_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cat_roles_id_rol_seq', 3, true);
+
+
+--
+-- Name: celulas_id_celula_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.celulas_id_celula_seq', 1, false);
+
+
+--
+-- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.expedientes_multidisciplinarios_id_expediente_seq', 1, false);
+
+
+--
+-- Name: menores_id_menor_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.menores_id_menor_seq', 1, false);
+
+
+--
+-- Name: personal_id_personal_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.personal_id_personal_seq', 3, true);
+
+
+--
+-- Name: apoyos_asignados apoyos_asignados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apoyos_asignados
+    ADD CONSTRAINT apoyos_asignados_pkey PRIMARY KEY (id_apoyo);
+
+
+--
+-- Name: cat_estados cat_estados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_estados
+    ADD CONSTRAINT cat_estados_pkey PRIMARY KEY (id_estado);
+
+
+--
+-- Name: cat_estatus_menor cat_estatus_menor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_estatus_menor
+    ADD CONSTRAINT cat_estatus_menor_pkey PRIMARY KEY (id_estatus);
+
+
+--
+-- Name: cat_municipios cat_municipios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_municipios
+    ADD CONSTRAINT cat_municipios_pkey PRIMARY KEY (id_municipio);
+
+
+--
+-- Name: cat_roles cat_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_roles
+    ADD CONSTRAINT cat_roles_pkey PRIMARY KEY (id_rol);
+
+
+--
+-- Name: celulas celulas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celulas
+    ADD CONSTRAINT celulas_pkey PRIMARY KEY (id_celula);
+
+
+--
+-- Name: expedientes_multidisciplinarios expedientes_multidisciplinarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.expedientes_multidisciplinarios
+    ADD CONSTRAINT expedientes_multidisciplinarios_pkey PRIMARY KEY (id_expediente);
+
+
+--
+-- Name: menores menores_curp_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menores
+    ADD CONSTRAINT menores_curp_key UNIQUE (curp);
+
+
+--
+-- Name: menores menores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menores
+    ADD CONSTRAINT menores_pkey PRIMARY KEY (id_menor);
+
+
+--
+-- Name: personal personal_correo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal
+    ADD CONSTRAINT personal_correo_key UNIQUE (correo);
+
+
+--
+-- Name: personal personal_curp_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal
+    ADD CONSTRAINT personal_curp_key UNIQUE (curp);
+
+
+--
+-- Name: personal personal_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal
+    ADD CONSTRAINT personal_pkey PRIMARY KEY (id_personal);
+
+
+--
+-- Name: personal personal_rfc_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal
+    ADD CONSTRAINT personal_rfc_key UNIQUE (rfc);
+
+
+--
+-- Name: celula_integrantes pk_celula_integrantes; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celula_integrantes
+    ADD CONSTRAINT pk_celula_integrantes PRIMARY KEY (id_celula, id_personal);
+
+
+--
+-- Name: apoyos_asignados fk_apoyo_menor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apoyos_asignados
+    ADD CONSTRAINT fk_apoyo_menor FOREIGN KEY (id_menor) REFERENCES public.menores(id_menor) ON DELETE CASCADE;
+
+
+--
+-- Name: celulas fk_celula_municipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celulas
+    ADD CONSTRAINT fk_celula_municipio FOREIGN KEY (id_municipio) REFERENCES public.cat_municipios(id_municipio) ON DELETE RESTRICT;
+
+
+--
+-- Name: celula_integrantes fk_ci_celula; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celula_integrantes
+    ADD CONSTRAINT fk_ci_celula FOREIGN KEY (id_celula) REFERENCES public.celulas(id_celula) ON DELETE RESTRICT;
+
+
+--
+-- Name: celula_integrantes fk_ci_personal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.celula_integrantes
+    ADD CONSTRAINT fk_ci_personal FOREIGN KEY (id_personal) REFERENCES public.personal(id_personal) ON DELETE RESTRICT;
+
+
+--
+-- Name: expedientes_multidisciplinarios fk_expediente_menor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.expedientes_multidisciplinarios
+    ADD CONSTRAINT fk_expediente_menor FOREIGN KEY (id_menor) REFERENCES public.menores(id_menor) ON DELETE CASCADE;
+
+
+--
+-- Name: expedientes_multidisciplinarios fk_expediente_personal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.expedientes_multidisciplinarios
+    ADD CONSTRAINT fk_expediente_personal FOREIGN KEY (id_personal) REFERENCES public.personal(id_personal) ON DELETE RESTRICT;
+
+
+--
+-- Name: menores fk_menor_celula; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menores
+    ADD CONSTRAINT fk_menor_celula FOREIGN KEY (id_celula_asignada) REFERENCES public.celulas(id_celula) ON DELETE RESTRICT;
+
+
+--
+-- Name: menores fk_menor_estatus; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menores
+    ADD CONSTRAINT fk_menor_estatus FOREIGN KEY (id_estatus) REFERENCES public.cat_estatus_menor(id_estatus) ON DELETE RESTRICT;
+
+
+--
+-- Name: cat_municipios fk_municipio_estado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_municipios
+    ADD CONSTRAINT fk_municipio_estado FOREIGN KEY (id_estado) REFERENCES public.cat_estados(id_estado) ON DELETE RESTRICT;
+
+
+--
+-- Name: personal fk_personal_rol; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal
+    ADD CONSTRAINT fk_personal_rol FOREIGN KEY (id_rol) REFERENCES public.cat_roles(id_rol) ON DELETE RESTRICT;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict Xk5XhYuhxIsVQ7txJJggcfhaTsL20dSVY9fhYeeTAWArHYTFWjlyzgYRgq31mvd
+</file>
+
+</files>

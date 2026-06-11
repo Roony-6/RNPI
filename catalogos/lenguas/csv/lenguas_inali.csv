@@ -1,0 +1,70 @@
+id_lengua,nombre,es_indigena
+1,Español,false
+2,Akateko,true
+3,Amuzgo,true
+4,Awakateko,true
+5,Ayapaneco,true
+6,Chatino,true
+7,Chichimeco Jonaz,true
+8,Chinanteco,true
+9,Chocholteco,true
+10,Chontal de Oaxaca,true
+11,Chontal de Tabasco,true
+12,Chuj,true
+13,Cochimí,true
+14,Cora,true
+15,Cucapá,true
+16,Cuicateco,true
+17,Guarijío,true
+18,Huasteco,true
+19,Huave,true
+20,Huichol,true
+21,Ixcateco,true
+22,Ixil,true
+23,Jacalteco,true
+24,Kaqchikel,true
+25,Kickapoo,true
+26,Kiliwa,true
+27,K'iche',true
+28,Ku'ahl,true
+29,Kumiai,true
+30,Lacandón,true
+31,Mam,true
+32,Matlatzinca,true
+33,Maya,true
+34,Mayo,true
+35,Mazahua,true
+36,Mazateco,true
+37,Mixe,true
+38,Mixteco,true
+39,Mocho',true
+40,Náhuatl,true
+41,Ocuilteco,true
+42,Oluteco,true
+43,Otomí,true
+44,Paipai,true
+45,Pame,true
+46,Papago,true
+47,Pima,true
+48,Popoloca,true
+49,Popoluca de la Sierra,true
+50,Purépecha,true
+51,Q'anjob'al,true
+52,Qato'k,true
+53,Seri,true
+54,Tarahumara,true
+55,Teko,true
+56,Tepehua,true
+57,Tepehuano del Norte,true
+58,Tepehuano del Sur,true
+59,Tlapaneco,true
+60,Tojolabal,true
+61,Totonaco,true
+62,Triqui,true
+63,Tzeltal,true
+64,Tzotzil,true
+65,Yaqui,true
+66,Zapoteco,true
+67,Zoque,true
+68,Ngiwa,true
+69,No Especificado,false

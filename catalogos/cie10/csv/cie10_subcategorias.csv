@@ -1,0 +1,131 @@
+id_subcategoria,id_categoria,codigo,descripcion
+1,1,A00.0,Colera debida a Vibrio cholerae 01 biotipo cholerae
+2,1,A00.1,Colera debida a Vibrio cholerae 01 biotipo el tor
+3,1,A00.9,Colera no especificada
+4,2,A01.0,Fiebre tifoidea
+5,2,A01.1,Fiebre paratifoidea A
+6,2,A01.2,Fiebre paratifoidea B
+7,2,A01.3,Fiebre paratifoidea C
+8,2,A01.4,Fiebre paratifoidea no especificada
+9,3,A02.0,Enteritis por salmonela
+10,3,A02.1,Septicemia por salmonela
+11,3,A02.2,Infecciones localizadas debidas a salmonela
+12,3,A02.8,Otras infecciones especificadas debidas a salmonela
+13,3,A02.9,Infeccion debida a salmonela no especificada
+14,10,A09.0,Otras gastroenteritis y colitis de origen infeccioso
+15,10,A09.9,Gastroenteritis y colitis de origen no especificado
+16,34,D50.0,Anemia por deficiencia de hierro secundaria a perdida de sangre (cronica)
+17,34,D50.1,Disfagia sideropenica
+18,34,D50.8,Otras anemias por deficiencia de hierro
+19,34,D50.9,Anemia por deficiencia de hierro sin otra especificacion
+20,37,D53.0,Anemia por deficiencia de proteinas
+21,37,D53.1,Otras anemias megoblasticas no clasificadas en otra parte
+22,37,D53.2,Anemia escorbutica
+23,37,D53.8,Otras anemias nutricionales especificadas
+24,37,D53.9,Anemia nutricional no especificada
+25,42,D62,Anemia posthemorragica aguda
+26,47,E43,Desnutricion proteicocaloritica grave no especificada
+27,49,E46,Desnutricion proteicocaloritica no especificada
+28,50,E10.0,Diabetes mellitus tipo 1 con coma
+29,50,E10.1,Diabetes mellitus tipo 1 con cetoacidosis
+30,50,E10.2,Diabetes mellitus tipo 1 con complicaciones renales
+31,50,E10.3,Diabetes mellitus tipo 1 con complicaciones oftalmicas
+32,50,E10.4,Diabetes mellitus tipo 1 con complicaciones neurologicas
+33,50,E10.5,Diabetes mellitus tipo 1 con complicaciones circulatorias perifericas
+34,50,E10.6,Diabetes mellitus tipo 1 con otras complicaciones especificadas
+35,50,E10.7,Diabetes mellitus tipo 1 con complicaciones multiples
+36,50,E10.8,Diabetes mellitus tipo 1 con complicaciones no especificadas
+37,50,E10.9,Diabetes mellitus tipo 1 sin mencion de complicacion
+38,51,E11.0,Diabetes mellitus tipo 2 con coma
+39,51,E11.1,Diabetes mellitus tipo 2 con cetoacidosis
+40,51,E11.2,Diabetes mellitus tipo 2 con complicaciones renales
+41,51,E11.3,Diabetes mellitus tipo 2 con complicaciones oftalmicas
+42,51,E11.4,Diabetes mellitus tipo 2 con complicaciones neurologicas
+43,51,E11.5,Diabetes mellitus tipo 2 con complicaciones circulatorias perifericas
+44,51,E11.6,Diabetes mellitus tipo 2 con otras complicaciones especificadas
+45,51,E11.7,Diabetes mellitus tipo 2 con complicaciones multiples
+46,51,E11.8,Diabetes mellitus tipo 2 con complicaciones no especificadas
+47,51,E11.9,Diabetes mellitus tipo 2 sin mencion de complicacion
+48,54,E14.0,Diabetes mellitus no especificada con coma
+49,54,E14.1,Diabetes mellitus no especificada con cetoacidosis
+50,54,E14.9,Diabetes mellitus no especificada sin mencion de complicacion
+51,55,E65,Adiposidad localizada
+52,56,E66.0,Obesidad debida a exceso de calorias
+53,56,E66.1,Obesidad inducida por medicamentos
+54,56,E66.2,Obesidad extrema con hipoventilacion alveolar
+55,56,E66.8,Otro tipo de obesidad
+56,56,E66.9,Obesidad no especificada
+57,60,E03.0,Hipotiroidismo congenito con bocio
+58,60,E03.1,Hipotiroidismo congenito sin bocio
+59,60,E03.2,Hipotiroidismo debido a medicamentos y otras sustancias exogenas
+60,60,E03.3,Hipotiroidismo postinfeccioso
+61,60,E03.4,Atrofia de la glandula tiroides (adquirida)
+62,60,E03.5,Coma mixedematoso
+63,60,E03.8,Otros hipotiroidismos especificados
+64,60,E03.9,Hipotiroidismo no especificado
+65,67,F70.0,Retraso mental leve con deterioro del comportamiento nulo o minimo
+66,67,F70.1,Retraso mental leve con deterioro del comportamiento significativo que requiere atencion o tratamiento
+67,67,F70.8,Otros retrasos mentales leves
+68,67,F70.9,Retraso mental leve sin mencion de deterioro del comportamiento
+69,73,F80.0,Trastorno especifico de la pronunciacion
+70,73,F80.1,Trastorno del lenguaje expresivo
+71,73,F80.2,Trastorno de la recepcion del lenguaje
+72,73,F80.3,Afasia adquirida con epilepsia (sindrome de Landau-Kleffner)
+73,73,F80.8,Otros trastornos del desarrollo del habla y del lenguaje
+74,73,F80.9,Trastorno del desarrollo del habla y del lenguaje no especificado
+75,77,F84.0,Autismo en la ninez
+76,77,F84.1,Autismo atipico
+77,77,F84.2,Sindrome de Rett
+78,77,F84.3,Otro trastorno desintegrativo de la ninez
+79,77,F84.4,Trastorno hiperactivo asociado con retraso mental y movimientos estereotipados
+80,77,F84.5,Sindrome de Asperger
+81,77,F84.8,Otros trastornos generalizados del desarrollo
+82,77,F84.9,Trastorno generalizado del desarrollo no especificado
+83,80,F90.0,Perturbacion de la actividad y de la atencion (TDAH)
+84,80,F90.1,Trastorno hipercinetico de la conducta
+85,80,F90.8,Otros trastornos hipercineticos
+86,80,F90.9,Trastorno hipercinetico no especificado
+87,87,I10,Hipertension esencial (primaria)
+88,92,I20.0,Angina inestable
+89,92,I20.1,Angina de pecho con espasmo documentado
+90,92,I20.8,Otras formas de angina de pecho
+91,92,I20.9,Angina de pecho no especificada
+92,93,I21.0,Infarto agudo transmural del miocardio de la pared anterior
+93,93,I21.1,Infarto agudo transmural del miocardio de la pared inferior
+94,93,I21.2,Infarto agudo transmural del miocardio de otros sitios
+95,93,I21.3,Infarto agudo transmural del miocardio de sitio no especificado
+96,93,I21.4,Infarto agudo subendocardico del miocardio
+97,93,I21.9,Infarto agudo del miocardio sin otra especificacion
+98,98,J00,Rinofaringitis aguda (resfriado comun)
+99,99,J01.0,Sinusitis maxilar aguda
+100,99,J01.1,Sinusitis frontal aguda
+101,99,J01.2,Sinusitis etmoidal aguda
+102,99,J01.3,Sinusitis esfenoidal aguda
+103,99,J01.4,Pansinusitis aguda
+104,99,J01.8,Otras sinusitis agudas
+105,99,J01.9,Sinusitis aguda no especificada
+106,101,J03.0,Amigdalitis estreptococica
+107,101,J03.8,Amigdalitis aguda debida a otros microorganismos especificados
+108,101,J03.9,Amigdalitis aguda no especificada
+109,107,J11.0,Influenza con neumonia virus no identificado
+110,107,J11.1,Influenza con otras manifestaciones respiratorias virus no identificado
+111,107,J11.8,Influenza con otras manifestaciones virus no identificado
+112,114,J18.0,Bronconeumonia organismo no especificado
+113,114,J18.1,Neumonia lobar organismo no especificado
+114,114,J18.2,Neumonia hipostatica organismo no especificado
+115,114,J18.8,Otras neumonias organismo no especificado
+116,114,J18.9,Neumonia no especificada
+117,115,J20.0,Bronquitis aguda debida a Mycoplasma pneumoniae
+118,115,J20.1,Bronquitis aguda debida a Haemophilus influenzae
+119,115,J20.2,Bronquitis aguda debida a estreptococo
+120,115,J20.3,Bronquitis aguda debida a virus coxsackie
+121,115,J20.4,Bronquitis aguda debida a virus parainfluenza
+122,115,J20.5,Bronquitis aguda debida a virus sincitial respiratorio
+123,115,J20.6,Bronquitis aguda debida a rinovirus
+124,115,J20.7,Bronquitis aguda debida a ecovirus
+125,115,J20.8,Bronquitis aguda debida a otros organismos especificados
+126,115,J20.9,Bronquitis aguda no especificada
+127,123,J45.0,Asma predominantemente alergica
+128,123,J45.1,Asma no alergica
+129,123,J45.8,Asma mixta
+130,123,J45.9,Asma no especificada

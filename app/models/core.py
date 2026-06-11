@@ -7,14 +7,16 @@ from app.database import Base
 class Personal(Base):
     __tablename__ = "personal"
 
-    id_personal     = Column(Integer,     primary_key=True, index=True)
-    nombre_completo = Column(String(200), nullable=False)
-    rfc             = Column(String(13),  nullable=False, unique=True)
-    curp            = Column(String(18),  nullable=False, unique=True)
-    correo          = Column(String(150), nullable=False, unique=True)
-    contrasena      = Column(String,      nullable=False)
-    activo          = Column(Boolean,     default=True, nullable=False)
-    id_rol          = Column(Integer,     ForeignKey("cat_roles.id_rol"), nullable=False)
+    id_personal      = Column(Integer,     primary_key=True, index=True)
+    nom_personal     = Column(String(200), nullable=False)
+    prim_ap_personal = Column(String(200), nullable=False)
+    seg_ap_personal  = Column(String(200))
+    rfc              = Column(String(13),  nullable=False, unique=True)
+    curp             = Column(String(18),  nullable=False, unique=True)
+    correo           = Column(String(150), nullable=False, unique=True)
+    contrasena       = Column(String,      nullable=False)
+    activo           = Column(Boolean,     default=True, nullable=False)
+    id_rol           = Column(Integer,     ForeignKey("cat_roles.id_rol"), nullable=False)
 
 
 class Tutor(Base):

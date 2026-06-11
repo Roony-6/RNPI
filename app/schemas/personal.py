@@ -2,11 +2,13 @@ from pydantic import BaseModel, EmailStr
 
 
 class PersonalBase(BaseModel):
-    nombre_completo: str
-    rfc:             str
-    curp:            str
-    correo:          EmailStr
-    id_rol:          int
+    nom_personal:     str
+    prim_ap_personal: str
+    seg_ap_personal:  str | None = None
+    rfc:              str
+    curp:             str
+    correo:           EmailStr
+    id_rol:           int
 
 
 class PersonalCrear(PersonalBase):

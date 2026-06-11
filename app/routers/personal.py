@@ -51,7 +51,9 @@ def registrar_personal(
         raise HTTPException(status_code=400, detail="El rol indicado no existe")
 
     nueva_persona = Personal(
-        nombre_completo=datos.nombre_completo,
+        nom_personal=datos.nom_personal.strip(),
+        prim_ap_personal=datos.prim_ap_personal.strip(),
+        seg_ap_personal=datos.seg_ap_personal.strip() if datos.seg_ap_personal else None,
         rfc=datos.rfc.upper(),
         curp=datos.curp.upper(),
         correo=datos.correo,
@@ -92,11 +94,13 @@ def actualizar_personal(
     if not db.get(CatRol, datos.id_rol):
         raise HTTPException(status_code=400, detail="El rol indicado no existe")
 
-    persona.nombre_completo = datos.nombre_completo
-    persona.rfc             = datos.rfc.upper()
-    persona.curp            = datos.curp.upper()
-    persona.correo          = datos.correo
-    persona.id_rol          = datos.id_rol
+    persona.nom_personal     = datos.nom_personal.strip()
+    persona.prim_ap_personal = datos.prim_ap_personal.strip()
+    persona.seg_ap_personal  = datos.seg_ap_personal.strip() if datos.seg_ap_personal else None
+    persona.rfc              = datos.rfc.upper()
+    persona.curp             = datos.curp.upper()
+    persona.correo           = datos.correo
+    persona.id_rol           = datos.id_rol
     db.commit()
     db.refresh(persona)
     return persona

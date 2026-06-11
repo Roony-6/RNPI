@@ -24,7 +24,9 @@ def crear_primer_admin() -> None:
     correo_admin = "director@rnpi.gob.mx"
     if not db.query(Personal).filter(Personal.correo == correo_admin).first():
         admin = Personal(
-            nombre_completo="Director General",
+            nom_personal="Director",
+            prim_ap_personal="General",
+            seg_ap_personal=None,
             rfc="ADMIN12345678",
             curp="ADMIN1234567890123",
             correo=correo_admin,

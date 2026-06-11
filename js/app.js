@@ -319,6 +319,10 @@ async function cargarRoles() {
   });
 }
 
+function nombreCompleto(p) {
+  return [p.nom_personal, p.prim_ap_personal, p.seg_ap_personal].filter(Boolean).join(' ');
+}
+
 async function cargarPersonal() {
   const res = await apiFetch('/personal');
   if (!res || !res.ok) return;
@@ -340,7 +344,7 @@ function filtrarPersonal() {
     const nombre_rol = ROLES.find((r) => r.id_rol == p.id_rol)?.nombre_rol || 'Rol';
     return `<tr>
       <td>${p.id_personal}</td>
-      <td><strong>${esc(p.nombre_completo)}</strong></td>
+      <td><strong>${esc(nombreCompleto(p))}</strong></td>
       <td>${esc(p.correo)}</td>
       <td>${esc(p.rfc)}</td>
       <td><span class="badge badge-navy">${esc(nombre_rol)}</span></td>
@@ -364,10 +368,10 @@ async function verDetallePersonal(id) {
     const res = await apiFetch(`/personal/${id}`);
     if (!res) return;
     const p = await res.json();
-    const initials       = p.nombre_completo.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+    const initials       = nombreCompleto(p).split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase();
     const nombre_rol_str = ROLES.find((r) => r.id_rol == p.id_rol)?.nombre_rol || 'Rol';
     $('det-avatar').textContent = initials;
-    $('det-nombre').textContent = p.nombre_completo;
+    $('det-nombre').textContent = nombreCompleto(p);
     $('det-badge').innerHTML    = `<span class="badge ${p.activo ? 'badge-green' : 'badge-red'}">${p.activo ? 'Activo' : 'Inactivo'}</span> <span class="badge badge-navy">${esc(nombre_rol_str)}</span>`;
     $('det-rfc').textContent    = p.rfc;
     $('det-curp').textContent   = p.curp;
@@ -380,7 +384,7 @@ async function verDetallePersonal(id) {
 }
 
 function openModalNuevoPersonal() {
-  ['f-id', 'f-nombre', 'f-rfc', 'f-curp', 'f-correo', 'f-rol'].forEach((id) => { $(id).value = ''; });
+  ['f-id', 'f-nombre', 'f-prim-ap', 'f-seg-ap', 'f-rfc', 'f-curp', 'f-correo', 'f-rol'].forEach((id) => { $(id).value = ''; });
   $('wrap-password').style.display  = '';
   $('wrap-password2').style.display = '';
   $('modal-pers-title').innerText   = 'Registrar Personal';
@@ -391,7 +395,9 @@ function openModalEditarPersonal(id) {
   const p = PERSONAL_ALL.find((x) => x.id_personal === id);
   if (!p) return;
   $('f-id').value     = p.id_personal;
-  $('f-nombre').value = p.nombre_completo;
+  $('f-nombre').value  = p.nom_personal;
+  $('f-prim-ap').value = p.prim_ap_personal;
+  $('f-seg-ap').value  = p.seg_ap_personal || '';
   $('f-rfc').value    = p.rfc;
   $('f-curp').value   = p.curp;
   $('f-correo').value = p.correo;
@@ -405,7 +411,9 @@ function openModalEditarPersonal(id) {
 async function guardarPersonal() {
   const id   = $('f-id').value;
   const body = {
-    nombre_completo: $('f-nombre').value,
+    nom_personal:     $('f-nombre').value,
+    prim_ap_personal: $('f-prim-ap').value,
+    seg_ap_personal:  $('f-seg-ap').value || null,
     rfc:    $('f-rfc').value,
     curp:   $('f-curp').value,
     correo: $('f-correo').value,
@@ -426,7 +434,7 @@ async function guardarPersonal() {
 
 function confirmarAcceso(id, activo) {
   const p      = PERSONAL_ALL.find((x) => x.id_personal === id);
-  const nombre = p ? p.nombre_completo : `#${id}`;
+  const nombre = p ? nombreCompleto(p) : `#${id}`;
   if (activo) {
     mostrarConfirm({
       icon: 'warning', title: 'Revocar acceso',
@@ -456,7 +464,7 @@ async function toggleAcceso(id, nuevo_activo) {
 
 function confirmarEliminarPersonal(id) {
   const p      = PERSONAL_ALL.find((x) => x.id_personal === id);
-  const nombre = p ? p.nombre_completo : `#${id}`;
+  const nombre = p ? nombreCompleto(p) : `#${id}`;
   mostrarConfirm({
     icon: 'danger', title: 'Eliminar registro de personal',
     message: `¿Está seguro de eliminar a <strong>${esc(nombre)}</strong>? Esta acción es irreversible.`,
@@ -507,7 +515,7 @@ function iniciarApp() {
   const usuario = auth.getUsuario();
   $('screen-login').style.display = 'none';
   $('screen-main').style.display  = 'block';
-  $('header-username').textContent = usuario ? usuario.nombre_completo : 'Usuario';
+  $('header-username').textContent = usuario ? nombreCompleto(usuario) : 'Usuario';
 
   // Muestra/oculta secciones marcadas con data-roles según el id_rol del token
   auth.aplicarVisibilidadPorRol();

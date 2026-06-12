@@ -146,16 +146,21 @@ TOKEN_EXPIRE_MINUTES=480
 
 ### 1. Ejecutar los scripts SQL (en orden)
 
-El esquema y la migración a 5NF se aplican con `psql`, **en orden numérico**. Los scripts `02`–`04` son idempotentes (pueden re-ejecutarse sin error).
+El esquema y la migración a 5NF se aplican con `psql`, **en orden numérico**. Los scripts `02`–`07` son idempotentes (pueden re-ejecutarse sin error).
 
 ```bash
 psql -U rnpi_user -d rnpi -f database/schema.sql
 psql -U rnpi_user -d rnpi -f database/02_catalogos_previos.sql
 psql -U rnpi_user -d rnpi -f database/03_migracion_diagrama.sql
 psql -U rnpi_user -d rnpi -f database/04_semillas_catalogos.sql
+psql -U rnpi_user -d rnpi -f database/05_personal_nombre_atomico.sql
+psql -U rnpi_user -d rnpi -f database/06_valoracion_medica_situacion_legal.sql
+psql -U rnpi_user -d rnpi -f database/07_plantillas.sql
 ```
 
 > `03_migracion_diagrama.sql` requiere que `02_catalogos_previos.sql` haya sido aplicado antes, ya que crea llaves foráneas hacia esos catálogos.
+
+> ⚠️ **Advertencia:** el dump `schema.sql` está desactualizado respecto a la base de datos viva: sus INSERT de `cat_roles` no coinciden con los roles reales (1=Abogado, 2=Director General, 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social, 8=Voluntario). Tras reconstruir desde el dump, verifica/corrige `cat_roles` antes de usar el sistema. Ver `docs/ESTADO.md`.
 
 ### 2. Inyectar los catálogos desde CSV
 

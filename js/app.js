@@ -1,6 +1,10 @@
 // app.js — Lógica de UI: navegación, modales, toasts y módulos NNA / Personal.
 
-import { apiFetch, apiGetJson } from './api.js';
+import {
+  apiFetch, apiGetJson,
+  buscarCie10, obtenerPadecimientos, guardarPadecimiento,
+  obtenerSituacionLegal, guardarSituacionLegal,
+} from './api.js';
 import * as auth from './auth.js';
 
 // ==========================================
@@ -96,7 +100,8 @@ function llenarSelect(id, datos, placeholder) {
 
 async function cargarCatalogosNNA() {
   try {
-    const [sexos, nacionalidades, entidades, lenguas, discapacidades, grados, tipos_contacto] =
+    const [sexos, nacionalidades, entidades, lenguas, discapacidades, grados, tipos_contacto,
+           estatus_juridico, medidas_proteccion] =
       await Promise.all([
         apiGetJson('/catalogos/sexos'),
         apiGetJson('/catalogos/nacionalidades'),
@@ -105,6 +110,8 @@ async function cargarCatalogosNNA() {
         apiGetJson('/catalogos/discapacidades'),
         apiGetJson('/catalogos/grados_dependencia'),
         apiGetJson('/catalogos/tipos_contacto'),
+        apiGetJson('/catalogos/estatus_juridico'),
+        apiGetJson('/catalogos/medidas_proteccion'),
       ]);
     llenarSelect('f-nna-sexo',         sexos,          '-- Seleccione --');
     llenarSelect('f-nna-nacionalidad', nacionalidades, '-- Seleccione --');
@@ -114,6 +121,8 @@ async function cargarCatalogosNNA() {
     llenarSelect('f-nna-gradodep',     grados,         '-- Seleccione Grado --');
     llenarSelect('f-dir-entidad',      entidades,      '-- Seleccione Entidad --');
     llenarSelect('f-con-tipo',         tipos_contacto, '-- Seleccione --');
+    llenarSelect('f-leg-estatus',      estatus_juridico,   '-- Seleccione --');
+    llenarSelect('f-leg-medida',       medidas_proteccion, 'Ninguna');
   } catch (e) { console.error('Error cargando catálogos NNA', e); }
 }
 
@@ -280,7 +289,131 @@ function verDetalleNNA(index) {
     `${t.nom_tutor} ${t.prim_ap_tutor} ${t.seg_ap_tutor || ''} (CURP: ${t.curp_tutor})`.replace('  ', ' ')
   ).join('; '));
   set('det-contactos',          n.contactos.map((c) => `${c.tipo}: ${c.text_con}`).join('; '));
+
+  DETALLE_NNA_ID = n.id_nna;
+  limpiarFormulariosExpediente();
+  if (auth.tieneRol(...ROLES_MEDICOS)) cargarPadecimientosNNA(n.id_nna);
+  if (auth.tieneRol(...ROLES_LEGALES)) cargarSituacionLegalNNA(n.id_nna);
+
   openModal('modal-detalle-nna');
+}
+
+// ==========================================
+// 2.b VALORACIÓN MÉDICA Y SITUACIÓN LEGAL
+//     RBAC frontend: médico = roles 2,3,4,5 · legal = roles 1,2,3
+// ==========================================
+const ROLES_MEDICOS = [2, 3, 4, 5];
+const ROLES_LEGALES = [1, 2, 3];
+
+let DETALLE_NNA_ID = null;
+let cie10_timer = null;
+
+function limpiarFormulariosExpediente() {
+  ['f-med-buscar', 'f-med-fecha', 'f-med-notas', 'f-leg-fecha', 'f-leg-observaciones']
+    .forEach((id) => { $(id).value = ''; });
+  ['f-med-cronico', 'f-med-controlado', 'f-leg-estatus', 'f-leg-medida']
+    .forEach((id) => { $(id).selectedIndex = 0; });
+  const sel = $('f-med-diagnostico');
+  sel.innerHTML = '<option value="">-- Busque un diagnóstico primero --</option>';
+  sel.disabled  = true;
+}
+
+async function cargarPadecimientosNNA(id_nna) {
+  const lista = await obtenerPadecimientos(id_nna);
+  $('det-padecimientos').innerHTML = lista.length
+    ? lista.map((p) =>
+        `<strong>${esc(p.codigo_cie10)}</strong> — ${esc(p.diagnostico)}` +
+        ` (${p.es_cronico ? 'crónico' : 'no crónico'}, ${p.esta_controlado ? 'controlado' : 'no controlado'},` +
+        ` dx: ${esc(p.fecha_diagnostico)})` +
+        (p.notas_clinicas ? `<br><small>${esc(p.notas_clinicas)}</small>` : '')
+      ).join('<br>')
+    : 'Sin valoraciones médicas registradas';
+}
+
+async function cargarSituacionLegalNNA(id_nna) {
+  const lista = await obtenerSituacionLegal(id_nna);
+  $('det-situacion-legal').innerHTML = lista.length
+    ? lista.map((s) =>
+        `<strong>${esc(s.estatus_juridico)}</strong>` +
+        (s.medida_proteccion ? ` — ${esc(s.medida_proteccion)}` : '') +
+        ` (desde: ${esc(s.fecha_inicio)})` +
+        (s.observaciones ? `<br><small>${esc(s.observaciones)}</small>` : '')
+      ).join('<br>')
+    : 'Sin situación legal registrada';
+}
+
+function buscarDiagnosticoCie10(q) {
+  clearTimeout(cie10_timer);
+  const sel = $('f-med-diagnostico');
+  if (q.trim().length < 2) {
+    sel.innerHTML = '<option value="">-- Busque un diagnóstico primero --</option>';
+    sel.disabled  = true;
+    return;
+  }
+  cie10_timer = setTimeout(async () => {
+    const resultados = await buscarCie10(q.trim());
+    if (!resultados.length) {
+      sel.innerHTML = '<option value="">-- Sin coincidencias --</option>';
+      sel.disabled  = true;
+      return;
+    }
+    sel.innerHTML = '<option value="">-- Seleccione diagnóstico --</option>';
+    resultados.forEach((r) => {
+      sel.innerHTML += `<option value="${r.id}">${esc(r.codigo_subcategoria)} — ${esc(r.descripcion)}</option>`;
+    });
+    sel.disabled = false;
+  }, 350);
+}
+
+async function guardarValoracionMedica() {
+  const id_subcategoria = $('f-med-diagnostico').value;
+  if (!DETALLE_NNA_ID)   { toast('Abra primero un expediente', 'error'); return; }
+  if (!id_subcategoria)  { toast('Seleccione un diagnóstico CIE-10', 'error'); return; }
+
+  const body = {
+    id_subcategoria:   parseInt(id_subcategoria),
+    es_cronico:        $('f-med-cronico').value === 'true',
+    esta_controlado:   $('f-med-controlado').value === 'true',
+    fecha_diagnostico: $('f-med-fecha').value || null,
+    notas_clinicas:    $('f-med-notas').value.trim() || null,
+  };
+  try {
+    const res = await guardarPadecimiento(DETALLE_NNA_ID, body);
+    if (!res) return;
+    if (!res.ok) {
+      const err = await res.json().catch(() => null);
+      toast(err && err.detail ? err.detail : 'Error al guardar la valoración', 'error');
+      return;
+    }
+    toast('Valoración médica registrada', 'success');
+    limpiarFormulariosExpediente();
+    cargarPadecimientosNNA(DETALLE_NNA_ID);
+  } catch (e) { toast('Error al conectar con la BD', 'error'); }
+}
+
+async function guardarSituacionLegalNNA() {
+  const id_est_jur = $('f-leg-estatus').value;
+  if (!DETALLE_NNA_ID) { toast('Abra primero un expediente', 'error'); return; }
+  if (!id_est_jur)     { toast('Seleccione el estatus jurídico', 'error'); return; }
+
+  const body = {
+    id_est_jur:    parseInt(id_est_jur),
+    id_med_pro:    parseInt($('f-leg-medida').value) || null,
+    fecha_inicio:  $('f-leg-fecha').value || null,
+    observaciones: $('f-leg-observaciones').value.trim() || null,
+  };
+  try {
+    const res = await guardarSituacionLegal(DETALLE_NNA_ID, body);
+    if (!res) return;
+    if (!res.ok) {
+      const err = await res.json().catch(() => null);
+      toast(err && err.detail ? err.detail : 'Error al guardar la situación legal', 'error');
+      return;
+    }
+    toast('Situación legal registrada', 'success');
+    limpiarFormulariosExpediente();
+    cargarSituacionLegalNNA(DETALLE_NNA_ID);
+  } catch (e) { toast('Error al conectar con la BD', 'error'); }
 }
 
 function confirmarEliminarNNA(index) {
@@ -558,6 +691,11 @@ function wireEventos() {
     if (btn.dataset.action === 'ver')      verDetalleNNA(index);
     if (btn.dataset.action === 'eliminar') confirmarEliminarNNA(index);
   });
+
+  // Valoración Médica y Situación Legal (dentro del detalle del expediente)
+  $('f-med-buscar').addEventListener('input', (e) => buscarDiagnosticoCie10(e.target.value));
+  $('btn-guardar-padecimiento').addEventListener('click', guardarValoracionMedica);
+  $('btn-guardar-situacion-legal').addEventListener('click', guardarSituacionLegalNNA);
 
   // Módulo Personal
   $('btn-nuevo-personal').addEventListener('click', openModalNuevoPersonal);

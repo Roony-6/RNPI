@@ -30,6 +30,30 @@ export async function apiGetJson(path, por_defecto = []) {
   }
 }
 
+// --- Valoración Médica (nna_padecimiento) ---
+
+export function buscarCie10(q) {
+  return apiGetJson(`/catalogos/cie10_buscar?q=${encodeURIComponent(q)}`);
+}
+
+export function obtenerPadecimientos(id_nna) {
+  return apiGetJson(`/nna/${id_nna}/padecimientos`);
+}
+
+export function guardarPadecimiento(id_nna, datos) {
+  return apiFetch(`/nna/${id_nna}/padecimientos`, { method: 'POST', body: JSON.stringify(datos) });
+}
+
+// --- Situación Legal (nna_situacion_legal) ---
+
+export function obtenerSituacionLegal(id_nna) {
+  return apiGetJson(`/nna/${id_nna}/situacion_legal`);
+}
+
+export function guardarSituacionLegal(id_nna, datos) {
+  return apiFetch(`/nna/${id_nna}/situacion_legal`, { method: 'POST', body: JSON.stringify(datos) });
+}
+
 export async function loginRequest(correo, contrasena) {
   const body = new URLSearchParams({ username: correo, password: contrasena });
   const res = await fetch(API_BASE + '/auth/login', {

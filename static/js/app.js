@@ -4,6 +4,8 @@ import {
   apiFetch, apiGetJson,
   buscarCie10, obtenerPadecimientos, guardarPadecimiento,
   obtenerSituacionLegal, guardarSituacionLegal,
+  obtenerPlantillas, crearPlantilla, agregarIntegrante, quitarIntegrante,
+  asignarNnaPlantilla, obtenerNnaDePlantilla, obtenerPlantillasDeNna,
 } from './api.js';
 import * as auth from './auth.js';
 
@@ -292,6 +294,7 @@ function verDetalleNNA(index) {
 
   DETALLE_NNA_ID = n.id_nna;
   limpiarFormulariosExpediente();
+  cargarPlantillasNNA(n.id_nna);
   if (auth.tieneRol(...ROLES_MEDICOS)) cargarPadecimientosNNA(n.id_nna);
   if (auth.tieneRol(...ROLES_LEGALES)) cargarSituacionLegalNNA(n.id_nna);
 
@@ -617,6 +620,188 @@ async function eliminarPersonal(id) {
 }
 
 // ==========================================
+// 3.b MÓDULO PLANTILLAS (equipos de trabajo · roles 2,3)
+// ==========================================
+let PLANTILLAS = [];
+let DETALLE_PLANTILLA_ID = null;
+
+async function cargarPlantillas() {
+  PLANTILLAS = await obtenerPlantillas();
+  renderTablaPlantillas();
+}
+
+function renderTablaPlantillas() {
+  const tbody = $('tbody-plantillas');
+  if (!PLANTILLAS.length) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;">Sin plantillas registradas</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = PLANTILLAS.map((pl, i) => `
+    <tr>
+      <td>${pl.id_plantilla}</td>
+      <td><strong>${esc(pl.nombre_plantilla)}</strong></td>
+      <td>${pl.activa ? '<span class="badge badge-green">Activa</span>' : '<span class="badge badge-red">Inactiva</span>'}</td>
+      <td>${pl.integrantes.length} integrante(s)</td>
+      <td>
+        <div class="actions">
+          <button class="btn-icon" title="Gestionar equipo y asignaciones" data-action="gestionar" data-index="${i}">${ICONO_EDITAR}</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+async function guardarPlantilla() {
+  const nombre = $('f-plantilla-nombre').value.trim();
+  if (nombre.length < 3) { toast('El nombre de la plantilla debe tener al menos 3 caracteres', 'error'); return; }
+  try {
+    const res = await crearPlantilla({ nombre_plantilla: nombre });
+    if (!res) return;
+    if (!res.ok) {
+      const err = await res.json().catch(() => null);
+      toast(err && err.detail ? err.detail : 'No se pudo crear la plantilla', 'error');
+      return;
+    }
+    toast('Plantilla creada exitosamente', 'success');
+    closeModal('modal-form-plantilla');
+    cargarPlantillas();
+  } catch (e) { toast('Error al conectar con la BD', 'error'); }
+}
+
+function renderIntegrantes(pl) {
+  const tbody = $('tbody-integrantes');
+  if (!pl.integrantes.length) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:1.2rem;">La plantilla aún no tiene integrantes</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = pl.integrantes.map((i) => `
+    <tr>
+      <td>${esc(i.nombre)}</td>
+      <td><span class="badge badge-navy">${esc(i.rol)}</span></td>
+      <td>
+        <div class="actions">
+          <button class="btn-icon danger" title="Quitar de la plantilla" data-action="quitar" data-id="${i.id_personal}">${ICONO_ELIMINAR}</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function llenarSelectPersonalPlantilla() {
+  const sel = $('f-pl-personal');
+  sel.innerHTML = '<option value="">-- Seleccione --</option>';
+  PERSONAL_ALL.filter((p) => p.activo).forEach((p) => {
+    const rol = ROLES.find((r) => r.id_rol == p.id_rol)?.nombre_rol || 'Rol';
+    sel.innerHTML += `<option value="${p.id_personal}">${esc(nombreCompleto(p))} — ${esc(rol)}</option>`;
+  });
+}
+
+function llenarSelectNnaPlantilla() {
+  const sel = $('f-pl-nna');
+  sel.innerHTML = '<option value="">-- Seleccione --</option>';
+  NNA_REGISTROS.forEach((n) => {
+    const nombre = `${n.nom_nna} ${n.prim_ap_nna} ${n.seg_ap_nna || ''}`.trim();
+    sel.innerHTML += `<option value="${n.id_nna}">${esc(n.folio_nna)} — ${esc(nombre)}</option>`;
+  });
+}
+
+async function cargarNnaAsignados(id_plantilla) {
+  const lista = await obtenerNnaDePlantilla(id_plantilla);
+  $('det-plantilla-nna').innerHTML = lista.length
+    ? lista.map((a) =>
+        `<strong>${esc(a.folio_nna)}</strong> — ${esc(a.nombre_nna)} (desde: ${esc(a.fecha_asignacion)})`
+      ).join('<br>')
+    : 'Sin expedientes asignados a esta plantilla';
+}
+
+function abrirGestionPlantilla(index) {
+  const pl = PLANTILLAS[index];
+  DETALLE_PLANTILLA_ID = pl.id_plantilla;
+  $('modal-plantilla-titulo').textContent = `Plantilla: ${pl.nombre_plantilla}`;
+  renderIntegrantes(pl);
+  llenarSelectPersonalPlantilla();
+  llenarSelectNnaPlantilla();
+  $('f-pl-fecha').value = '';
+  cargarNnaAsignados(pl.id_plantilla);
+  openModal('modal-plantilla');
+}
+
+async function refrescarPlantillaAbierta() {
+  await cargarPlantillas();
+  const pl = PLANTILLAS.find((x) => x.id_plantilla === DETALLE_PLANTILLA_ID);
+  if (pl) renderIntegrantes(pl);
+}
+
+async function agregarIntegrantePlantilla() {
+  const id_personal = $('f-pl-personal').value;
+  if (!DETALLE_PLANTILLA_ID) return;
+  if (!id_personal) { toast('Seleccione a la persona que desea agregar', 'error'); return; }
+  try {
+    const res = await agregarIntegrante(DETALLE_PLANTILLA_ID, parseInt(id_personal));
+    if (!res) return;
+    if (!res.ok) {
+      // El 400 de la Regla C (rol duplicado en el equipo) llega en err.detail
+      const err = await res.json().catch(() => null);
+      toast(err && err.detail ? err.detail : 'No se pudo agregar el integrante', 'error');
+      return;
+    }
+    toast('Integrante agregado a la plantilla', 'success');
+    $('f-pl-personal').value = '';
+    refrescarPlantillaAbierta();
+  } catch (e) { toast('Error al conectar con la BD', 'error'); }
+}
+
+function confirmarQuitarIntegrante(id_personal) {
+  const p      = PERSONAL_ALL.find((x) => x.id_personal === id_personal);
+  const nombre = p ? nombreCompleto(p) : `#${id_personal}`;
+  mostrarConfirm({
+    icon: 'warning', title: 'Quitar integrante',
+    message: `¿Desea quitar a <strong>${esc(nombre)}</strong> de esta plantilla?`,
+    btnClass: 'btn-warning', btnText: 'Quitar',
+    callback: async () => {
+      try {
+        const res = await quitarIntegrante(DETALLE_PLANTILLA_ID, id_personal);
+        if (!res || !res.ok) throw new Error();
+        toast('Integrante quitado de la plantilla', 'info');
+        closeModal('confirm-modal-overlay');
+        refrescarPlantillaAbierta();
+      } catch (e) { toast('Error al quitar al integrante', 'error'); }
+    },
+  });
+}
+
+async function asignarNnaAPlantilla() {
+  const id_nna = $('f-pl-nna').value;
+  if (!DETALLE_PLANTILLA_ID) return;
+  if (!id_nna) { toast('Seleccione el expediente NNA a asignar', 'error'); return; }
+  const body = {
+    id_nna:           parseInt(id_nna),
+    fecha_asignacion: $('f-pl-fecha').value || null,
+  };
+  try {
+    const res = await asignarNnaPlantilla(DETALLE_PLANTILLA_ID, body);
+    if (!res) return;
+    if (!res.ok) {
+      const err = await res.json().catch(() => null);
+      toast(err && err.detail ? err.detail : 'No se pudo asignar la plantilla', 'error');
+      return;
+    }
+    toast('Plantilla asignada al NNA', 'success');
+    $('f-pl-nna').value  = '';
+    $('f-pl-fecha').value = '';
+    cargarNnaAsignados(DETALLE_PLANTILLA_ID);
+  } catch (e) { toast('Error al conectar con la BD', 'error'); }
+}
+
+async function cargarPlantillasNNA(id_nna) {
+  const lista = await obtenerPlantillasDeNna(id_nna);
+  $('det-plantillas-nna').innerHTML = lista.length
+    ? lista.map((a) =>
+        `<strong>${esc(a.nombre_plantilla)}</strong> (desde: ${esc(a.fecha_asignacion)}) ` +
+        (a.activa ? '<span class="badge badge-green">Vigente</span>' : '<span class="badge badge-red">Histórica</span>')
+      ).join('<br>')
+    : 'Sin plantilla asignada';
+}
+
+// ==========================================
 // 4. SESIÓN Y ARRANQUE
 // ==========================================
 async function manejarLogin() {
@@ -657,6 +842,7 @@ function iniciarApp() {
   cargarExpedientes();
   cargarRoles();
   cargarPersonal();
+  if (auth.tieneRol(2, 3)) cargarPlantillas();
 }
 
 function wireEventos() {
@@ -709,6 +895,25 @@ function wireEventos() {
     if (btn.dataset.action === 'editar')   openModalEditarPersonal(id);
     if (btn.dataset.action === 'acceso')   confirmarAcceso(id, btn.dataset.activo === 'true');
     if (btn.dataset.action === 'eliminar') confirmarEliminarPersonal(id);
+  });
+
+  // Módulo Plantillas
+  $('btn-nueva-plantilla').addEventListener('click', () => {
+    $('f-plantilla-nombre').value = '';
+    openModal('modal-form-plantilla');
+  });
+  $('btn-guardar-plantilla').addEventListener('click', guardarPlantilla);
+  $('tbody-plantillas').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'gestionar') abrirGestionPlantilla(Number(btn.dataset.index));
+  });
+  $('btn-agregar-integrante').addEventListener('click', agregarIntegrantePlantilla);
+  $('btn-asignar-nna').addEventListener('click', asignarNnaAPlantilla);
+  $('tbody-integrantes').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'quitar') confirmarQuitarIntegrante(Number(btn.dataset.id));
   });
 
   // Modal de confirmación

@@ -18,6 +18,8 @@ class Personal(Base):
     activo           = Column(Boolean,     default=True, nullable=False)
     id_rol           = Column(Integer,     ForeignKey("cat_roles.id_rol"), nullable=False)
 
+    rol = relationship("CatRol")
+
 
 class Tutor(Base):
     __tablename__ = "tutor"
@@ -56,6 +58,7 @@ class NNA(Base):
     discapacidades    = relationship("NnaDiscapacidad",   back_populates="nna")
     padecimientos     = relationship("NnaPadecimiento",   back_populates="nna")
     situaciones_legales = relationship("NnaSituacionLegal", back_populates="nna")
+    plantillas        = relationship("NnaPlantilla",      back_populates="nna")
 
 
 class NnaTutor(Base):
@@ -135,6 +138,40 @@ class NnaSituacionLegal(Base):
     nna     = relationship("NNA",                 back_populates="situaciones_legales")
     estatus = relationship("CatEstatusJuridico")
     medida  = relationship("CatMedidaProteccion")
+
+
+class Plantilla(Base):
+    __tablename__ = "plantilla"
+
+    id_plantilla     = Column(Integer,     primary_key=True, index=True)
+    nombre_plantilla = Column(String(150), nullable=False, unique=True)
+    activa           = Column(Boolean,     nullable=False, default=True)
+
+    integrantes  = relationship("PlantillaPersonal", back_populates="plantilla")
+    asignaciones = relationship("NnaPlantilla",      back_populates="plantilla")
+
+
+class PlantillaPersonal(Base):
+    __tablename__ = "plantilla_personal"
+
+    id_plantilla = Column(Integer, ForeignKey("plantilla.id_plantilla", ondelete="CASCADE"), primary_key=True)
+    id_personal  = Column(Integer, ForeignKey("personal.id_personal",   ondelete="CASCADE"), primary_key=True)
+
+    plantilla = relationship("Plantilla", back_populates="integrantes")
+    personal  = relationship("Personal")
+
+
+class NnaPlantilla(Base):
+    __tablename__ = "nna_plantilla"
+
+    id_nna_plantilla = Column(Integer, primary_key=True, index=True)
+    id_nna           = Column(Integer, ForeignKey("nna.id_nna", ondelete="CASCADE"), nullable=False)
+    id_plantilla     = Column(Integer, ForeignKey("plantilla.id_plantilla"),          nullable=False)
+    fecha_asignacion = Column(Date,    nullable=False)
+    activa           = Column(Boolean, nullable=False, default=True)
+
+    nna       = relationship("NNA",       back_populates="plantillas")
+    plantilla = relationship("Plantilla", back_populates="asignaciones")
 
 
 class NnaDiscapacidad(Base):

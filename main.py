@@ -11,7 +11,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.routers import auth, catalogos, nna, personal
+from app.routers import auth, catalogos, nna, personal, plantillas
 
 app = FastAPI(
     title="RNPI API",
@@ -36,6 +36,7 @@ app.include_router(auth.router)
 app.include_router(personal.router)
 app.include_router(catalogos.router)
 app.include_router(nna.router)
+app.include_router(plantillas.router)
 
 
 @app.get("/ui", tags=["Frontend"])

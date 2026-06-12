@@ -54,6 +54,36 @@ export function guardarSituacionLegal(id_nna, datos) {
   return apiFetch(`/nna/${id_nna}/situacion_legal`, { method: 'POST', body: JSON.stringify(datos) });
 }
 
+// --- Plantillas (equipos de trabajo) ---
+
+export function obtenerPlantillas() {
+  return apiGetJson('/plantillas');
+}
+
+export function crearPlantilla(datos) {
+  return apiFetch('/plantillas', { method: 'POST', body: JSON.stringify(datos) });
+}
+
+export function agregarIntegrante(id_plantilla, id_personal) {
+  return apiFetch(`/plantillas/${id_plantilla}/personal`, { method: 'POST', body: JSON.stringify({ id_personal }) });
+}
+
+export function quitarIntegrante(id_plantilla, id_personal) {
+  return apiFetch(`/plantillas/${id_plantilla}/personal/${id_personal}`, { method: 'DELETE' });
+}
+
+export function asignarNnaPlantilla(id_plantilla, datos) {
+  return apiFetch(`/plantillas/${id_plantilla}/nna`, { method: 'POST', body: JSON.stringify(datos) });
+}
+
+export function obtenerNnaDePlantilla(id_plantilla) {
+  return apiGetJson(`/plantillas/${id_plantilla}/nna`);
+}
+
+export function obtenerPlantillasDeNna(id_nna) {
+  return apiGetJson(`/plantillas/nna/${id_nna}`);
+}
+
 export async function loginRequest(correo, contrasena) {
   const body = new URLSearchParams({ username: correo, password: contrasena });
   const res = await fetch(API_BASE + '/auth/login', {

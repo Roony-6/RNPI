@@ -51,6 +51,7 @@
       <nav class="nav-menu">
         <a class="nav-tab active" id="tab-nna" data-view="nna">Expedientes NNA</a>
         <a class="nav-tab" id="tab-personal" data-view="personal" data-roles="2">Gestión de Personal</a>
+        <a class="nav-tab" id="tab-plantillas" data-view="plantillas" data-roles="2,3">Plantillas</a>
       </nav>
     </div>
     <div class="header-user">
@@ -123,6 +124,34 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+
+    <!-- ─── Vista: Plantillas / Equipos de Trabajo (Director General y Coordinador Estatal) ─── -->
+    <div id="view-plantillas" class="view-section" data-roles="2,3">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Plantillas de Trabajo</div>
+          <div class="page-sub">Equipos multidisciplinarios y asignación de expedientes NNA</div>
+        </div>
+        <button class="btn btn-primary" id="btn-nueva-plantilla">+ Nueva Plantilla</button>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre de la Plantilla</th>
+              <th>Estatus</th>
+              <th>Integrantes</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-plantillas">
+            <tr><td colspan="5" style="text-align:center;padding:2rem;">Cargando...</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -237,6 +266,14 @@
         <div class="detail-grid">
           <div class="detail-item"><label>Tutor(es)</label><p id="det-tutores"></p></div>
           <div class="detail-item"><label>Contacto(s)</label><p id="det-contactos"></p></div>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>Plantilla Asignada (Equipo de Trabajo)</h3>
+        <div class="detail-item">
+          <label>Historial de asignaciones</label>
+          <p id="det-plantillas-nna">—</p>
         </div>
       </div>
 
@@ -358,6 +395,74 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" data-close="modal-detalle-personal">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nueva Plantilla -->
+<div class="overlay" id="modal-form-plantilla">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Nueva Plantilla</h2>
+      <button class="close-btn" data-close="modal-form-plantilla">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Nombre de la plantilla *</label>
+        <input type="text" id="f-plantilla-nombre" placeholder="Ej. Plantilla Zona Norte" maxlength="150" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close="modal-form-plantilla">Cancelar</button>
+      <button class="btn btn-primary" id="btn-guardar-plantilla">Crear Plantilla</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Gestión de Plantilla -->
+<div class="overlay" id="modal-plantilla">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h2 id="modal-plantilla-titulo">Plantilla</h2>
+      <button class="close-btn" data-close="modal-plantilla">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-card">
+        <h3>Integrantes del equipo</h3>
+        <table>
+          <thead>
+            <tr><th>Nombre</th><th>Rol</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="tbody-integrantes"></tbody>
+        </table>
+        <div class="section-title">Agregar integrante (una sola persona por rol)</div>
+        <div class="form-grid">
+          <div class="span-2"><label>Personal</label>
+            <select id="f-pl-personal"><option value="">-- Seleccione --</option></select>
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:.8rem">
+          <button class="btn btn-primary" id="btn-agregar-integrante">Agregar a la Plantilla</button>
+        </div>
+      </div>
+
+      <div class="detail-card">
+        <h3>NNA asignados actualmente</h3>
+        <div class="detail-item">
+          <label>Expedientes activos en esta plantilla</label>
+          <p id="det-plantilla-nna">—</p>
+        </div>
+        <div class="section-title">Asignar expediente NNA</div>
+        <div class="form-grid">
+          <div><label>NNA *</label>
+            <select id="f-pl-nna"><option value="">-- Seleccione --</option></select>
+          </div>
+          <div><label>Fecha de asignación</label><input type="date" id="f-pl-fecha"></div>
+        </div>
+        <div style="text-align:right;margin-top:.8rem">
+          <button class="btn btn-primary" id="btn-asignar-nna">Asignar Plantilla al NNA</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

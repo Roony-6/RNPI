@@ -2,14 +2,15 @@
 -- PostgreSQL database dump
 --
 
-\restrict Xk5XhYuhxIsVQ7txJJggcfhaTsL20dSVY9fhYeeTAWArHYTFWjlyzgYRgq31mvd
+\restrict ScEhOtV9HVBc0njxh7WmWUS4qLynbDSGD1dmPwGCB9lFLjdaxabgJIuFOWgic6R
 
--- Dumped from database version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
--- Dumped by pg_dump version 16.11 (Ubuntu 16.11-0ubuntu0.24.04.1)
+-- Dumped from database version 18.4
+-- Dumped by pg_dump version 18.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -18,83 +19,32 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS fk_personal_rol;
-ALTER TABLE IF EXISTS ONLY public.cat_municipios DROP CONSTRAINT IF EXISTS fk_municipio_estado;
-ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS fk_menor_estatus;
-ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS fk_menor_celula;
-ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS fk_expediente_personal;
-ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS fk_expediente_menor;
-ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS fk_ci_personal;
-ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS fk_ci_celula;
-ALTER TABLE IF EXISTS ONLY public.celulas DROP CONSTRAINT IF EXISTS fk_celula_municipio;
-ALTER TABLE IF EXISTS ONLY public.apoyos_asignados DROP CONSTRAINT IF EXISTS fk_apoyo_menor;
-ALTER TABLE IF EXISTS ONLY public.celula_integrantes DROP CONSTRAINT IF EXISTS pk_celula_integrantes;
-ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_rfc_key;
-ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_pkey;
-ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_curp_key;
-ALTER TABLE IF EXISTS ONLY public.personal DROP CONSTRAINT IF EXISTS personal_correo_key;
-ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS menores_pkey;
-ALTER TABLE IF EXISTS ONLY public.menores DROP CONSTRAINT IF EXISTS menores_curp_key;
-ALTER TABLE IF EXISTS ONLY public.expedientes_multidisciplinarios DROP CONSTRAINT IF EXISTS expedientes_multidisciplinarios_pkey;
-ALTER TABLE IF EXISTS ONLY public.celulas DROP CONSTRAINT IF EXISTS celulas_pkey;
-ALTER TABLE IF EXISTS ONLY public.cat_roles DROP CONSTRAINT IF EXISTS cat_roles_pkey;
-ALTER TABLE IF EXISTS ONLY public.cat_municipios DROP CONSTRAINT IF EXISTS cat_municipios_pkey;
-ALTER TABLE IF EXISTS ONLY public.cat_estatus_menor DROP CONSTRAINT IF EXISTS cat_estatus_menor_pkey;
-ALTER TABLE IF EXISTS ONLY public.cat_estados DROP CONSTRAINT IF EXISTS cat_estados_pkey;
-ALTER TABLE IF EXISTS ONLY public.apoyos_asignados DROP CONSTRAINT IF EXISTS apoyos_asignados_pkey;
-ALTER TABLE IF EXISTS public.personal ALTER COLUMN id_personal DROP DEFAULT;
-ALTER TABLE IF EXISTS public.menores ALTER COLUMN id_menor DROP DEFAULT;
-ALTER TABLE IF EXISTS public.expedientes_multidisciplinarios ALTER COLUMN id_expediente DROP DEFAULT;
-ALTER TABLE IF EXISTS public.celulas ALTER COLUMN id_celula DROP DEFAULT;
-ALTER TABLE IF EXISTS public.cat_roles ALTER COLUMN id_rol DROP DEFAULT;
-ALTER TABLE IF EXISTS public.cat_municipios ALTER COLUMN id_municipio DROP DEFAULT;
-ALTER TABLE IF EXISTS public.cat_estatus_menor ALTER COLUMN id_estatus DROP DEFAULT;
-ALTER TABLE IF EXISTS public.cat_estados ALTER COLUMN id_estado DROP DEFAULT;
-ALTER TABLE IF EXISTS public.apoyos_asignados ALTER COLUMN id_apoyo DROP DEFAULT;
-DROP SEQUENCE IF EXISTS public.personal_id_personal_seq;
-DROP TABLE IF EXISTS public.personal;
-DROP SEQUENCE IF EXISTS public.menores_id_menor_seq;
-DROP TABLE IF EXISTS public.menores;
-DROP SEQUENCE IF EXISTS public.expedientes_multidisciplinarios_id_expediente_seq;
-DROP TABLE IF EXISTS public.expedientes_multidisciplinarios;
-DROP SEQUENCE IF EXISTS public.celulas_id_celula_seq;
-DROP TABLE IF EXISTS public.celulas;
-DROP TABLE IF EXISTS public.celula_integrantes;
-DROP SEQUENCE IF EXISTS public.cat_roles_id_rol_seq;
-DROP TABLE IF EXISTS public.cat_roles;
-DROP SEQUENCE IF EXISTS public.cat_municipios_id_municipio_seq;
-DROP TABLE IF EXISTS public.cat_municipios;
-DROP SEQUENCE IF EXISTS public.cat_estatus_menor_id_estatus_seq;
-DROP TABLE IF EXISTS public.cat_estatus_menor;
-DROP SEQUENCE IF EXISTS public.cat_estados_id_estado_seq;
-DROP TABLE IF EXISTS public.cat_estados;
-DROP SEQUENCE IF EXISTS public.apoyos_asignados_id_apoyo_seq;
-DROP TABLE IF EXISTS public.apoyos_asignados;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: apoyos_asignados; Type: TABLE; Schema: public; Owner: postgres
+-- Name: asentamiento; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.apoyos_asignados (
-    id_apoyo integer NOT NULL,
-    id_menor integer NOT NULL,
-    tipo_apoyo character varying(150) NOT NULL,
-    monto_o_especie character varying(200) NOT NULL,
-    periodicidad character varying(50) NOT NULL,
-    CONSTRAINT chk_periodicidad CHECK (((periodicidad)::text = ANY (ARRAY[('Única vez'::character varying)::text, ('Semanal'::character varying)::text, ('Quincenal'::character varying)::text, ('Mensual'::character varying)::text, ('Bimestral'::character varying)::text, ('Trimestral'::character varying)::text, ('Anual'::character varying)::text])))
+CREATE TABLE public.asentamiento (
+    id_asen integer NOT NULL,
+    id_mun integer NOT NULL,
+    nom_mun character varying(200) NOT NULL,
+    id_col integer,
+    nom_col character varying(200) NOT NULL,
+    cp_asen character varying(5) NOT NULL,
+    id_ent integer NOT NULL
 );
 
 
-ALTER TABLE public.apoyos_asignados OWNER TO postgres;
+ALTER TABLE public.asentamiento OWNER TO postgres;
 
 --
--- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: asentamiento_id_asen_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.apoyos_asignados_id_apoyo_seq
+CREATE SEQUENCE public.asentamiento_id_asen_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -103,32 +53,176 @@ CREATE SEQUENCE public.apoyos_asignados_id_apoyo_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.apoyos_asignados_id_apoyo_seq OWNER TO postgres;
+ALTER SEQUENCE public.asentamiento_id_asen_seq OWNER TO postgres;
 
 --
--- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: asentamiento_id_asen_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.apoyos_asignados_id_apoyo_seq OWNED BY public.apoyos_asignados.id_apoyo;
+ALTER SEQUENCE public.asentamiento_id_asen_seq OWNED BY public.asentamiento.id_asen;
 
 
 --
--- Name: cat_estados; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_cie_bloque; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cat_estados (
-    id_estado integer NOT NULL,
+CREATE TABLE public.cat_cie_bloque (
+    id_bloque integer NOT NULL,
+    id_capitulo integer NOT NULL,
+    codigo_inicio character varying(7) NOT NULL,
+    codigo_fin character varying(7) NOT NULL,
+    descripcion character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public.cat_cie_bloque OWNER TO postgres;
+
+--
+-- Name: cat_cie_bloque_id_bloque_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_cie_bloque_id_bloque_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_cie_bloque_id_bloque_seq OWNER TO postgres;
+
+--
+-- Name: cat_cie_bloque_id_bloque_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_cie_bloque_id_bloque_seq OWNED BY public.cat_cie_bloque.id_bloque;
+
+
+--
+-- Name: cat_cie_capitulo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_cie_capitulo (
+    id_capitulo integer NOT NULL,
+    codigo_romano character varying(10) NOT NULL,
+    descripcion character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public.cat_cie_capitulo OWNER TO postgres;
+
+--
+-- Name: cat_cie_capitulo_id_capitulo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_cie_capitulo_id_capitulo_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_cie_capitulo_id_capitulo_seq OWNER TO postgres;
+
+--
+-- Name: cat_cie_capitulo_id_capitulo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_cie_capitulo_id_capitulo_seq OWNED BY public.cat_cie_capitulo.id_capitulo;
+
+
+--
+-- Name: cat_cie_categoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_cie_categoria (
+    id_categoria integer NOT NULL,
+    id_bloque integer NOT NULL,
+    codigo character(3) NOT NULL,
+    descripcion character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public.cat_cie_categoria OWNER TO postgres;
+
+--
+-- Name: cat_cie_categoria_id_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_cie_categoria_id_categoria_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_cie_categoria_id_categoria_seq OWNER TO postgres;
+
+--
+-- Name: cat_cie_categoria_id_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_cie_categoria_id_categoria_seq OWNED BY public.cat_cie_categoria.id_categoria;
+
+
+--
+-- Name: cat_cie_subcategoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_cie_subcategoria (
+    id_subcategoria integer NOT NULL,
+    id_categoria integer NOT NULL,
+    codigo character varying(7) NOT NULL,
+    descripcion character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public.cat_cie_subcategoria OWNER TO postgres;
+
+--
+-- Name: cat_cie_subcategoria_id_subcategoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_cie_subcategoria_id_subcategoria_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_cie_subcategoria_id_subcategoria_seq OWNER TO postgres;
+
+--
+-- Name: cat_cie_subcategoria_id_subcategoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_cie_subcategoria_id_subcategoria_seq OWNED BY public.cat_cie_subcategoria.id_subcategoria;
+
+
+--
+-- Name: cat_discapacidad; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_discapacidad (
+    id_dis integer NOT NULL,
     nombre character varying(100) NOT NULL
 );
 
 
-ALTER TABLE public.cat_estados OWNER TO postgres;
+ALTER TABLE public.cat_discapacidad OWNER TO postgres;
 
 --
--- Name: cat_estados_id_estado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cat_discapacidad_id_dis_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.cat_estados_id_estado_seq
+CREATE SEQUENCE public.cat_discapacidad_id_dis_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -137,32 +231,32 @@ CREATE SEQUENCE public.cat_estados_id_estado_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.cat_estados_id_estado_seq OWNER TO postgres;
+ALTER SEQUENCE public.cat_discapacidad_id_dis_seq OWNER TO postgres;
 
 --
--- Name: cat_estados_id_estado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cat_discapacidad_id_dis_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.cat_estados_id_estado_seq OWNED BY public.cat_estados.id_estado;
+ALTER SEQUENCE public.cat_discapacidad_id_dis_seq OWNED BY public.cat_discapacidad.id_dis;
 
 
 --
--- Name: cat_estatus_menor; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_grado_dependencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cat_estatus_menor (
-    id_estatus integer NOT NULL,
+CREATE TABLE public.cat_grado_dependencia (
+    id_gra_dep integer NOT NULL,
     descripcion character varying(100) NOT NULL
 );
 
 
-ALTER TABLE public.cat_estatus_menor OWNER TO postgres;
+ALTER TABLE public.cat_grado_dependencia OWNER TO postgres;
 
 --
--- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cat_grado_dependencia_id_gra_dep_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.cat_estatus_menor_id_estatus_seq
+CREATE SEQUENCE public.cat_grado_dependencia_id_gra_dep_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -171,33 +265,33 @@ CREATE SEQUENCE public.cat_estatus_menor_id_estatus_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.cat_estatus_menor_id_estatus_seq OWNER TO postgres;
+ALTER SEQUENCE public.cat_grado_dependencia_id_gra_dep_seq OWNER TO postgres;
 
 --
--- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cat_grado_dependencia_id_gra_dep_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.cat_estatus_menor_id_estatus_seq OWNED BY public.cat_estatus_menor.id_estatus;
+ALTER SEQUENCE public.cat_grado_dependencia_id_gra_dep_seq OWNED BY public.cat_grado_dependencia.id_gra_dep;
 
 
 --
--- Name: cat_municipios; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_lengua; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.cat_municipios (
-    id_municipio integer NOT NULL,
-    id_estado integer NOT NULL,
-    nombre character varying(150) NOT NULL
+CREATE TABLE public.cat_lengua (
+    id_len integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    es_indigena boolean DEFAULT true
 );
 
 
-ALTER TABLE public.cat_municipios OWNER TO postgres;
+ALTER TABLE public.cat_lengua OWNER TO postgres;
 
 --
--- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cat_lengua_id_len_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.cat_municipios_id_municipio_seq
+CREATE SEQUENCE public.cat_lengua_id_len_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -206,13 +300,150 @@ CREATE SEQUENCE public.cat_municipios_id_municipio_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.cat_municipios_id_municipio_seq OWNER TO postgres;
+ALTER SEQUENCE public.cat_lengua_id_len_seq OWNER TO postgres;
 
 --
--- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cat_lengua_id_len_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.cat_municipios_id_municipio_seq OWNED BY public.cat_municipios.id_municipio;
+ALTER SEQUENCE public.cat_lengua_id_len_seq OWNED BY public.cat_lengua.id_len;
+
+
+--
+-- Name: cat_lengua_inali; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_lengua_inali (
+    id_lengua integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    es_indigena boolean DEFAULT true
+);
+
+
+ALTER TABLE public.cat_lengua_inali OWNER TO postgres;
+
+--
+-- Name: cat_lengua_inali_id_lengua_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_lengua_inali_id_lengua_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_lengua_inali_id_lengua_seq OWNER TO postgres;
+
+--
+-- Name: cat_lengua_inali_id_lengua_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_lengua_inali_id_lengua_seq OWNED BY public.cat_lengua_inali.id_lengua;
+
+
+--
+-- Name: cat_modo_adquisicion_lengua; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_modo_adquisicion_lengua (
+    id_mod_adc integer NOT NULL,
+    descripcion character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.cat_modo_adquisicion_lengua OWNER TO postgres;
+
+--
+-- Name: cat_modo_adquisicion_lengua_id_mod_adc_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_modo_adquisicion_lengua_id_mod_adc_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_modo_adquisicion_lengua_id_mod_adc_seq OWNER TO postgres;
+
+--
+-- Name: cat_modo_adquisicion_lengua_id_mod_adc_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_modo_adquisicion_lengua_id_mod_adc_seq OWNED BY public.cat_modo_adquisicion_lengua.id_mod_adc;
+
+
+--
+-- Name: cat_nacionalidad; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_nacionalidad (
+    id_nac integer NOT NULL,
+    nombre character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.cat_nacionalidad OWNER TO postgres;
+
+--
+-- Name: cat_nacionalidad_id_nac_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_nacionalidad_id_nac_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_nacionalidad_id_nac_seq OWNER TO postgres;
+
+--
+-- Name: cat_nacionalidad_id_nac_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_nacionalidad_id_nac_seq OWNED BY public.cat_nacionalidad.id_nac;
+
+
+--
+-- Name: cat_nivel_competencia_oral; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cat_nivel_competencia_oral (
+    id_niv_com integer NOT NULL,
+    descripcion character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.cat_nivel_competencia_oral OWNER TO postgres;
+
+--
+-- Name: cat_nivel_competencia_oral_id_niv_com_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cat_nivel_competencia_oral_id_niv_com_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cat_nivel_competencia_oral_id_niv_com_seq OWNER TO postgres;
+
+--
+-- Name: cat_nivel_competencia_oral_id_niv_com_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cat_nivel_competencia_oral_id_niv_com_seq OWNED BY public.cat_nivel_competencia_oral.id_niv_com;
 
 
 --
@@ -250,35 +481,22 @@ ALTER SEQUENCE public.cat_roles_id_rol_seq OWNED BY public.cat_roles.id_rol;
 
 
 --
--- Name: celula_integrantes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_sexo; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.celula_integrantes (
-    id_celula integer NOT NULL,
-    id_personal integer NOT NULL
+CREATE TABLE public.cat_sexo (
+    id_sexo integer NOT NULL,
+    nombre character varying(50) NOT NULL
 );
 
 
-ALTER TABLE public.celula_integrantes OWNER TO postgres;
+ALTER TABLE public.cat_sexo OWNER TO postgres;
 
 --
--- Name: celulas; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_sexo_id_sexo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.celulas (
-    id_celula integer NOT NULL,
-    nombre_celula character varying(150) NOT NULL,
-    id_municipio integer NOT NULL
-);
-
-
-ALTER TABLE public.celulas OWNER TO postgres;
-
---
--- Name: celulas_id_celula_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.celulas_id_celula_seq
+CREATE SEQUENCE public.cat_sexo_id_sexo_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -287,38 +505,32 @@ CREATE SEQUENCE public.celulas_id_celula_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.celulas_id_celula_seq OWNER TO postgres;
+ALTER SEQUENCE public.cat_sexo_id_sexo_seq OWNER TO postgres;
 
 --
--- Name: celulas_id_celula_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cat_sexo_id_sexo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.celulas_id_celula_seq OWNED BY public.celulas.id_celula;
+ALTER SEQUENCE public.cat_sexo_id_sexo_seq OWNED BY public.cat_sexo.id_sexo;
 
 
 --
--- Name: expedientes_multidisciplinarios; Type: TABLE; Schema: public; Owner: postgres
+-- Name: cat_tipo_contacto; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.expedientes_multidisciplinarios (
-    id_expediente integer NOT NULL,
-    id_menor integer NOT NULL,
-    id_personal integer NOT NULL,
-    tipo_evaluacion character varying(20) NOT NULL,
-    diagnostico text,
-    dictamen_provisional boolean DEFAULT false NOT NULL,
-    fecha_evaluacion date DEFAULT CURRENT_DATE NOT NULL,
-    CONSTRAINT chk_tipo_evaluacion CHECK (((tipo_evaluacion)::text = ANY (ARRAY[('Médica'::character varying)::text, ('Legal'::character varying)::text, ('Psicológica'::character varying)::text, ('Social'::character varying)::text])))
+CREATE TABLE public.cat_tipo_contacto (
+    id_tipo_con integer NOT NULL,
+    nombre character varying(100) NOT NULL
 );
 
 
-ALTER TABLE public.expedientes_multidisciplinarios OWNER TO postgres;
+ALTER TABLE public.cat_tipo_contacto OWNER TO postgres;
 
 --
--- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: cat_tipo_contacto_id_tipo_con_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq
+CREATE SEQUENCE public.cat_tipo_contacto_id_tipo_con_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -327,37 +539,35 @@ CREATE SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq OWNER TO postgres;
+ALTER SEQUENCE public.cat_tipo_contacto_id_tipo_con_seq OWNER TO postgres;
 
 --
--- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: cat_tipo_contacto_id_tipo_con_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.expedientes_multidisciplinarios_id_expediente_seq OWNED BY public.expedientes_multidisciplinarios.id_expediente;
+ALTER SEQUENCE public.cat_tipo_contacto_id_tipo_con_seq OWNED BY public.cat_tipo_contacto.id_tipo_con;
 
 
 --
--- Name: menores; Type: TABLE; Schema: public; Owner: postgres
+-- Name: contacto_nna; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.menores (
-    id_menor integer NOT NULL,
-    nombre_completo character varying(200) NOT NULL,
-    curp character varying(18) NOT NULL,
-    fecha_nacimiento date NOT NULL,
-    fecha_registro timestamp without time zone DEFAULT now() NOT NULL,
-    id_celula_asignada integer NOT NULL,
-    id_estatus integer NOT NULL
+CREATE TABLE public.contacto_nna (
+    id_contacto integer NOT NULL,
+    id_nna integer NOT NULL,
+    id_tipo_con integer NOT NULL,
+    text_con character varying(200) NOT NULL,
+    desc_con character varying(200)
 );
 
 
-ALTER TABLE public.menores OWNER TO postgres;
+ALTER TABLE public.contacto_nna OWNER TO postgres;
 
 --
--- Name: menores_id_menor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: contacto_nna_id_contacto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.menores_id_menor_seq
+CREATE SEQUENCE public.contacto_nna_id_contacto_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -366,14 +576,182 @@ CREATE SEQUENCE public.menores_id_menor_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.menores_id_menor_seq OWNER TO postgres;
+ALTER SEQUENCE public.contacto_nna_id_contacto_seq OWNER TO postgres;
 
 --
--- Name: menores_id_menor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: contacto_nna_id_contacto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.menores_id_menor_seq OWNED BY public.menores.id_menor;
+ALTER SEQUENCE public.contacto_nna_id_contacto_seq OWNED BY public.contacto_nna.id_contacto;
 
+
+--
+-- Name: direccion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.direccion (
+    id_dir integer NOT NULL,
+    calle_dir character varying(200) NOT NULL,
+    no_int_dir character varying(200),
+    no_ext_dir character varying(200),
+    id_asen integer NOT NULL,
+    ref_dir character varying(200)
+);
+
+
+ALTER TABLE public.direccion OWNER TO postgres;
+
+--
+-- Name: direccion_id_dir_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.direccion_id_dir_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.direccion_id_dir_seq OWNER TO postgres;
+
+--
+-- Name: direccion_id_dir_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.direccion_id_dir_seq OWNED BY public.direccion.id_dir;
+
+
+--
+-- Name: entidad_federativa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.entidad_federativa (
+    id_ent integer NOT NULL,
+    nom_ent character varying(200) NOT NULL
+);
+
+
+ALTER TABLE public.entidad_federativa OWNER TO postgres;
+
+--
+-- Name: entidad_federativa_id_ent_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.entidad_federativa_id_ent_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.entidad_federativa_id_ent_seq OWNER TO postgres;
+
+--
+-- Name: entidad_federativa_id_ent_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.entidad_federativa_id_ent_seq OWNED BY public.entidad_federativa.id_ent;
+
+
+--
+-- Name: lenguaje_nna; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.lenguaje_nna (
+    id_nna integer NOT NULL,
+    id_len integer NOT NULL,
+    id_niv_com integer,
+    id_mod_adc integer,
+    preferente_len_nna boolean DEFAULT false NOT NULL,
+    autodenom_len_nna character varying(200)
+);
+
+
+ALTER TABLE public.lenguaje_nna OWNER TO postgres;
+
+--
+-- Name: nacionalidad_nna; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nacionalidad_nna (
+    id_nna integer NOT NULL,
+    id_nac integer NOT NULL
+);
+
+
+ALTER TABLE public.nacionalidad_nna OWNER TO postgres;
+
+--
+-- Name: nna; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nna (
+    id_nna integer NOT NULL,
+    folio_nna character varying(10) NOT NULL,
+    nom_nna character varying(200) NOT NULL,
+    prim_ap_nna character varying(200) NOT NULL,
+    seg_ap_nna character varying(200),
+    nacim_nna date NOT NULL,
+    curp_nna character varying(18) NOT NULL,
+    id_sexo integer NOT NULL,
+    dir_actual integer,
+    luga_nac_nna integer
+);
+
+
+ALTER TABLE public.nna OWNER TO postgres;
+
+--
+-- Name: nna_discapacidad; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nna_discapacidad (
+    id_nna integer NOT NULL,
+    id_dis integer NOT NULL,
+    id_gra_dep integer,
+    diagnost_dis boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.nna_discapacidad OWNER TO postgres;
+
+--
+-- Name: nna_id_nna_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.nna_id_nna_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.nna_id_nna_seq OWNER TO postgres;
+
+--
+-- Name: nna_id_nna_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.nna_id_nna_seq OWNED BY public.nna.id_nna;
+
+
+--
+-- Name: nna_tutor; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nna_tutor (
+    id_nna integer NOT NULL,
+    id_tutor integer NOT NULL
+);
+
+
+ALTER TABLE public.nna_tutor OWNER TO postgres;
 
 --
 -- Name: personal; Type: TABLE; Schema: public; Owner: postgres
@@ -381,13 +759,15 @@ ALTER SEQUENCE public.menores_id_menor_seq OWNED BY public.menores.id_menor;
 
 CREATE TABLE public.personal (
     id_personal integer NOT NULL,
-    nombre_completo character varying(200) NOT NULL,
     rfc character varying(13) NOT NULL,
     curp character varying(18) NOT NULL,
     correo character varying(150) NOT NULL,
     contrasena text NOT NULL,
     activo boolean DEFAULT true NOT NULL,
-    id_rol integer NOT NULL
+    id_rol integer NOT NULL,
+    nom_personal character varying(200) NOT NULL,
+    prim_ap_personal character varying(200) NOT NULL,
+    seg_ap_personal character varying(200)
 );
 
 
@@ -416,31 +796,124 @@ ALTER SEQUENCE public.personal_id_personal_seq OWNED BY public.personal.id_perso
 
 
 --
--- Name: apoyos_asignados id_apoyo; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: tutor; Type: TABLE; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.apoyos_asignados ALTER COLUMN id_apoyo SET DEFAULT nextval('public.apoyos_asignados_id_apoyo_seq'::regclass);
+CREATE TABLE public.tutor (
+    id_tutor integer NOT NULL,
+    nom_tutor character varying(200) NOT NULL,
+    prim_ap_tutor character varying(200) NOT NULL,
+    seg_ap_tutor character varying(200),
+    curp_tutor character varying(18) NOT NULL
+);
+
+
+ALTER TABLE public.tutor OWNER TO postgres;
+
+--
+-- Name: tutor_id_tutor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tutor_id_tutor_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.tutor_id_tutor_seq OWNER TO postgres;
+
+--
+-- Name: tutor_id_tutor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tutor_id_tutor_seq OWNED BY public.tutor.id_tutor;
 
 
 --
--- Name: cat_estados id_estado; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: asentamiento id_asen; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.cat_estados ALTER COLUMN id_estado SET DEFAULT nextval('public.cat_estados_id_estado_seq'::regclass);
-
-
---
--- Name: cat_estatus_menor id_estatus; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cat_estatus_menor ALTER COLUMN id_estatus SET DEFAULT nextval('public.cat_estatus_menor_id_estatus_seq'::regclass);
+ALTER TABLE ONLY public.asentamiento ALTER COLUMN id_asen SET DEFAULT nextval('public.asentamiento_id_asen_seq'::regclass);
 
 
 --
--- Name: cat_municipios id_municipio; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: cat_cie_bloque id_bloque; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.cat_municipios ALTER COLUMN id_municipio SET DEFAULT nextval('public.cat_municipios_id_municipio_seq'::regclass);
+ALTER TABLE ONLY public.cat_cie_bloque ALTER COLUMN id_bloque SET DEFAULT nextval('public.cat_cie_bloque_id_bloque_seq'::regclass);
+
+
+--
+-- Name: cat_cie_capitulo id_capitulo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_cie_capitulo ALTER COLUMN id_capitulo SET DEFAULT nextval('public.cat_cie_capitulo_id_capitulo_seq'::regclass);
+
+
+--
+-- Name: cat_cie_categoria id_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_cie_categoria ALTER COLUMN id_categoria SET DEFAULT nextval('public.cat_cie_categoria_id_categoria_seq'::regclass);
+
+
+--
+-- Name: cat_cie_subcategoria id_subcategoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_cie_subcategoria ALTER COLUMN id_subcategoria SET DEFAULT nextval('public.cat_cie_subcategoria_id_subcategoria_seq'::regclass);
+
+
+--
+-- Name: cat_discapacidad id_dis; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_discapacidad ALTER COLUMN id_dis SET DEFAULT nextval('public.cat_discapacidad_id_dis_seq'::regclass);
+
+
+--
+-- Name: cat_grado_dependencia id_gra_dep; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_grado_dependencia ALTER COLUMN id_gra_dep SET DEFAULT nextval('public.cat_grado_dependencia_id_gra_dep_seq'::regclass);
+
+
+--
+-- Name: cat_lengua id_len; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_lengua ALTER COLUMN id_len SET DEFAULT nextval('public.cat_lengua_id_len_seq'::regclass);
+
+
+--
+-- Name: cat_lengua_inali id_lengua; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_lengua_inali ALTER COLUMN id_lengua SET DEFAULT nextval('public.cat_lengua_inali_id_lengua_seq'::regclass);
+
+
+--
+-- Name: cat_modo_adquisicion_lengua id_mod_adc; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_modo_adquisicion_lengua ALTER COLUMN id_mod_adc SET DEFAULT nextval('public.cat_modo_adquisicion_lengua_id_mod_adc_seq'::regclass);
+
+
+--
+-- Name: cat_nacionalidad id_nac; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_nacionalidad ALTER COLUMN id_nac SET DEFAULT nextval('public.cat_nacionalidad_id_nac_seq'::regclass);
+
+
+--
+-- Name: cat_nivel_competencia_oral id_niv_com; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_nivel_competencia_oral ALTER COLUMN id_niv_com SET DEFAULT nextval('public.cat_nivel_competencia_oral_id_niv_com_seq'::regclass);
 
 
 --
@@ -451,24 +924,45 @@ ALTER TABLE ONLY public.cat_roles ALTER COLUMN id_rol SET DEFAULT nextval('publi
 
 
 --
--- Name: celulas id_celula; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: cat_sexo id_sexo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.celulas ALTER COLUMN id_celula SET DEFAULT nextval('public.celulas_id_celula_seq'::regclass);
-
-
---
--- Name: expedientes_multidisciplinarios id_expediente; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.expedientes_multidisciplinarios ALTER COLUMN id_expediente SET DEFAULT nextval('public.expedientes_multidisciplinarios_id_expediente_seq'::regclass);
+ALTER TABLE ONLY public.cat_sexo ALTER COLUMN id_sexo SET DEFAULT nextval('public.cat_sexo_id_sexo_seq'::regclass);
 
 
 --
--- Name: menores id_menor; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: cat_tipo_contacto id_tipo_con; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.menores ALTER COLUMN id_menor SET DEFAULT nextval('public.menores_id_menor_seq'::regclass);
+ALTER TABLE ONLY public.cat_tipo_contacto ALTER COLUMN id_tipo_con SET DEFAULT nextval('public.cat_tipo_contacto_id_tipo_con_seq'::regclass);
+
+
+--
+-- Name: contacto_nna id_contacto; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contacto_nna ALTER COLUMN id_contacto SET DEFAULT nextval('public.contacto_nna_id_contacto_seq'::regclass);
+
+
+--
+-- Name: direccion id_dir; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.direccion ALTER COLUMN id_dir SET DEFAULT nextval('public.direccion_id_dir_seq'::regclass);
+
+
+--
+-- Name: entidad_federativa id_ent; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entidad_federativa ALTER COLUMN id_ent SET DEFAULT nextval('public.entidad_federativa_id_ent_seq'::regclass);
+
+
+--
+-- Name: nna id_nna; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna ALTER COLUMN id_nna SET DEFAULT nextval('public.nna_id_nna_seq'::regclass);
 
 
 --
@@ -479,163 +973,130 @@ ALTER TABLE ONLY public.personal ALTER COLUMN id_personal SET DEFAULT nextval('p
 
 
 --
--- Data for Name: apoyos_asignados; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: tutor id_tutor; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-
-
---
--- Data for Name: cat_estados; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+ALTER TABLE ONLY public.tutor ALTER COLUMN id_tutor SET DEFAULT nextval('public.tutor_id_tutor_seq'::regclass);
 
 
 --
--- Data for Name: cat_estatus_menor; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: asentamiento asentamiento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-
-
---
--- Data for Name: cat_municipios; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+ALTER TABLE ONLY public.asentamiento
+    ADD CONSTRAINT asentamiento_pkey PRIMARY KEY (id_asen);
 
 
 --
--- Data for Name: cat_roles; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: cat_cie_bloque cat_cie_bloque_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.cat_roles VALUES (1, 'Director');
-INSERT INTO public.cat_roles VALUES (2, 'Médico');
-INSERT INTO public.cat_roles VALUES (3, 'Desarrollador');
-
-
---
--- Data for Name: celula_integrantes; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+ALTER TABLE ONLY public.cat_cie_bloque
+    ADD CONSTRAINT cat_cie_bloque_pkey PRIMARY KEY (id_bloque);
 
 
 --
--- Data for Name: celulas; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: cat_cie_capitulo cat_cie_capitulo_codigo_romano_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-
-
---
--- Data for Name: expedientes_multidisciplinarios; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
+ALTER TABLE ONLY public.cat_cie_capitulo
+    ADD CONSTRAINT cat_cie_capitulo_codigo_romano_key UNIQUE (codigo_romano);
 
 
 --
--- Data for Name: menores; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: cat_cie_capitulo cat_cie_capitulo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-
-
---
--- Data for Name: personal; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO public.personal VALUES (1, 'Obed Viveros', 'DIRT800101ABC', 'DIRT800101HDFRZR09', 'director@rnpi.gob.mx', '$2b$12$0fU2KE21GQ.4ve6mOfWN4unaAsgWF8sDH7.VyHVwAoCCD0NAi0r/2', true, 1);
-INSERT INTO public.personal VALUES (3, 'Roony Roldan Cruz', 'ROONJJDJWJ34J', 'ROONJJDJWJ34JHFJDD', 'roonyr@rnpi.gob.mx', '$2b$12$a5m.rcobVoVS791lvzDCe.ltcN4oEe3mZ0KBdMbbfhzMENEQjZWu2', true, 3);
+ALTER TABLE ONLY public.cat_cie_capitulo
+    ADD CONSTRAINT cat_cie_capitulo_pkey PRIMARY KEY (id_capitulo);
 
 
 --
--- Name: apoyos_asignados_id_apoyo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cat_cie_categoria cat_cie_categoria_codigo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.apoyos_asignados_id_apoyo_seq', 1, false);
-
-
---
--- Name: cat_estados_id_estado_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.cat_estados_id_estado_seq', 1, false);
+ALTER TABLE ONLY public.cat_cie_categoria
+    ADD CONSTRAINT cat_cie_categoria_codigo_key UNIQUE (codigo);
 
 
 --
--- Name: cat_estatus_menor_id_estatus_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cat_cie_categoria cat_cie_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.cat_estatus_menor_id_estatus_seq', 1, false);
-
-
---
--- Name: cat_municipios_id_municipio_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.cat_municipios_id_municipio_seq', 1, false);
+ALTER TABLE ONLY public.cat_cie_categoria
+    ADD CONSTRAINT cat_cie_categoria_pkey PRIMARY KEY (id_categoria);
 
 
 --
--- Name: cat_roles_id_rol_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cat_cie_subcategoria cat_cie_subcategoria_codigo_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.cat_roles_id_rol_seq', 3, true);
-
-
---
--- Name: celulas_id_celula_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.celulas_id_celula_seq', 1, false);
+ALTER TABLE ONLY public.cat_cie_subcategoria
+    ADD CONSTRAINT cat_cie_subcategoria_codigo_key UNIQUE (codigo);
 
 
 --
--- Name: expedientes_multidisciplinarios_id_expediente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cat_cie_subcategoria cat_cie_subcategoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.expedientes_multidisciplinarios_id_expediente_seq', 1, false);
-
-
---
--- Name: menores_id_menor_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.menores_id_menor_seq', 1, false);
+ALTER TABLE ONLY public.cat_cie_subcategoria
+    ADD CONSTRAINT cat_cie_subcategoria_pkey PRIMARY KEY (id_subcategoria);
 
 
 --
--- Name: personal_id_personal_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: cat_discapacidad cat_discapacidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.personal_id_personal_seq', 3, true);
-
-
---
--- Name: apoyos_asignados apoyos_asignados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.apoyos_asignados
-    ADD CONSTRAINT apoyos_asignados_pkey PRIMARY KEY (id_apoyo);
+ALTER TABLE ONLY public.cat_discapacidad
+    ADD CONSTRAINT cat_discapacidad_pkey PRIMARY KEY (id_dis);
 
 
 --
--- Name: cat_estados cat_estados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_grado_dependencia cat_grado_dependencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.cat_estados
-    ADD CONSTRAINT cat_estados_pkey PRIMARY KEY (id_estado);
-
-
---
--- Name: cat_estatus_menor cat_estatus_menor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.cat_estatus_menor
-    ADD CONSTRAINT cat_estatus_menor_pkey PRIMARY KEY (id_estatus);
+ALTER TABLE ONLY public.cat_grado_dependencia
+    ADD CONSTRAINT cat_grado_dependencia_pkey PRIMARY KEY (id_gra_dep);
 
 
 --
--- Name: cat_municipios cat_municipios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_lengua_inali cat_lengua_inali_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.cat_municipios
-    ADD CONSTRAINT cat_municipios_pkey PRIMARY KEY (id_municipio);
+ALTER TABLE ONLY public.cat_lengua_inali
+    ADD CONSTRAINT cat_lengua_inali_pkey PRIMARY KEY (id_lengua);
+
+
+--
+-- Name: cat_lengua cat_lengua_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_lengua
+    ADD CONSTRAINT cat_lengua_pkey PRIMARY KEY (id_len);
+
+
+--
+-- Name: cat_modo_adquisicion_lengua cat_modo_adquisicion_lengua_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_modo_adquisicion_lengua
+    ADD CONSTRAINT cat_modo_adquisicion_lengua_pkey PRIMARY KEY (id_mod_adc);
+
+
+--
+-- Name: cat_nacionalidad cat_nacionalidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_nacionalidad
+    ADD CONSTRAINT cat_nacionalidad_pkey PRIMARY KEY (id_nac);
+
+
+--
+-- Name: cat_nivel_competencia_oral cat_nivel_competencia_oral_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cat_nivel_competencia_oral
+    ADD CONSTRAINT cat_nivel_competencia_oral_pkey PRIMARY KEY (id_niv_com);
 
 
 --
@@ -647,35 +1108,91 @@ ALTER TABLE ONLY public.cat_roles
 
 
 --
--- Name: celulas celulas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_sexo cat_sexo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.celulas
-    ADD CONSTRAINT celulas_pkey PRIMARY KEY (id_celula);
-
-
---
--- Name: expedientes_multidisciplinarios expedientes_multidisciplinarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.expedientes_multidisciplinarios
-    ADD CONSTRAINT expedientes_multidisciplinarios_pkey PRIMARY KEY (id_expediente);
+ALTER TABLE ONLY public.cat_sexo
+    ADD CONSTRAINT cat_sexo_pkey PRIMARY KEY (id_sexo);
 
 
 --
--- Name: menores menores_curp_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_tipo_contacto cat_tipo_contacto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.menores
-    ADD CONSTRAINT menores_curp_key UNIQUE (curp);
+ALTER TABLE ONLY public.cat_tipo_contacto
+    ADD CONSTRAINT cat_tipo_contacto_pkey PRIMARY KEY (id_tipo_con);
 
 
 --
--- Name: menores menores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: contacto_nna contacto_nna_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.menores
-    ADD CONSTRAINT menores_pkey PRIMARY KEY (id_menor);
+ALTER TABLE ONLY public.contacto_nna
+    ADD CONSTRAINT contacto_nna_pkey PRIMARY KEY (id_contacto);
+
+
+--
+-- Name: direccion direccion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.direccion
+    ADD CONSTRAINT direccion_pkey PRIMARY KEY (id_dir);
+
+
+--
+-- Name: entidad_federativa entidad_federativa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entidad_federativa
+    ADD CONSTRAINT entidad_federativa_pkey PRIMARY KEY (id_ent);
+
+
+--
+-- Name: lenguaje_nna lenguaje_nna_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lenguaje_nna
+    ADD CONSTRAINT lenguaje_nna_pkey PRIMARY KEY (id_nna, id_len);
+
+
+--
+-- Name: nacionalidad_nna nacionalidad_nna_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nacionalidad_nna
+    ADD CONSTRAINT nacionalidad_nna_pkey PRIMARY KEY (id_nna, id_nac);
+
+
+--
+-- Name: nna nna_curp_nna_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna
+    ADD CONSTRAINT nna_curp_nna_key UNIQUE (curp_nna);
+
+
+--
+-- Name: nna_discapacidad nna_discapacidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_discapacidad
+    ADD CONSTRAINT nna_discapacidad_pkey PRIMARY KEY (id_nna, id_dis);
+
+
+--
+-- Name: nna nna_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna
+    ADD CONSTRAINT nna_pkey PRIMARY KEY (id_nna);
+
+
+--
+-- Name: nna_tutor nna_tutor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_tutor
+    ADD CONSTRAINT nna_tutor_pkey PRIMARY KEY (id_nna, id_tutor);
 
 
 --
@@ -711,83 +1228,75 @@ ALTER TABLE ONLY public.personal
 
 
 --
--- Name: celula_integrantes pk_celula_integrantes; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tutor tutor_curp_tutor_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.celula_integrantes
-    ADD CONSTRAINT pk_celula_integrantes PRIMARY KEY (id_celula, id_personal);
-
-
---
--- Name: apoyos_asignados fk_apoyo_menor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.apoyos_asignados
-    ADD CONSTRAINT fk_apoyo_menor FOREIGN KEY (id_menor) REFERENCES public.menores(id_menor) ON DELETE CASCADE;
+ALTER TABLE ONLY public.tutor
+    ADD CONSTRAINT tutor_curp_tutor_key UNIQUE (curp_tutor);
 
 
 --
--- Name: celulas fk_celula_municipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tutor tutor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.celulas
-    ADD CONSTRAINT fk_celula_municipio FOREIGN KEY (id_municipio) REFERENCES public.cat_municipios(id_municipio) ON DELETE RESTRICT;
-
-
---
--- Name: celula_integrantes fk_ci_celula; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.celula_integrantes
-    ADD CONSTRAINT fk_ci_celula FOREIGN KEY (id_celula) REFERENCES public.celulas(id_celula) ON DELETE RESTRICT;
+ALTER TABLE ONLY public.tutor
+    ADD CONSTRAINT tutor_pkey PRIMARY KEY (id_tutor);
 
 
 --
--- Name: celula_integrantes fk_ci_personal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: asentamiento asentamiento_id_ent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.celula_integrantes
-    ADD CONSTRAINT fk_ci_personal FOREIGN KEY (id_personal) REFERENCES public.personal(id_personal) ON DELETE RESTRICT;
-
-
---
--- Name: expedientes_multidisciplinarios fk_expediente_menor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.expedientes_multidisciplinarios
-    ADD CONSTRAINT fk_expediente_menor FOREIGN KEY (id_menor) REFERENCES public.menores(id_menor) ON DELETE CASCADE;
+ALTER TABLE ONLY public.asentamiento
+    ADD CONSTRAINT asentamiento_id_ent_fkey FOREIGN KEY (id_ent) REFERENCES public.entidad_federativa(id_ent);
 
 
 --
--- Name: expedientes_multidisciplinarios fk_expediente_personal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_cie_bloque cat_cie_bloque_id_capitulo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.expedientes_multidisciplinarios
-    ADD CONSTRAINT fk_expediente_personal FOREIGN KEY (id_personal) REFERENCES public.personal(id_personal) ON DELETE RESTRICT;
-
-
---
--- Name: menores fk_menor_celula; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.menores
-    ADD CONSTRAINT fk_menor_celula FOREIGN KEY (id_celula_asignada) REFERENCES public.celulas(id_celula) ON DELETE RESTRICT;
+ALTER TABLE ONLY public.cat_cie_bloque
+    ADD CONSTRAINT cat_cie_bloque_id_capitulo_fkey FOREIGN KEY (id_capitulo) REFERENCES public.cat_cie_capitulo(id_capitulo) ON DELETE RESTRICT;
 
 
 --
--- Name: menores fk_menor_estatus; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_cie_categoria cat_cie_categoria_id_bloque_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.menores
-    ADD CONSTRAINT fk_menor_estatus FOREIGN KEY (id_estatus) REFERENCES public.cat_estatus_menor(id_estatus) ON DELETE RESTRICT;
+ALTER TABLE ONLY public.cat_cie_categoria
+    ADD CONSTRAINT cat_cie_categoria_id_bloque_fkey FOREIGN KEY (id_bloque) REFERENCES public.cat_cie_bloque(id_bloque) ON DELETE RESTRICT;
 
 
 --
--- Name: cat_municipios fk_municipio_estado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: cat_cie_subcategoria cat_cie_subcategoria_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.cat_municipios
-    ADD CONSTRAINT fk_municipio_estado FOREIGN KEY (id_estado) REFERENCES public.cat_estados(id_estado) ON DELETE RESTRICT;
+ALTER TABLE ONLY public.cat_cie_subcategoria
+    ADD CONSTRAINT cat_cie_subcategoria_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES public.cat_cie_categoria(id_categoria) ON DELETE RESTRICT;
+
+
+--
+-- Name: contacto_nna contacto_nna_id_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contacto_nna
+    ADD CONSTRAINT contacto_nna_id_nna_fkey FOREIGN KEY (id_nna) REFERENCES public.nna(id_nna) ON DELETE CASCADE;
+
+
+--
+-- Name: contacto_nna contacto_nna_id_tipo_con_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contacto_nna
+    ADD CONSTRAINT contacto_nna_id_tipo_con_fkey FOREIGN KEY (id_tipo_con) REFERENCES public.cat_tipo_contacto(id_tipo_con);
+
+
+--
+-- Name: direccion direccion_id_asen_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.direccion
+    ADD CONSTRAINT direccion_id_asen_fkey FOREIGN KEY (id_asen) REFERENCES public.asentamiento(id_asen);
 
 
 --
@@ -799,8 +1308,134 @@ ALTER TABLE ONLY public.personal
 
 
 --
+-- Name: lenguaje_nna lenguaje_nna_id_len_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lenguaje_nna
+    ADD CONSTRAINT lenguaje_nna_id_len_fkey FOREIGN KEY (id_len) REFERENCES public.cat_lengua(id_len);
+
+
+--
+-- Name: lenguaje_nna lenguaje_nna_id_mod_adc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lenguaje_nna
+    ADD CONSTRAINT lenguaje_nna_id_mod_adc_fkey FOREIGN KEY (id_mod_adc) REFERENCES public.cat_modo_adquisicion_lengua(id_mod_adc);
+
+
+--
+-- Name: lenguaje_nna lenguaje_nna_id_niv_com_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lenguaje_nna
+    ADD CONSTRAINT lenguaje_nna_id_niv_com_fkey FOREIGN KEY (id_niv_com) REFERENCES public.cat_nivel_competencia_oral(id_niv_com);
+
+
+--
+-- Name: lenguaje_nna lenguaje_nna_id_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.lenguaje_nna
+    ADD CONSTRAINT lenguaje_nna_id_nna_fkey FOREIGN KEY (id_nna) REFERENCES public.nna(id_nna) ON DELETE CASCADE;
+
+
+--
+-- Name: nacionalidad_nna nacionalidad_nna_id_nac_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nacionalidad_nna
+    ADD CONSTRAINT nacionalidad_nna_id_nac_fkey FOREIGN KEY (id_nac) REFERENCES public.cat_nacionalidad(id_nac) ON DELETE CASCADE;
+
+
+--
+-- Name: nacionalidad_nna nacionalidad_nna_id_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nacionalidad_nna
+    ADD CONSTRAINT nacionalidad_nna_id_nna_fkey FOREIGN KEY (id_nna) REFERENCES public.nna(id_nna) ON DELETE CASCADE;
+
+
+--
+-- Name: nna nna_dir_actual_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna
+    ADD CONSTRAINT nna_dir_actual_fkey FOREIGN KEY (dir_actual) REFERENCES public.direccion(id_dir);
+
+
+--
+-- Name: nna_discapacidad nna_discapacidad_id_dis_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_discapacidad
+    ADD CONSTRAINT nna_discapacidad_id_dis_fkey FOREIGN KEY (id_dis) REFERENCES public.cat_discapacidad(id_dis);
+
+
+--
+-- Name: nna_discapacidad nna_discapacidad_id_gra_dep_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_discapacidad
+    ADD CONSTRAINT nna_discapacidad_id_gra_dep_fkey FOREIGN KEY (id_gra_dep) REFERENCES public.cat_grado_dependencia(id_gra_dep);
+
+
+--
+-- Name: nna_discapacidad nna_discapacidad_id_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_discapacidad
+    ADD CONSTRAINT nna_discapacidad_id_nna_fkey FOREIGN KEY (id_nna) REFERENCES public.nna(id_nna) ON DELETE CASCADE;
+
+
+--
+-- Name: nna nna_id_sexo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna
+    ADD CONSTRAINT nna_id_sexo_fkey FOREIGN KEY (id_sexo) REFERENCES public.cat_sexo(id_sexo);
+
+
+--
+-- Name: nna nna_luga_nac_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna
+    ADD CONSTRAINT nna_luga_nac_nna_fkey FOREIGN KEY (luga_nac_nna) REFERENCES public.entidad_federativa(id_ent);
+
+
+--
+-- Name: nna_tutor nna_tutor_id_nna_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_tutor
+    ADD CONSTRAINT nna_tutor_id_nna_fkey FOREIGN KEY (id_nna) REFERENCES public.nna(id_nna) ON DELETE CASCADE;
+
+
+--
+-- Name: nna_tutor nna_tutor_id_tutor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nna_tutor
+    ADD CONSTRAINT nna_tutor_id_tutor_fkey FOREIGN KEY (id_tutor) REFERENCES public.tutor(id_tutor) ON DELETE CASCADE;
+
+
+--
+-- Name: TABLE cat_roles; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TABLE public.cat_roles TO rnpi_user;
+
+
+--
+-- Name: TABLE personal; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TABLE public.personal TO rnpi_user;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Xk5XhYuhxIsVQ7txJJggcfhaTsL20dSVY9fhYeeTAWArHYTFWjlyzgYRgq31mvd
+\unrestrict ScEhOtV9HVBc0njxh7WmWUS4qLynbDSGD1dmPwGCB9lFLjdaxabgJIuFOWgic6R
 

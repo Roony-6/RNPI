@@ -1,0 +1,68 @@
+# RNPI — Estado del Proyecto (Diagnóstico Técnico)
+
+**Fecha:** 2026-06-11
+**Alcance:** Auditoría end-to-end de solo lectura sobre el repositorio (backend, frontend, SQL).
+
+---
+
+## Estado de la Arquitectura
+
+| Capa | Tecnología | Estado |
+|---|---|---|
+| Backend | Python 3.14 · FastAPI 0.136 · SQLAlchemy 2.0 · Pydantic 2 | Operativo |
+| Base de Datos | PostgreSQL, modelo normalizado a 5NF | Operativa (dump desactualizado) |
+| Autenticación | JWT (python-jose, HS256) + bcrypt | Operativa |
+| Frontend | HTML5 + CSS + Vanilla JS modular (ES Modules) | Operativo |
+
+El modelo de datos descompone a la persona en entidades atómicas: `nna`, `tutor`, `personal` (con nombre dividido en `nom_*` / `prim_ap_*` / `seg_ap_*`), tablas pivote (`nna_tutor`, `nacionalidad_nna`, `lenguaje_nna`, `nna_discapacidad`, `contacto_nna`) y catálogos de soporte (`cat_sexo`, `cat_lengua`, `cat_discapacidad`, geografía `entidad_federativa` → `asentamiento` → `direccion`, CIE-10, INALI).
+
+La refactorización de campos atómicos del personal (commit `45c5b7d`, migración `database/05_personal_nombre_atomico.sql`) está **propagada de forma consistente** en las cuatro capas: modelo ORM (`app/models/core.py`), schemas Pydantic (`app/schemas/personal.py`), router (`app/routers/personal.py`) y frontend (`static/js/app.js` → `nombreCompleto()`).
+
+---
+
+## 🟢 Componentes Completados
+
+- **Autenticación JWT completa**: login OAuth2 (`/auth/login`), hash bcrypt, expiración configurable (480 min), verificación de cuenta activa, dependencia `usuario_actual` reutilizable (`app/auth/security.py`).
+- **RBAC en backend**: dependencia `solo_director` protege el CRUD de personal (crear, editar, activar/revocar, eliminar) verificando el nombre del rol del usuario autenticado.
+- **CRUD de Personal**: alta con validación de unicidad (correo/RFC/CURP), edición, revocación/restauración de acceso (`PATCH /acceso` con protección anti auto-bloqueo) y borrado.
+- **Registro transaccional de NNA en 5NF**: `POST /nna` crea en una sola transacción la dirección, el NNA, tutores (con deduplicación por CURP), nacionalidades, contactos, lenguas y discapacidades; genera folio `NNA-xxxxx` a partir del id.
+- **Lectura eficiente de expedientes**: `_consulta_nna` usa `joinedload` en todas las relaciones — sin problema N+1.
+- **Catálogos servidos como JSON puro**: roles, geografía en cascada (entidad → asentamiento), sexos, nacionalidades, lenguas, discapacidades, grados de dependencia, tipos de contacto y búsqueda CIE-10.
+- **Frontend modular conforme a CLAUDE.md**: `index.html` solo estructura; `api.js` (fetch centralizado + token + evento `rnpi:sesion-expirada`), `auth.js` (sesión en localStorage + visibilidad por rol vía `data-roles`), `app.js` (UI, modales, toasts).
+- **Mitigación XSS básica**: todo dato dinámico inyectado al DOM pasa por `esc()`.
+- **Sesión persistente**: restauración desde localStorage y logout automático ante 401.
+
+---
+
+## 🟡 Deuda Técnica / Advertencias
+
+1. **`database/schema.sql` desactualizado (crítico para onboarding).** El dump aún define `personal.nombre_completo` (línea 384) — la migración 05 nunca se reflejó. Además, sus INSERT de `cat_roles` **no coinciden con la BD viva** (roles reales: 1=Abogado, 2=Director General, 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social, 8=Voluntario). Quien reconstruya la BD desde el dump obtendrá un sistema roto.
+2. **RBAC desalineado entre capas.** El frontend oculta por id fijo (`data-roles="2"`), pero el backend autoriza por nombre de rol (`"director"` o `"coordinador"` en `solo_director`). Consecuencia real: un Coordinador Estatal (id 3) puede mutar personal vía API pero no ve el módulo en la UI. Un renombre de rol en BD rompería silenciosamente la autorización.
+3. **Endpoints de catálogos sin autenticación.** Salvo `/catalogos/roles`, ningún endpoint de catálogos exige token (geografía, sexos, CIE-10, etc. son públicos).
+4. **Dependencia sospechosa `hose==0.0.1`** en `requirements.txt` (probable typo de instalación; riesgo de typosquatting). Además `passlib` está declarado pero el código usa `bcrypt` directamente — vestigial.
+5. **`folio_nna` sin constraint UNIQUE** en BD; se asigna tras un `flush` con placeholder `"PENDIENTE"`. Colisiones improbables pero posibles.
+6. **Confirmación de contraseña no validada**: el modal de personal tiene campo `f-password2` (`wrap-password2`) pero `guardarPersonal()` nunca compara ambos valores.
+7. **Borrado de NNA deja huérfana la fila de `direccion`** (las pivote se limpian por `ON DELETE CASCADE`, la dirección no).
+8. **Token en `localStorage`**: expuesto ante cualquier XSS que evada `esc()`. Aceptable para MVP interno, no para producción.
+9. **`SECRET_KEY` con default inseguro** en `app/config.py` si no existe `.env`.
+10. **Sin migraciones gestionadas** (Alembic): los cambios de esquema viven en archivos SQL numerados aplicados a mano.
+11. **`apiGetJson` silencia errores** retornando el valor por defecto — fallos de catálogos pasan inadvertidos para el usuario.
+12. **Manejo de errores genérico en frontend**: `guardarPersonal()` muestra "Error de validación" sin propagar el `detail` del backend (409 de correo/RFC/CURP duplicado se pierde).
+
+---
+
+## 🔴 Hoja de Ruta (Next Steps) — priorizada
+
+1. **Regenerar `database/schema.sql`** desde la BD viva (`pg_dump`) para reflejar los campos atómicos y los roles reales; o adoptar **Alembic** y convertir los SQL numerados en migraciones versionadas.
+2. **Alinear RBAC**: definir una fuente única de verdad (ids o nombres de rol) compartida por `solo_director` y `data-roles`; exponer los permisos del usuario en la respuesta de login para que el frontend no hardcodee ids.
+3. **Endpoint `PUT /nna/{id}` + UI de edición**: hoy un expediente NNA solo puede verse o eliminarse; corregir un dato exige borrar y recapturar (inaceptable para registros con folio oficial).
+4. **Módulo de valoración médica**: el placeholder ya existe en `index.html` (`data-roles="2,4"`) y los catálogos CIE-10 ya tienen endpoints (`/catalogos/cie10_buscar`), pero falta la tabla pivote (p. ej. `nna_padecimiento`), su modelo, schema, ruta y formulario.
+5. **Proteger los endpoints de catálogos** con `Depends(usuario_actual)`.
+6. **Paginación y búsqueda server-side** en `GET /nna` y `GET /personal` (hoy retornan tablas completas; no escala).
+7. **Endurecimiento**: constraint UNIQUE en `folio_nna`, validación de confirmación de contraseña, eliminar `hose` y `passlib` de requirements, exigir `SECRET_KEY` por entorno (fallar al arrancar si falta en producción).
+8. **Suite de pruebas** (pytest + httpx): no existe ningún test; mínimo cubrir login, RBAC de personal y el alta transaccional de NNA.
+9. **Edición de tutores/contactos/lenguas post-alta**: el formulario actual solo captura 1 tutor, 1 contacto, 1 lengua y 1 discapacidad aunque el modelo soporta N.
+
+---
+
+*Documento generado por auditoría automatizada. Ver [ARQUITECTURA.md](ARQUITECTURA.md) para la referencia técnica del sistema.*

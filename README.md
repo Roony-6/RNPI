@@ -1,6 +1,6 @@
 # RNPI — Red Nacional de Protección Infantil
 
-Sistema web institucional para la gestión integral de expedientes de **Niños, Niñas y Adolescentes (NNA)** en situación de vulnerabilidad. Permite registrar expedientes completos del menor (datos personales, CURP, domicilio, tutores, contactos, lenguas y discapacidades), así como administrar al **personal** de la institución (empleados y voluntarios) con autenticación por token JWT y control de acceso basado en roles (Director, Médico, Desarrollador).
+Sistema web institucional para la gestión integral de expedientes de **Niños, Niñas y Adolescentes (NNA)** en situación de vulnerabilidad. Permite registrar expedientes completos del menor (datos personales, CURP, domicilio, tutores, contactos, lenguas, discapacidades, valoraciones médicas CIE-10 y situación legal), administrar al **personal** de la institución (empleados y voluntarios) y organizarlo en **plantillas de trabajo multidisciplinarias** asignables a cada expediente con historial legal. La autenticación es por token JWT con control de acceso basado en roles (Abogado, Director General, Coordinador Estatal, Médico, Psicólogo, Trabajador Social, Voluntario).
 
 La aplicación expone una API REST que retorna exclusivamente JSON; todo el renderizado visual ocurre en el navegador mediante un frontend ligero sin frameworks.
 
@@ -39,15 +39,18 @@ RNPI/
 │   ├── config.py            #   Lectura de .env (DATABASE_URL, SECRET_KEY, ...)
 │   ├── database.py          #   Engine y sesión de SQLAlchemy
 │   ├── auth/                #   Seguridad: hash bcrypt y emisión/validación de JWT
-│   ├── models/              #   Modelos SQLAlchemy (core: nna/personal · catálogos)
+│   ├── models/              #   Modelos SQLAlchemy (core: nna/personal/plantillas · catálogos)
 │   ├── schemas/             #   Esquemas Pydantic de entrada/salida
-│   └── routers/             #   Endpoints: /auth, /personal, /nna, /catalogos
+│   └── routers/             #   Endpoints: /auth, /personal, /nna, /catalogos, /plantillas
 │
 ├── database/                # Scripts SQL (ejecutar en orden numérico)
 │   ├── schema.sql           #   Esquema base + semillas iniciales (dump de PostgreSQL)
 │   ├── 02_catalogos_previos.sql   # Catálogos requeridos como FK por la migración
 │   ├── 03_migracion_diagrama.sql  # Migración a 5NF según el diagrama ER (idempotente)
-│   └── 04_semillas_catalogos.sql  # Semillas de catálogos de soporte (idempotente)
+│   ├── 04_semillas_catalogos.sql  # Semillas de catálogos de soporte (idempotente)
+│   ├── 05_personal_nombre_atomico.sql        # Nombre del personal en campos atómicos
+│   ├── 06_valoracion_medica_situacion_legal.sql  # Valoración médica (CIE-10) y situación legal
+│   └── 07_plantillas.sql          # Plantillas de trabajo y asignación de NNA
 │
 ├── scripts/                 # Utilidades de administración y carga de datos
 │   ├── inyectar_catalogos_csv.py  # Inyecta CSV → catálogos (Pandas + SQLAlchemy)
@@ -65,7 +68,7 @@ RNPI/
     └── js/
         ├── api.js           #   Cliente HTTP centralizado (fetch + Bearer token)
         ├── auth.js          #   Sesión, token JWT y visibilidad por id_rol
-        └── app.js           #   Lógica de UI y renderizado (módulos NNA y Personal)
+        └── app.js           #   Lógica de UI y renderizado (módulos NNA, Personal y Plantillas)
 ```
 
 ---

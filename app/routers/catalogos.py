@@ -8,7 +8,9 @@ from app.models.catalogos import (
     Asentamiento,
     CatCieSubcategoria,
     CatDiscapacidad,
+    CatEstatusJuridico,
     CatGradoDependencia,
+    CatMedidaProteccion,
     CatLengua,
     CatModoAdquisicionLengua,
     CatNacionalidad,
@@ -114,6 +116,22 @@ def obtener_grados_dependencia(db: Session = Depends(get_db)):
 
 
 # ---------------------------------------------------------------------------
+# Catálogos legales
+# ---------------------------------------------------------------------------
+
+@router.get("/estatus_juridico")
+def obtener_estatus_juridico(db: Session = Depends(get_db)):
+    filas = db.query(CatEstatusJuridico).order_by(CatEstatusJuridico.id_est_jur).all()
+    return [{"id": f.id_est_jur, "nombre": f.nombre} for f in filas]
+
+
+@router.get("/medidas_proteccion")
+def obtener_medidas_proteccion(db: Session = Depends(get_db)):
+    filas = db.query(CatMedidaProteccion).order_by(CatMedidaProteccion.id_med_pro).all()
+    return [{"id": f.id_med_pro, "nombre": f.nombre} for f in filas]
+
+
+# ---------------------------------------------------------------------------
 # CIE-10
 # ---------------------------------------------------------------------------
 
@@ -126,7 +144,10 @@ def obtener_cie10_comunes(db: Session = Depends(get_db)):
     ]
     filtros    = [CatCieSubcategoria.descripcion.ilike(t) for t in terminos]
     resultados = db.query(CatCieSubcategoria).filter(or_(*filtros)).limit(20).all()
-    return [{"codigo_subcategoria": r.codigo, "descripcion": r.descripcion} for r in resultados]
+    return [
+        {"id": r.id_subcategoria, "codigo_subcategoria": r.codigo, "descripcion": r.descripcion}
+        for r in resultados
+    ]
 
 
 @router.get("/cie10_buscar")
@@ -144,4 +165,7 @@ def buscar_cie10(q: str = "", db: Session = Depends(get_db)):
         .limit(15)
         .all()
     )
-    return [{"codigo_subcategoria": r.codigo, "descripcion": r.descripcion} for r in resultados]
+    return [
+        {"id": r.id_subcategoria, "codigo_subcategoria": r.codigo, "descripcion": r.descripcion}
+        for r in resultados
+    ]

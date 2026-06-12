@@ -43,6 +43,21 @@ class DiscapacidadNnaCrear(BaseModel):
     diagnost_dis: bool = False
 
 
+class PadecimientoCrear(BaseModel):
+    id_subcategoria:   int
+    es_cronico:        bool = False
+    esta_controlado:   bool = False
+    fecha_diagnostico: Optional[date] = None
+    notas_clinicas:    Optional[str] = None
+
+
+class SituacionLegalCrear(BaseModel):
+    id_est_jur:    int
+    id_med_pro:    Optional[int] = None
+    fecha_inicio:  Optional[date] = None
+    observaciones: Optional[str] = None
+
+
 class NnaCrear(BaseModel):
     nom_nna:        str
     prim_ap_nna:    str
@@ -104,6 +119,27 @@ class DiscapacidadNnaRespuesta(BaseModel):
     discapacidad:     str
     grado_dependencia: Optional[str] = None
     diagnost_dis:     bool
+
+
+class PadecimientoRespuesta(BaseModel):
+    id_padecimiento:   int
+    id_subcategoria:   int
+    codigo_cie10:      str
+    diagnostico:       str
+    es_cronico:        bool
+    esta_controlado:   bool
+    fecha_diagnostico: date
+    notas_clinicas:    Optional[str] = None
+
+
+class SituacionLegalRespuesta(BaseModel):
+    id_sit_legal:      int
+    id_est_jur:        int
+    estatus_juridico:  str
+    id_med_pro:        Optional[int] = None
+    medida_proteccion: Optional[str] = None
+    fecha_inicio:      date
+    observaciones:     Optional[str] = None
 
 
 class NnaRespuesta(BaseModel):

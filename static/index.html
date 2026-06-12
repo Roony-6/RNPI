@@ -196,12 +196,6 @@
         <div><label>Dato de Contacto</label><input type="text" id="f-con-texto" placeholder="Teléfono o correo"></div>
       </div>
 
-      <!--
-        Futuras secciones médicas o legales: basta con marcarlas con data-roles
-        para que auth.js las muestre solo a esos roles. Ejemplo:
-        <div class="section-title" data-roles="2,4">4. Valoración Médica</div>
-        <div class="form-grid" data-roles="2,4"> ...campos médicos... </div>
-      -->
     </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" data-close="modal-alta-nna">Cancelar</button>
@@ -243,6 +237,66 @@
         <div class="detail-grid">
           <div class="detail-item"><label>Tutor(es)</label><p id="det-tutores"></p></div>
           <div class="detail-item"><label>Contacto(s)</label><p id="det-contactos"></p></div>
+        </div>
+      </div>
+
+      <!-- ─── Valoración Médica (solo roles 2=Director, 3=Coordinador, 4=Médico, 5=Psicólogo) ─── -->
+      <div class="detail-card" data-roles="2,3,4,5">
+        <h3>Valoración Médica</h3>
+        <div class="detail-item">
+          <label>Diagnósticos registrados (CIE-10)</label>
+          <p id="det-padecimientos">—</p>
+        </div>
+        <div class="section-title">Nueva Valoración Médica</div>
+        <div class="form-grid">
+          <div class="span-2">
+            <label>Buscar diagnóstico CIE-10 *</label>
+            <input type="text" id="f-med-buscar" placeholder="Escriba al menos 2 caracteres (ej. asma, E11)">
+          </div>
+          <div class="span-2">
+            <label>Diagnóstico *</label>
+            <select id="f-med-diagnostico" disabled><option value="">-- Busque un diagnóstico primero --</option></select>
+          </div>
+          <div><label>Fecha de diagnóstico</label><input type="date" id="f-med-fecha"></div>
+          <div><label>¿Es crónico?</label>
+            <select id="f-med-cronico"><option value="false">No</option><option value="true">Sí</option></select>
+          </div>
+          <div><label>¿Está controlado?</label>
+            <select id="f-med-controlado"><option value="false">No</option><option value="true">Sí</option></select>
+          </div>
+          <div class="span-2">
+            <label>Notas clínicas</label>
+            <input type="text" id="f-med-notas" placeholder="Observaciones del personal de salud">
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:.8rem">
+          <button class="btn btn-primary" id="btn-guardar-padecimiento">Guardar Valoración</button>
+        </div>
+      </div>
+
+      <!-- ─── Situación Legal (solo roles 1=Abogado, 2=Director, 3=Coordinador) ─── -->
+      <div class="detail-card" data-roles="1,2,3">
+        <h3>Situación Legal</h3>
+        <div class="detail-item">
+          <label>Historial jurídico</label>
+          <p id="det-situacion-legal">—</p>
+        </div>
+        <div class="section-title">Nueva Situación Legal</div>
+        <div class="form-grid">
+          <div><label>Estatus jurídico *</label>
+            <select id="f-leg-estatus"><option value="">-- Seleccione --</option></select>
+          </div>
+          <div><label>Medida de protección</label>
+            <select id="f-leg-medida"><option value="">Ninguna</option></select>
+          </div>
+          <div><label>Fecha de inicio</label><input type="date" id="f-leg-fecha"></div>
+          <div class="span-2">
+            <label>Observaciones</label>
+            <input type="text" id="f-leg-observaciones" placeholder="Detalle jurídico del expediente">
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:.8rem">
+          <button class="btn btn-primary" id="btn-guardar-situacion-legal">Guardar Situación Legal</button>
         </div>
       </div>
     </div>

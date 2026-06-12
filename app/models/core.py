@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -49,11 +49,13 @@ class NNA(Base):
     direccion_actual = relationship("Direccion",         foreign_keys=[dir_actual])
     lugar_nacimiento = relationship("EntidadFederativa", foreign_keys=[luga_nac_nna])
 
-    nna_tutores    = relationship("NnaTutor",        back_populates="nna")
-    nacionalidades = relationship("NacionalidadNna", back_populates="nna")
-    contactos      = relationship("ContactoNna",     back_populates="nna")
-    lenguas        = relationship("LenguajeNna",     back_populates="nna")
-    discapacidades = relationship("NnaDiscapacidad", back_populates="nna")
+    nna_tutores       = relationship("NnaTutor",          back_populates="nna")
+    nacionalidades    = relationship("NacionalidadNna",   back_populates="nna")
+    contactos         = relationship("ContactoNna",       back_populates="nna")
+    lenguas           = relationship("LenguajeNna",       back_populates="nna")
+    discapacidades    = relationship("NnaDiscapacidad",   back_populates="nna")
+    padecimientos     = relationship("NnaPadecimiento",   back_populates="nna")
+    situaciones_legales = relationship("NnaSituacionLegal", back_populates="nna")
 
 
 class NnaTutor(Base):
@@ -103,6 +105,36 @@ class LenguajeNna(Base):
     lengua = relationship("CatLengua")
     nivel  = relationship("CatNivelCompetenciaOral")
     modo   = relationship("CatModoAdquisicionLengua")
+
+
+class NnaPadecimiento(Base):
+    __tablename__ = "nna_padecimiento"
+
+    id_padecimiento   = Column(Integer, primary_key=True, index=True)
+    id_nna            = Column(Integer, ForeignKey("nna.id_nna", ondelete="CASCADE"), nullable=False)
+    id_subcategoria   = Column(Integer, ForeignKey("cat_cie_subcategoria.id_subcategoria"), nullable=False)
+    es_cronico        = Column(Boolean, nullable=False, default=False)
+    esta_controlado   = Column(Boolean, nullable=False, default=False)
+    fecha_diagnostico = Column(Date,    nullable=False)
+    notas_clinicas    = Column(Text)
+
+    nna          = relationship("NNA",               back_populates="padecimientos")
+    subcategoria = relationship("CatCieSubcategoria")
+
+
+class NnaSituacionLegal(Base):
+    __tablename__ = "nna_situacion_legal"
+
+    id_sit_legal  = Column(Integer, primary_key=True, index=True)
+    id_nna        = Column(Integer, ForeignKey("nna.id_nna", ondelete="CASCADE"), nullable=False)
+    id_est_jur    = Column(Integer, ForeignKey("cat_estatus_juridico.id_est_jur"), nullable=False)
+    id_med_pro    = Column(Integer, ForeignKey("cat_medida_proteccion.id_med_pro"))
+    fecha_inicio  = Column(Date,    nullable=False)
+    observaciones = Column(Text)
+
+    nna     = relationship("NNA",                 back_populates="situaciones_legales")
+    estatus = relationship("CatEstatusJuridico")
+    medida  = relationship("CatMedidaProteccion")
 
 
 class NnaDiscapacidad(Base):

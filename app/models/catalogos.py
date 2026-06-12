@@ -132,3 +132,21 @@ class CatCieSubcategoria(Base):
     id_categoria    = Column(Integer,   nullable=False)
     codigo          = Column(String(7), unique=True, nullable=False)
     descripcion     = Column(String(300))
+
+
+# ---------------------------------------------------------------------------
+# Catálogos legales
+# ---------------------------------------------------------------------------
+
+class CatEstatusJuridico(Base):
+    __tablename__ = "cat_estatus_juridico"
+
+    id_est_jur = Column(Integer,     primary_key=True, index=True)
+    nombre     = Column(String(150), nullable=False, unique=True)
+
+
+class CatMedidaProteccion(Base):
+    __tablename__ = "cat_medida_proteccion"
+
+    id_med_pro = Column(Integer,     primary_key=True, index=True)
+    nombre     = Column(String(150), nullable=False, unique=True)

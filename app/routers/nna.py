@@ -1,15 +1,24 @@
+from datetime import date
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
 
 from app.auth.security import usuario_actual
 from app.database import get_db
-from app.models.catalogos import Direccion
+from app.models.catalogos import (
+    CatCieSubcategoria,
+    CatEstatusJuridico,
+    CatMedidaProteccion,
+    Direccion,
+)
 from app.models.core import (
     NNA,
     ContactoNna,
     LenguajeNna,
     NacionalidadNna,
     NnaDiscapacidad,
+    NnaPadecimiento,
+    NnaSituacionLegal,
     NnaTutor,
     Personal,
     Tutor,
@@ -20,6 +29,10 @@ from app.schemas.nna import (
     LenguaNnaRespuesta,
     NnaCrear,
     NnaRespuesta,
+    PadecimientoCrear,
+    PadecimientoRespuesta,
+    SituacionLegalCrear,
+    SituacionLegalRespuesta,
     TutorRespuesta,
 )
 
@@ -200,6 +213,130 @@ def detalle_nna(
     if not nna:
         raise HTTPException(status_code=404, detail="NNA no encontrado")
     return _serializar_nna(nna)
+
+
+def _obtener_nna_o_404(db: Session, id_nna: int) -> NNA:
+    nna = db.get(NNA, id_nna)
+    if not nna:
+        raise HTTPException(status_code=404, detail="NNA no encontrado")
+    return nna
+
+
+# ---------------------------------------------------------------------------
+# Valoración Médica (nna_padecimiento — CIE-10)
+# ---------------------------------------------------------------------------
+
+@router.post("/{id_nna}/padecimientos", status_code=201)
+def registrar_padecimiento(
+    id_nna: int,
+    datos: PadecimientoCrear,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    _obtener_nna_o_404(db, id_nna)
+    if not db.get(CatCieSubcategoria, datos.id_subcategoria):
+        raise HTTPException(status_code=404, detail="Diagnóstico CIE-10 no encontrado")
+
+    padecimiento = NnaPadecimiento(
+        id_nna=id_nna,
+        id_subcategoria=datos.id_subcategoria,
+        es_cronico=datos.es_cronico,
+        esta_controlado=datos.esta_controlado,
+        fecha_diagnostico=datos.fecha_diagnostico or date.today(),
+        notas_clinicas=datos.notas_clinicas,
+    )
+    db.add(padecimiento)
+    db.commit()
+    return {"mensaje": "Valoración médica registrada", "id_padecimiento": padecimiento.id_padecimiento}
+
+
+@router.get("/{id_nna}/padecimientos", response_model=list[PadecimientoRespuesta])
+def listar_padecimientos(
+    id_nna: int,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    _obtener_nna_o_404(db, id_nna)
+    registros = (
+        db.query(NnaPadecimiento)
+        .options(joinedload(NnaPadecimiento.subcategoria))
+        .filter(NnaPadecimiento.id_nna == id_nna)
+        .order_by(NnaPadecimiento.fecha_diagnostico.desc())
+        .all()
+    )
+    return [
+        PadecimientoRespuesta(
+            id_padecimiento=p.id_padecimiento,
+            id_subcategoria=p.id_subcategoria,
+            codigo_cie10=p.subcategoria.codigo,
+            diagnostico=p.subcategoria.descripcion,
+            es_cronico=p.es_cronico,
+            esta_controlado=p.esta_controlado,
+            fecha_diagnostico=p.fecha_diagnostico,
+            notas_clinicas=p.notas_clinicas,
+        )
+        for p in registros
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Situación Legal (nna_situacion_legal)
+# ---------------------------------------------------------------------------
+
+@router.post("/{id_nna}/situacion_legal", status_code=201)
+def registrar_situacion_legal(
+    id_nna: int,
+    datos: SituacionLegalCrear,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    _obtener_nna_o_404(db, id_nna)
+    if not db.get(CatEstatusJuridico, datos.id_est_jur):
+        raise HTTPException(status_code=404, detail="Estatus jurídico no encontrado")
+    if datos.id_med_pro and not db.get(CatMedidaProteccion, datos.id_med_pro):
+        raise HTTPException(status_code=404, detail="Medida de protección no encontrada")
+
+    situacion = NnaSituacionLegal(
+        id_nna=id_nna,
+        id_est_jur=datos.id_est_jur,
+        id_med_pro=datos.id_med_pro,
+        fecha_inicio=datos.fecha_inicio or date.today(),
+        observaciones=datos.observaciones,
+    )
+    db.add(situacion)
+    db.commit()
+    return {"mensaje": "Situación legal registrada", "id_sit_legal": situacion.id_sit_legal}
+
+
+@router.get("/{id_nna}/situacion_legal", response_model=list[SituacionLegalRespuesta])
+def listar_situacion_legal(
+    id_nna: int,
+    db: Session = Depends(get_db),
+    _: Personal = Depends(usuario_actual),
+):
+    _obtener_nna_o_404(db, id_nna)
+    registros = (
+        db.query(NnaSituacionLegal)
+        .options(
+            joinedload(NnaSituacionLegal.estatus),
+            joinedload(NnaSituacionLegal.medida),
+        )
+        .filter(NnaSituacionLegal.id_nna == id_nna)
+        .order_by(NnaSituacionLegal.fecha_inicio.desc())
+        .all()
+    )
+    return [
+        SituacionLegalRespuesta(
+            id_sit_legal=s.id_sit_legal,
+            id_est_jur=s.id_est_jur,
+            estatus_juridico=s.estatus.nombre,
+            id_med_pro=s.id_med_pro,
+            medida_proteccion=s.medida.nombre if s.medida else None,
+            fecha_inicio=s.fecha_inicio,
+            observaciones=s.observaciones,
+        )
+        for s in registros
+    ]
 
 
 @router.delete("/{id_nna}", status_code=204)

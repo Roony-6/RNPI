@@ -1,4 +1,22 @@
 from pydantic import BaseModel, EmailStr
+from typing import Optional
+
+
+class LenguaPersonalCrear(BaseModel):
+    id_len:                 int
+    id_niv_com:             Optional[int] = None
+    id_mod_adc:             Optional[int] = None
+    preferente_len_personal: bool = False
+    autodenom_len_personal:  Optional[str] = None
+
+
+class LenguaPersonalRespuesta(BaseModel):
+    id_len:                  int
+    lengua:                  str
+    nivel_competencia:       Optional[str] = None
+    modo_adquisicion:        Optional[str] = None
+    preferente_len_personal: bool
+    autodenom_len_personal:  Optional[str] = None
 
 
 class PersonalBase(BaseModel):
@@ -13,15 +31,17 @@ class PersonalBase(BaseModel):
 
 class PersonalCrear(PersonalBase):
     contrasena: str
+    lenguas:    list[LenguaPersonalCrear] = []
 
 
 class PersonalActualizar(PersonalBase):
-    pass
+    lenguas: list[LenguaPersonalCrear] = []
 
 
 class PersonalRespuesta(PersonalBase):
     id_personal: int
     activo:      bool
+    lenguas:     list[LenguaPersonalRespuesta] = []
     model_config = {"from_attributes": True}
 
 

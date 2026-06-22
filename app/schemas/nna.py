@@ -43,6 +43,20 @@ class DiscapacidadNnaCrear(BaseModel):
     diagnost_dis: bool = False
 
 
+class LenguaPersonalCrear(BaseModel):
+    id_len:                 int
+    id_niv_com:             Optional[int] = None
+    id_mod_adc:             Optional[int] = None
+    preferente_len_personal: bool = False
+    autodenom_len_personal:  Optional[str] = None
+
+
+class DiscapacidadTutorCrear(BaseModel):
+    id_dis:       int
+    id_gra_dep:   Optional[int] = None
+    diagnost_dis: bool = False
+
+
 class PadecimientoCrear(BaseModel):
     id_subcategoria:   int
     es_cronico:        bool = False
@@ -62,6 +76,7 @@ class NnaCrear(BaseModel):
     nom_nna:        str
     prim_ap_nna:    str
     seg_ap_nna:     Optional[str] = None
+    alias_nna:      Optional[str] = None
     nacim_nna:      date
     curp_nna:       str
     id_sexo:        int
@@ -148,6 +163,7 @@ class NnaRespuesta(BaseModel):
     nom_nna:          str
     prim_ap_nna:      str
     seg_ap_nna:       Optional[str] = None
+    alias_nna:        Optional[str] = None
     nacim_nna:        date
     curp_nna:         str
     sexo:             str

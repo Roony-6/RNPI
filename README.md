@@ -1,8 +1,8 @@
 # RNPI — Red Nacional de Protección Infantil
 
-Sistema web institucional para la gestión integral de expedientes de **Niños, Niñas y Adolescentes (NNA)** en situación de vulnerabilidad. Permite registrar expedientes completos del menor (datos personales, CURP, domicilio, tutores, contactos, lenguas, discapacidades, valoraciones médicas CIE-10 y situación legal), administrar al **personal** de la institución (empleados y voluntarios) y organizarlo en **plantillas de trabajo multidisciplinarias** asignables a cada expediente con historial legal. La autenticación es por token JWT con control de acceso basado en roles (Abogado, Director General, Coordinador Estatal, Médico, Psicólogo, Trabajador Social, Voluntario).
+Sistema web institucional para la gestión integral de expedientes de **Niños, Niñas y Adolescentes (NNA)** en situación de vulnerabilidad. Permite registrar expedientes completos en **5ta Forma Normal (5NF)** con descomposición multivaluada: datos personales atómicos, CURP, domicilio, tutores (con discapacidades), contactos, lenguas (con competencias y modos de adquisición), discapacidades (con grado de dependencia), valoraciones médicas CIE-10 y situación legal. Administra al **personal** de la institución (empleados y voluntarios con lenguas registradas) y lo organiza en **plantillas de trabajo multidisciplinarias** (máx. una persona por rol) asignables a expedientes con historial legal. Autenticación por token JWT con RBAC (Abogado, Director General, Coordinador Estatal, Médico, Psicólogo, Trabajador Social, Voluntario).
 
-La aplicación expone una API REST que retorna exclusivamente JSON; todo el renderizado visual ocurre en el navegador mediante un frontend ligero sin frameworks.
+La aplicación expone una API REST que retorna exclusivamente JSON; todo el renderizado visual ocurre en el navegador mediante un frontend ligero sin frameworks. **Las migraciones de schema se gestionan profesionalmente con Alembic** — el BD viva es el source of truth.
 
 ---
 
@@ -43,14 +43,17 @@ RNPI/
 │   ├── schemas/             #   Esquemas Pydantic de entrada/salida
 │   └── routers/             #   Endpoints: /auth, /personal, /nna, /catalogos, /plantillas
 │
-├── database/                # Scripts SQL (ejecutar en orden numérico)
-│   ├── schema.sql           #   Esquema base + semillas iniciales (dump de PostgreSQL)
-│   ├── 02_catalogos_previos.sql   # Catálogos requeridos como FK por la migración
-│   ├── 03_migracion_diagrama.sql  # Migración a 5NF según el diagrama ER (idempotente)
-│   ├── 04_semillas_catalogos.sql  # Semillas de catálogos de soporte (idempotente)
-│   ├── 05_personal_nombre_atomico.sql        # Nombre del personal en campos atómicos
-│   ├── 06_valoracion_medica_situacion_legal.sql  # Valoración médica (CIE-10) y situación legal
-│   └── 07_plantillas.sql          # Plantillas de trabajo y asignación de NNA
+├── alembic/                 # Migraciones gestionadas por Alembic
+│   ├── env.py               #   Configuración: importa modelos ORM, lee DATABASE_URL del entorno
+│   ├── versions/            #   Migraciones versionadas (baseline + cambios futuros)
+│   ├── script.py.mako       #   Template de Alembic para nuevas migraciones
+│   └── README               #   Guía de uso de Alembic
+│
+├── alembic.ini              # Configuración Alembic (URL desde entorno, no hardcodeada)
+│
+├── database/                # Esquema e histórico de migraciones
+│   ├── 01_init_schema.sql   #   Punto de partida único: volcado completo desde BD viva
+│   └── .archive_backup/     #   Historial de migraciones numeradas antiguas (referencia)
 │
 ├── scripts/                 # Utilidades de administración y carga de datos
 │   ├── inyectar_catalogos_csv.py  # Inyecta CSV → catálogos (Pandas + SQLAlchemy)
@@ -144,25 +147,38 @@ TOKEN_EXPIRE_MINUTES=480
 
 ## Configuración de Datos
 
-### 1. Ejecutar los scripts SQL (en orden)
+### 1. Crear la base de datos desde el esquema base
 
-El esquema y la migración a 5NF se aplican con `psql`, **en orden numérico**. Los scripts `02`–`07` son idempotentes (pueden re-ejecutarse sin error).
+La estructura actual (5NF) se capturó en `database/01_init_schema.sql`. Aplícalo para crear la BD desde cero:
 
 ```bash
-psql -U rnpi_user -d rnpi -f database/schema.sql
-psql -U rnpi_user -d rnpi -f database/02_catalogos_previos.sql
-psql -U rnpi_user -d rnpi -f database/03_migracion_diagrama.sql
-psql -U rnpi_user -d rnpi -f database/04_semillas_catalogos.sql
-psql -U rnpi_user -d rnpi -f database/05_personal_nombre_atomico.sql
-psql -U rnpi_user -d rnpi -f database/06_valoracion_medica_situacion_legal.sql
-psql -U rnpi_user -d rnpi -f database/07_plantillas.sql
+psql -U rnpi_user -d rnpi -f database/01_init_schema.sql
 ```
 
-> `03_migracion_diagrama.sql` requiere que `02_catalogos_previos.sql` haya sido aplicado antes, ya que crea llaves foráneas hacia esos catálogos.
+### 2. Sincronizar Alembic (solo si el schema ya existe)
 
-> ⚠️ **Advertencia:** el dump `schema.sql` está desactualizado respecto a la base de datos viva: sus INSERT de `cat_roles` no coinciden con los roles reales (1=Abogado, 2=Director General, 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social, 8=Voluntario). Tras reconstruir desde el dump, verifica/corrige `cat_roles` antes de usar el sistema. Ver `docs/ESTADO.md`.
+Si la BD ya tiene datos, marca que está sincronizada con el baseline actual:
 
-### 2. Inyectar los catálogos desde CSV
+```bash
+export DATABASE_URL="postgresql://rnpi_user:contraseña@localhost:5432/rnpi"
+alembic stamp head
+```
+
+Esto registra internamente que la BD está en la revisión actual sin aplicar cambios.
+
+### 3. Para futuras migraciones
+
+Después de modificar los modelos en `app/models/core.py` o `app/models/catalogos.py`, Alembic auto-genera el SQL:
+
+```bash
+alembic revision --autogenerate -m "Descripción del cambio"
+# Revisar el archivo en alembic/versions/
+alembic upgrade head
+```
+
+Más detalles en `docs/ARQUITECTURA.md` (sección 8.2).
+
+### 4. Inyectar los catálogos desde CSV
 
 Con la estructura SQL ya confirmada, ejecuta el script de Pandas que puebla los catálogos geográficos y de lenguas (estados, municipios/asentamientos y lenguas INALI):
 

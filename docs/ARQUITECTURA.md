@@ -70,7 +70,14 @@ RNPI/
 │       ├── api.js           # fetch centralizado, token, evento sesión-expirada
 │       ├── auth.js          # sesión localStorage, RBAC data-roles
 │       └── app.js           # UI: vistas, modales, toasts, módulos NNA/Personal
-├── database/                # schema.sql (dump) + migraciones numeradas 02-07
+├── alembic/                 # Migraciones gestionadas por Alembic
+│   ├── versions/            # Cambios versionados (auto-generados + manuales)
+│   ├── env.py               # Configuración: importa modelos, lee DATABASE_URL del entorno
+│   └── script.py.mako       # Template para nuevas migraciones
+├── alembic.ini              # Configuración Alembic (URL leída de entorno)
+├── database/
+│   ├── 01_init_schema.sql   # Volcado de estructura actual (punto de partida único)
+│   └── .archive_backup/     # Backup de migraciones numeradas históricas (02-08)
 ├── catalogos/               # Fuentes CSV/SQL: CIE-10, lenguas INALI, localidades
 └── scripts/                 # crear_admin.py, reset_pass.py, inyección de catálogos
 ```
@@ -172,19 +179,52 @@ Todas las respuestas son JSON puro. 🔒 = requiere Bearer token; 🔒D = ademá
 
 ## 8. Configuración y arranque
 
+### 8.1 Instalación y variables de entorno
+
 ```bash
 # .env (obligatorio en producción)
 DATABASE_URL=postgresql://usuario:pass@localhost:5432/rnpi
 SECRET_KEY=<clave-segura>
 TOKEN_EXPIRE_MINUTES=480
 
-# Arranque
+# Instalación
 pip install -r requirements.txt
-python main.py            # uvicorn en 0.0.0.0:8000, reload activo
-# UI: http://localhost:8000/ui   ·   Docs OpenAPI: /docs
 ```
 
-Scripts de soporte en `scripts/`: `crear_admin.py` (primer usuario), `reset_pass.py`, `inyectar_catalogos_csv.py` (carga de catálogos — ejecutar solo con la estructura SQL confirmada).
+### 8.2 Migraciones (Alembic)
+
+**Punto de partida:** La BD viva es el source of truth. Se capturó en `database/01_init_schema.sql` y se sincronizó con Alembic mediante `alembic stamp head`.
+
+**Aplicar nuevas migraciones** (después de cambios en `app/models/`):
+
+```bash
+# 1. Auto-generar migración desde cambios en modelos
+export DATABASE_URL="postgresql://usuario:pass@localhost/rnpi"
+alembic revision --autogenerate -m "Descripción del cambio"
+
+# 2. Revisar migración generada en alembic/versions/
+# 3. Aplicar a BD
+alembic upgrade head
+
+# Verificar estado
+alembic current              # Revisión actual
+alembic history --verbose    # Historial completo
+```
+
+**Nota:** Toda la configuración de Alembic lee `DATABASE_URL` del entorno en `alembic/env.py`; no hardcodear URLs en `alembic.ini`.
+
+### 8.3 Arranque del servidor
+
+```bash
+# Desarrollo
+python main.py            # uvicorn en 0.0.0.0:8000, reload activo
+# UI: http://localhost:8000/ui   ·   Docs OpenAPI: /docs
+
+# Producción
+gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker
+```
+
+**Scripts de soporte** en `scripts/`: `crear_admin.py` (primer usuario), `reset_pass.py`, `inyectar_catalogos_csv.py` (carga de catálogos — ejecutar después de aplicar migraciones).
 
 ---
 

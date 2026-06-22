@@ -173,6 +173,7 @@
         <div><label>Nombre(s) *</label><input type="text" id="f-nna-nombre" placeholder="Ej. Juan"></div>
         <div><label>Primer Apellido *</label><input type="text" id="f-nna-ap1" placeholder="Ej. Pérez"></div>
         <div><label>Segundo Apellido</label><input type="text" id="f-nna-ap2" placeholder="Opcional"></div>
+        <div><label>Cómo le gusta que le llamen (Alias)</label><input type="text" id="f-nna-alias" placeholder="Ej. Juanito"></div>
         <div><label>CURP *</label><input type="text" id="f-nna-curp" placeholder="18 caracteres" style="text-transform:uppercase" maxlength="18"></div>
         <div><label>Fecha de Nacimiento *</label><input type="date" id="f-nna-fecha"></div>
         <div><label>Sexo *</label>
@@ -184,18 +185,38 @@
         <div><label>Entidad de Nacimiento</label>
           <select id="f-nna-lugarnac"><option value="">-- Seleccione --</option></select>
         </div>
-        <div><label>Lengua</label>
-          <select id="f-nna-lengua"><option value="">-- Cargando... --</option></select>
-        </div>
-        <div><label>Discapacidad</label>
-          <select id="f-nna-discapacidad">
-            <option value="">Ninguna</option>
-          </select>
-        </div>
-        <div><label>Grado de Dependencia</label>
-          <select id="f-nna-gradodep" disabled><option value="">-- Sin discapacidad --</option></select>
+      </div>
+
+      <div class="section-title">Idiomas y Discapacidades</div>
+      <div id="lenguas-container">
+        <div class="form-grid" style="margin-bottom: 1rem;">
+          <div><label>Lengua/Idioma</label>
+            <select id="f-nna-lengua-0" class="f-nna-lengua"><option value="">-- Cargando... --</option></select>
+          </div>
+          <div><label>Nivel de Dominio</label>
+            <select id="f-nna-nivelcom-0" class="f-nna-nivelcom" disabled><option value="">-- Seleccione --</option></select>
+          </div>
+          <div><label>Modo de Adquisición</label>
+            <select id="f-nna-modadc-0" class="f-nna-modadc" disabled><option value="">-- Seleccione --</option></select>
+          </div>
+          <div><label>Preferente</label>
+            <input type="checkbox" id="f-nna-preferente-0" class="f-nna-preferente">
+          </div>
         </div>
       </div>
+      <button type="button" class="btn btn-secondary" id="btn-agregar-lengua" style="margin-bottom:1rem">+ Agregar otro idioma</button>
+
+      <div id="discapacidades-container">
+        <div class="form-grid" style="margin-bottom: 1rem;">
+          <div><label>Discapacidad</label>
+            <select id="f-nna-discapacidad-0" class="f-nna-discapacidad"><option value="">Ninguna</option></select>
+          </div>
+          <div><label>Grado de Dependencia</label>
+            <select id="f-nna-gradodep-0" class="f-nna-gradodep" disabled><option value="">-- Sin discapacidad --</option></select>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary" id="btn-agregar-discapacidad" style="margin-bottom:1rem">+ Agregar otra discapacidad</button>
 
       <div class="section-title">2. Domicilio Actual</div>
       <div class="form-grid">
@@ -246,6 +267,7 @@
         <div class="detail-grid">
           <div class="detail-item"><label>Folio</label><p id="det-nna-folio"></p></div>
           <div class="detail-item"><label>Nombre Completo</label><p id="det-nna-nombre"></p></div>
+          <div class="detail-item"><label>Alias / Cómo le llaman</label><p id="det-nna-alias"></p></div>
           <div class="detail-item"><label>CURP</label><p id="det-nna-curp"></p></div>
           <div class="detail-item"><label>Fecha Nac.</label><p id="det-nna-fecha"></p></div>
           <div class="detail-item"><label>Sexo</label><p id="det-nna-sexo"></p></div>

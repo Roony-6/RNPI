@@ -18,8 +18,7 @@ class Personal(Base):
     activo           = Column(Boolean,     default=True, nullable=False)
     id_rol           = Column(Integer,     ForeignKey("cat_roles.id_rol"), nullable=False)
 
-    rol     = relationship("CatRol")
-    lenguas = relationship("PersonalLengua", back_populates="personal")
+    rol = relationship("CatRol")
 
 
 class Tutor(Base):
@@ -31,8 +30,7 @@ class Tutor(Base):
     seg_ap_tutor  = Column(String(200))
     curp_tutor    = Column(String(18),  unique=True, nullable=False)
 
-    nna_tutores   = relationship("NnaTutor", back_populates="tutor")
-    discapacidades = relationship("TutorDiscapacidad", back_populates="tutor")
+    nna_tutores = relationship("NnaTutor", back_populates="tutor")
 
 
 class NNA(Base):
@@ -43,7 +41,6 @@ class NNA(Base):
     nom_nna      = Column(String(200), nullable=False)
     prim_ap_nna  = Column(String(200), nullable=False)
     seg_ap_nna   = Column(String(200))
-    alias_nna    = Column(String(150))
     nacim_nna    = Column(Date,        nullable=False)
     curp_nna     = Column(String(18),  unique=True, nullable=False)
     id_sexo      = Column(Integer,     ForeignKey("cat_sexo.id_sexo"), nullable=False)
@@ -188,32 +185,3 @@ class NnaDiscapacidad(Base):
     nna         = relationship("NNA",                back_populates="discapacidades")
     discapacidad = relationship("CatDiscapacidad")
     grado        = relationship("CatGradoDependencia")
-
-
-class TutorDiscapacidad(Base):
-    __tablename__ = "tutor_discapacidad"
-
-    id_tutor     = Column(Integer, ForeignKey("tutor.id_tutor",              ondelete="CASCADE"), primary_key=True)
-    id_dis       = Column(Integer, ForeignKey("cat_discapacidad.id_dis"),   primary_key=True)
-    id_gra_dep   = Column(Integer, ForeignKey("cat_grado_dependencia.id_gra_dep"))
-    diagnost_dis = Column(Boolean, nullable=False, default=False)
-
-    tutor        = relationship("Tutor", back_populates="discapacidades")
-    discapacidad = relationship("CatDiscapacidad")
-    grado        = relationship("CatGradoDependencia")
-
-
-class PersonalLengua(Base):
-    __tablename__ = "personal_lengua"
-
-    id_personal             = Column(Integer, ForeignKey("personal.id_personal",                  ondelete="CASCADE"), primary_key=True)
-    id_len                  = Column(Integer, ForeignKey("cat_lengua.id_len"),                    primary_key=True)
-    id_niv_com              = Column(Integer, ForeignKey("cat_nivel_competencia_oral.id_niv_com"))
-    id_mod_adc              = Column(Integer, ForeignKey("cat_modo_adquisicion_lengua.id_mod_adc"))
-    preferente_len_personal = Column(Boolean, nullable=False, default=False)
-    autodenom_len_personal  = Column(String(200))
-
-    personal = relationship("Personal", back_populates="lenguas")
-    lengua   = relationship("CatLengua")
-    nivel    = relationship("CatNivelCompetenciaOral")
-    modo     = relationship("CatModoAdquisicionLengua")

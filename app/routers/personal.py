@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session
 
 from app.auth.security import hash_password, solo_director, usuario_actual
 from app.database import get_db
 from app.models.catalogos import CatRol
-from app.models.core import Personal, PersonalLengua
+from app.models.core import Personal
 from app.schemas.personal import (
     AccesoActualizar,
-    LenguaPersonalRespuesta,
     PersonalActualizar,
     PersonalCrear,
     PersonalRespuesta,
@@ -16,46 +15,12 @@ from app.schemas.personal import (
 router = APIRouter(prefix="/personal", tags=["Personal"])
 
 
-def _serializar_personal(p: Personal) -> PersonalRespuesta:
-    return PersonalRespuesta(
-        id_personal=p.id_personal,
-        nom_personal=p.nom_personal,
-        prim_ap_personal=p.prim_ap_personal,
-        seg_ap_personal=p.seg_ap_personal,
-        rfc=p.rfc,
-        curp=p.curp,
-        correo=p.correo,
-        id_rol=p.id_rol,
-        activo=p.activo,
-        lenguas=[
-            LenguaPersonalRespuesta(
-                id_len=l.id_len,
-                lengua=l.lengua.nombre,
-                nivel_competencia=l.nivel.descripcion if l.nivel else None,
-                modo_adquisicion=l.modo.descripcion if l.modo else None,
-                preferente_len_personal=l.preferente_len_personal,
-                autodenom_len_personal=l.autodenom_len_personal,
-            )
-            for l in p.lenguas
-        ],
-    )
-
-
-def _consulta_personal(db: Session):
-    return db.query(Personal).options(
-        joinedload(Personal.lenguas).joinedload(PersonalLengua.lengua),
-        joinedload(Personal.lenguas).joinedload(PersonalLengua.nivel),
-        joinedload(Personal.lenguas).joinedload(PersonalLengua.modo),
-    )
-
-
 @router.get("", response_model=list[PersonalRespuesta])
 def listar_personal(
     db: Session = Depends(get_db),
     _: Personal = Depends(usuario_actual),
 ):
-    registros = _consulta_personal(db).order_by(Personal.id_personal).all()
-    return [_serializar_personal(p) for p in registros]
+    return db.query(Personal).order_by(Personal.id_personal).all()
 
 
 @router.get("/{id_personal}", response_model=PersonalRespuesta)
@@ -64,10 +29,10 @@ def obtener_personal(
     db: Session = Depends(get_db),
     _: Personal = Depends(usuario_actual),
 ):
-    persona = _consulta_personal(db).filter(Personal.id_personal == id_personal).first()
+    persona = db.get(Personal, id_personal)
     if not persona:
         raise HTTPException(status_code=404, detail="Personal no encontrado")
-    return _serializar_personal(persona)
+    return persona
 
 
 @router.post("", response_model=PersonalRespuesta, status_code=201)
@@ -97,21 +62,9 @@ def registrar_personal(
         activo=True,
     )
     db.add(nueva_persona)
-    db.flush()
-
-    for lng in datos.lenguas:
-        db.add(PersonalLengua(
-            id_personal=nueva_persona.id_personal,
-            id_len=lng.id_len,
-            id_niv_com=lng.id_niv_com,
-            id_mod_adc=lng.id_mod_adc,
-            preferente_len_personal=lng.preferente_len_personal,
-            autodenom_len_personal=lng.autodenom_len_personal,
-        ))
-
     db.commit()
     db.refresh(nueva_persona)
-    return _serializar_personal(nueva_persona)
+    return nueva_persona
 
 
 @router.put("/{id_personal}", response_model=PersonalRespuesta)
@@ -148,21 +101,9 @@ def actualizar_personal(
     persona.curp             = datos.curp.upper()
     persona.correo           = datos.correo
     persona.id_rol           = datos.id_rol
-
-    db.query(PersonalLengua).filter(PersonalLengua.id_personal == id_personal).delete(synchronize_session=False)
-    for lng in datos.lenguas:
-        db.add(PersonalLengua(
-            id_personal=id_personal,
-            id_len=lng.id_len,
-            id_niv_com=lng.id_niv_com,
-            id_mod_adc=lng.id_mod_adc,
-            preferente_len_personal=lng.preferente_len_personal,
-            autodenom_len_personal=lng.autodenom_len_personal,
-        ))
-
     db.commit()
     db.refresh(persona)
-    return _serializar_personal(persona)
+    return persona
 
 
 @router.patch("/{id_personal}/acceso", response_model=PersonalRespuesta)

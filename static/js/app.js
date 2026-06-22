@@ -71,118 +71,27 @@ const ICONO_CANDADO_CERRADO = `<svg viewBox="0 0 20 20" fill="currentColor"><pat
 const ICONO_CANDADO_ABIERTO = `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M14.5 1A4.5 4.5 0 0010 5.5V9H3a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V5.5a3 3 0 116 0v2.75a.75.75 0 001.5 0V5.5A4.5 4.5 0 0014.5 1z" clip-rule="evenodd"/></svg>`;
 
 function abrirFormularioNNA() {
-  ['f-nna-nombre', 'f-nna-ap1', 'f-nna-ap2', 'f-nna-alias', 'f-nna-curp', 'f-nna-fecha',
+  ['f-nna-nombre', 'f-nna-ap1', 'f-nna-ap2', 'f-nna-curp', 'f-nna-fecha',
    'f-dir-calle', 'f-dir-noext',
    'f-tutor-nombre', 'f-tutor-ap1', 'f-tutor-ap2', 'f-tutor-curp', 'f-con-texto',
   ].forEach((id) => { $(id).value = ''; });
-  ['f-nna-sexo', 'f-nna-nacionalidad', 'f-nna-lugarnac',
-   'f-dir-entidad', 'f-con-tipo',
+  ['f-nna-sexo', 'f-nna-nacionalidad', 'f-nna-lugarnac', 'f-nna-lengua',
+   'f-nna-discapacidad', 'f-dir-entidad', 'f-con-tipo',
   ].forEach((id) => { $(id).value = ''; });
 
   const asen = $('f-dir-asen');
   asen.innerHTML = '<option value="">-- Seleccione primero una Entidad --</option>';
   asen.disabled  = true;
+  toggleGradoDependencia('');
 
-  limpiarArraysNNA();
   cargarCatalogosNNA();
   openModal('modal-alta-nna');
 }
 
-let lenguasCount = 1;
-let discapacidadesCount = 1;
-
-function limpiarArraysNNA() {
-  lenguasCount = 1;
-  discapacidadesCount = 1;
-  $('lenguas-container').innerHTML = `
-    <div class="form-grid" style="margin-bottom: 1rem;" id="lengua-row-0">
-      <div><label>Lengua/Idioma</label>
-        <select id="f-nna-lengua-0" class="f-nna-lengua"><option value="">-- Cargando... --</option></select>
-      </div>
-      <div><label>Nivel de Dominio</label>
-        <select id="f-nna-nivelcom-0" class="f-nna-nivelcom" disabled><option value="">-- Seleccione --</option></select>
-      </div>
-      <div><label>Modo de Adquisición</label>
-        <select id="f-nna-modadc-0" class="f-nna-modadc" disabled><option value="">-- Seleccione --</option></select>
-      </div>
-      <div><label>Preferente</label>
-        <input type="checkbox" id="f-nna-preferente-0" class="f-nna-preferente">
-      </div>
-    </div>
-  `;
-  $('discapacidades-container').innerHTML = `
-    <div class="form-grid" style="margin-bottom: 1rem;" id="discapacidad-row-0">
-      <div><label>Discapacidad</label>
-        <select id="f-nna-discapacidad-0" class="f-nna-discapacidad"><option value="">Ninguna</option></select>
-      </div>
-      <div><label>Grado de Dependencia</label>
-        <select id="f-nna-gradodep-0" class="f-nna-gradodep" disabled><option value="">-- Sin discapacidad --</option></select>
-      </div>
-    </div>
-  `;
-}
-
-function agregarLengua() {
-  const container = $('lenguas-container');
-  const idx = lenguasCount++;
-  const html = `
-    <div class="form-grid" style="margin-bottom: 1rem;" id="lengua-row-${idx}">
-      <div><label>Lengua/Idioma</label>
-        <select id="f-nna-lengua-${idx}" class="f-nna-lengua"><option value="">-- Cargando... --</option></select>
-      </div>
-      <div><label>Nivel de Dominio</label>
-        <select id="f-nna-nivelcom-${idx}" class="f-nna-nivelcom" disabled><option value="">-- Seleccione --</option></select>
-      </div>
-      <div><label>Modo de Adquisición</label>
-        <select id="f-nna-modadc-${idx}" class="f-nna-modadc" disabled><option value="">-- Seleccione --</option></select>
-      </div>
-      <div><label>Preferente</label>
-        <input type="checkbox" id="f-nna-preferente-${idx}" class="f-nna-preferente">
-      </div>
-      <div><button type="button" class="btn btn-danger" onclick="quitarLengua(${idx})">Eliminar</button></div>
-    </div>
-  `;
-  container.innerHTML += html;
-  cargarCatalogosLenguas();
-  cargarCatalogosNiveles();
-  cargarCatalogosModos();
-}
-
-function quitarLengua(idx) {
-  const row = $(`lengua-row-${idx}`);
-  if (row) row.remove();
-}
-
-function agregarDiscapacidad() {
-  const container = $('discapacidades-container');
-  const idx = discapacidadesCount++;
-  const html = `
-    <div class="form-grid" style="margin-bottom: 1rem;" id="discapacidad-row-${idx}">
-      <div><label>Discapacidad</label>
-        <select id="f-nna-discapacidad-${idx}" class="f-nna-discapacidad"><option value="">Ninguna</option></select>
-      </div>
-      <div><label>Grado de Dependencia</label>
-        <select id="f-nna-gradodep-${idx}" class="f-nna-gradodep" disabled><option value="">-- Sin discapacidad --</option></select>
-      </div>
-      <div><button type="button" class="btn btn-danger" onclick="quitarDiscapacidad(${idx})">Eliminar</button></div>
-    </div>
-  `;
-  container.innerHTML += html;
-  cargarCatalogoDiscapacidades();
-  cargarCatalogosGrados();
-}
-
-function quitarDiscapacidad(idx) {
-  const row = $(`discapacidad-row-${idx}`);
-  if (row) row.remove();
-}
-
 function toggleGradoDependencia(id_dis) {
-  const sels = document.querySelectorAll('.f-nna-gradodep');
-  sels.forEach((sel) => {
-    sel.disabled = !id_dis;
-    if (!id_dis) sel.value = '';
-  });
+  const sel = $('f-nna-gradodep');
+  sel.disabled = !id_dis;
+  if (!id_dis) sel.value = '';
 }
 
 function llenarSelect(id, datos, placeholder) {
@@ -194,7 +103,7 @@ function llenarSelect(id, datos, placeholder) {
 async function cargarCatalogosNNA() {
   try {
     const [sexos, nacionalidades, entidades, lenguas, discapacidades, grados, tipos_contacto,
-           estatus_juridico, medidas_proteccion, niveles_competencia, modos_adquisicion] =
+           estatus_juridico, medidas_proteccion] =
       await Promise.all([
         apiGetJson('/catalogos/sexos'),
         apiGetJson('/catalogos/nacionalidades'),
@@ -205,64 +114,18 @@ async function cargarCatalogosNNA() {
         apiGetJson('/catalogos/tipos_contacto'),
         apiGetJson('/catalogos/estatus_juridico'),
         apiGetJson('/catalogos/medidas_proteccion'),
-        apiGetJson('/catalogos/niveles_competencia_oral').catch(() => []),
-        apiGetJson('/catalogos/modos_adquisicion_lengua').catch(() => []),
       ]);
-
-    window.CATALOGO_LENGUAS = lenguas;
-    window.CATALOGO_DISCAPACIDADES = discapacidades;
-    window.CATALOGO_GRADOS = grados;
-    window.CATALOGO_NIVELES = niveles_competencia;
-    window.CATALOGO_MODOS = modos_adquisicion;
-
     llenarSelect('f-nna-sexo',         sexos,          '-- Seleccione --');
     llenarSelect('f-nna-nacionalidad', nacionalidades, '-- Seleccione --');
     llenarSelect('f-nna-lugarnac',     entidades,      '-- Seleccione --');
-    cargarCatalogosLenguas();
-    cargarCatalogosNiveles();
-    cargarCatalogosModos();
-    cargarCatalogoDiscapacidades();
-    cargarCatalogosGrados();
+    llenarSelect('f-nna-lengua',       lenguas,        '-- Seleccione Lengua --');
+    llenarSelect('f-nna-discapacidad', discapacidades, 'Ninguna');
+    llenarSelect('f-nna-gradodep',     grados,         '-- Seleccione Grado --');
     llenarSelect('f-dir-entidad',      entidades,      '-- Seleccione Entidad --');
     llenarSelect('f-con-tipo',         tipos_contacto, '-- Seleccione --');
     llenarSelect('f-leg-estatus',      estatus_juridico,   '-- Seleccione --');
     llenarSelect('f-leg-medida',       medidas_proteccion, 'Ninguna');
   } catch (e) { console.error('Error cargando catálogos NNA', e); }
-}
-
-function cargarCatalogosLenguas() {
-  if (!window.CATALOGO_LENGUAS) return;
-  document.querySelectorAll('.f-nna-lengua').forEach((sel) => {
-    llenarSelect(sel.id, window.CATALOGO_LENGUAS, '-- Seleccione Lengua --');
-  });
-}
-
-function cargarCatalogosNiveles() {
-  if (!window.CATALOGO_NIVELES) return;
-  document.querySelectorAll('.f-nna-nivelcom').forEach((sel) => {
-    llenarSelect(sel.id, window.CATALOGO_NIVELES, '-- Seleccione --');
-  });
-}
-
-function cargarCatalogosModos() {
-  if (!window.CATALOGO_MODOS) return;
-  document.querySelectorAll('.f-nna-modadc').forEach((sel) => {
-    llenarSelect(sel.id, window.CATALOGO_MODOS, '-- Seleccione --');
-  });
-}
-
-function cargarCatalogoDiscapacidades() {
-  if (!window.CATALOGO_DISCAPACIDADES) return;
-  document.querySelectorAll('.f-nna-discapacidad').forEach((sel) => {
-    llenarSelect(sel.id, window.CATALOGO_DISCAPACIDADES, 'Ninguna');
-  });
-}
-
-function cargarCatalogosGrados() {
-  if (!window.CATALOGO_GRADOS) return;
-  document.querySelectorAll('.f-nna-gradodep').forEach((sel) => {
-    llenarSelect(sel.id, window.CATALOGO_GRADOS, '-- Seleccione Grado --');
-  });
 }
 
 async function cargarAsentamientos(id_ent) {
@@ -336,7 +199,6 @@ async function guardarExpediente() {
     nom_nna:        nom,
     prim_ap_nna:    ap1,
     seg_ap_nna:     $('f-nna-ap2').value.trim() || null,
-    alias_nna:      $('f-nna-alias').value.trim() || null,
     nacim_nna:      fecha,
     curp_nna:       curp,
     id_sexo:        parseInt(sexo),
@@ -382,31 +244,16 @@ async function guardarExpediente() {
   const text_con = $('f-con-texto').value.trim();
   if (tipo_con && text_con) body.contactos.push({ id_tipo_con: parseInt(tipo_con), text_con });
 
-  document.querySelectorAll('.f-nna-lengua').forEach((sel) => {
-    const id_len = sel.value;
-    if (id_len) {
-      const idx = sel.id.match(/\d+/)[0];
-      body.lenguas.push({
-        id_len: parseInt(id_len),
-        id_niv_com: parseInt($(`f-nna-nivelcom-${idx}`).value) || null,
-        id_mod_adc: parseInt($(`f-nna-modadc-${idx}`).value) || null,
-        preferente_len_nna: $(`f-nna-preferente-${idx}`).checked,
-        autodenom_len_nna: null,
-      });
-    }
-  });
+  const lengua = $('f-nna-lengua').value;
+  if (lengua) body.lenguas.push({ id_len: parseInt(lengua), preferente_len_nna: true });
 
-  document.querySelectorAll('.f-nna-discapacidad').forEach((sel) => {
-    const id_dis = sel.value;
-    if (id_dis) {
-      const idx = sel.id.match(/\d+/)[0];
-      body.discapacidades.push({
-        id_dis: parseInt(id_dis),
-        id_gra_dep: parseInt($(`f-nna-gradodep-${idx}`).value) || null,
-        diagnost_dis: false,
-      });
-    }
-  });
+  const dis = $('f-nna-discapacidad').value;
+  if (dis) {
+    body.discapacidades.push({
+      id_dis:     parseInt(dis),
+      id_gra_dep: parseInt($('f-nna-gradodep').value) || null,
+    });
+  }
 
   try {
     const res = await apiFetch('/nna', { method: 'POST', body: JSON.stringify(body) });
@@ -428,7 +275,6 @@ function verDetalleNNA(index) {
   const set = (id, val) => { $(id).innerText = val || '—'; };
   set('det-nna-folio',          n.folio_nna);
   set('det-nna-nombre',         `${n.nom_nna} ${n.prim_ap_nna} ${n.seg_ap_nna || ''}`.trim());
-  set('det-nna-alias',          n.alias_nna);
   set('det-nna-curp',           n.curp_nna);
   set('det-nna-fecha',          n.nacim_nna);
   set('det-nna-sexo',           n.sexo);
@@ -436,7 +282,7 @@ function verDetalleNNA(index) {
   set('det-nna-lugarnac',       n.lugar_nacimiento);
   set('det-nna-direccion',      n.direccion);
   set('det-nna-lenguas',        n.lenguas.map((l) =>
-    `${l.lengua}${l.preferente_len_nna ? ' (preferente)' : ''}${l.nivel_competencia ? ' — ' + l.nivel_competencia : ''}${l.modo_adquisicion ? ' [' + l.modo_adquisicion + ']' : ''}`
+    `${l.lengua}${l.preferente_len_nna ? ' (preferente)' : ''}${l.nivel_competencia ? ' — ' + l.nivel_competencia : ''}`
   ).join('; '));
   set('det-nna-discapacidades', n.discapacidades.map((d) =>
     `${d.discapacidad}${d.grado_dependencia ? ' — ' + d.grado_dependencia : ''}`
@@ -1022,27 +868,7 @@ function wireEventos() {
   // Módulo NNA
   $('btn-nuevo-expediente').addEventListener('click', abrirFormularioNNA);
   $('btn-guardar-expediente').addEventListener('click', guardarExpediente);
-  $('btn-agregar-lengua').addEventListener('click', agregarLengua);
-  $('btn-agregar-discapacidad').addEventListener('click', agregarDiscapacidad);
-
-  document.addEventListener('change', (e) => {
-    if (e.target.classList.contains('f-nna-discapacidad')) {
-      const idx = e.target.id.match(/\d+/)[0];
-      const gradoSel = $(`f-nna-gradodep-${idx}`);
-      if (gradoSel) {
-        gradoSel.disabled = !e.target.value;
-        if (!e.target.value) gradoSel.value = '';
-      }
-    }
-    if (e.target.classList.contains('f-nna-lengua')) {
-      const idx = e.target.id.match(/\d+/)[0];
-      const nivelSel = $(`f-nna-nivelcom-${idx}`);
-      const modoSel = $(`f-nna-modadc-${idx}`);
-      if (nivelSel) nivelSel.disabled = !e.target.value;
-      if (modoSel) modoSel.disabled = !e.target.value;
-    }
-  });
-
+  $('f-nna-discapacidad').addEventListener('change', (e) => toggleGradoDependencia(e.target.value));
   $('f-dir-entidad').addEventListener('change', (e) => cargarAsentamientos(e.target.value));
   $('tabla-nna-body').addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');

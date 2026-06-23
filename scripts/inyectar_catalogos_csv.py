@@ -95,7 +95,7 @@ def inyectar(tabla: str, config: dict) -> None:
 if __name__ == "__main__":
     engine = create_engine(DATABASE_URL)
     for tabla, config in MAPA_CATALOGOS.items():
-        print(f"→ Procesando: {tabla}")
+        print(f"Procesando: {tabla}")
         try:
             inyectar(tabla, config)
         except Exception as exc:

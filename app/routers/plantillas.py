@@ -72,9 +72,7 @@ def _obtener_plantilla_o_404(db: Session, id_plantilla: int) -> Plantilla:
     return plantilla
 
 
-# ---------------------------------------------------------------------------
 # CRUD de plantillas
-# ---------------------------------------------------------------------------
 
 @router.get("", response_model=list[PlantillaRespuesta])
 def listar_plantillas(
@@ -153,9 +151,7 @@ def actualizar_plantilla(
     return _serializar_plantilla(plantilla)
 
 
-# ---------------------------------------------------------------------------
 # Integrantes (plantilla_personal) — aquí vive la Regla C
-# ---------------------------------------------------------------------------
 
 @router.post("/{id_plantilla}/personal", status_code=201)
 def agregar_integrante(
@@ -213,9 +209,7 @@ def quitar_integrante(
     db.commit()
 
 
-# ---------------------------------------------------------------------------
 # Asignación de plantillas a NNA (nna_plantilla — historial legal)
-# ---------------------------------------------------------------------------
 
 @router.post("/{id_plantilla}/nna", status_code=201)
 def asignar_nna(

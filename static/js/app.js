@@ -9,9 +9,7 @@ import {
 } from './api.js';
 import * as auth from './auth.js';
 
-// ==========================================
 // 1. UTILIDADES DE UI (vistas, modales, toasts)
-// ==========================================
 const $ = (id) => document.getElementById(id);
 
 function switchView(view_name) {
@@ -59,9 +57,7 @@ function mostrarConfirm({ icon, title, message, btnClass, btnText, callback }) {
   openModal('confirm-modal-overlay');
 }
 
-// ==========================================
 // 2. MÓDULO NNA (estructura 5NF: nna / tutor)
-// ==========================================
 let NNA_REGISTROS = [];
 
 const ICONO_VER = `<svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>`;
@@ -455,10 +451,8 @@ function verDetalleNNA(index) {
   openModal('modal-detalle-nna');
 }
 
-// ==========================================
 // 2.b VALORACIÓN MÉDICA Y SITUACIÓN LEGAL
 //     RBAC frontend: médico = roles 2,3,4,5 · legal = roles 1,2,3
-// ==========================================
 const ROLES_MEDICOS = [2, 3, 4, 5];
 const ROLES_LEGALES = [1, 2, 3];
 
@@ -591,9 +585,7 @@ function confirmarEliminarNNA(index) {
   });
 }
 
-// ==========================================
 // 3. MÓDULO PERSONAL
-// ==========================================
 let ROLES = [];
 let PERSONAL_ALL = [];
 
@@ -773,9 +765,7 @@ async function eliminarPersonal(id) {
   } catch (e) { toast('Error de conexión', 'error'); }
 }
 
-// ==========================================
 // 3.b MÓDULO PLANTILLAS (equipos de trabajo · roles 2,3)
-// ==========================================
 let PLANTILLAS = [];
 let DETALLE_PLANTILLA_ID = null;
 
@@ -955,9 +945,7 @@ async function cargarPlantillasNNA(id_nna) {
     : 'Sin plantilla asignada';
 }
 
-// ==========================================
 // 4. SESIÓN Y ARRANQUE
-// ==========================================
 async function manejarLogin() {
   const correo = $('l-correo').value.trim();
   const pass   = $('l-pass').value;

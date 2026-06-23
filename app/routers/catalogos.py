@@ -34,9 +34,7 @@ def listar_roles(
     return db.query(CatRol).order_by(CatRol.id_rol).all()
 
 
-# ---------------------------------------------------------------------------
 # Geografía (5NF: entidad_federativa / asentamiento)
-# ---------------------------------------------------------------------------
 
 @router.get("/entidades")
 def obtener_entidades(db: Session = Depends(get_db)):
@@ -63,9 +61,7 @@ def obtener_asentamientos(id_ent: int, db: Session = Depends(get_db)):
     ]
 
 
-# ---------------------------------------------------------------------------
 # Catálogos de la persona (NNA)
-# ---------------------------------------------------------------------------
 
 @router.get("/sexos")
 def obtener_sexos(db: Session = Depends(get_db)):
@@ -115,9 +111,7 @@ def obtener_grados_dependencia(db: Session = Depends(get_db)):
     return [{"id": f.id_gra_dep, "nombre": f.descripcion} for f in filas]
 
 
-# ---------------------------------------------------------------------------
 # Catálogos legales
-# ---------------------------------------------------------------------------
 
 @router.get("/estatus_juridico")
 def obtener_estatus_juridico(db: Session = Depends(get_db)):
@@ -131,9 +125,7 @@ def obtener_medidas_proteccion(db: Session = Depends(get_db)):
     return [{"id": f.id_med_pro, "nombre": f.nombre} for f in filas]
 
 
-# ---------------------------------------------------------------------------
 # CIE-10
-# ---------------------------------------------------------------------------
 
 @router.get("/cie10_comunes")
 def obtener_cie10_comunes(db: Session = Depends(get_db)):

@@ -4,9 +4,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-# ---------------------------------------------------------------------------
 # Esquemas de creación
-# ---------------------------------------------------------------------------
 
 class DireccionCrear(BaseModel):
     calle_dir:  str
@@ -89,9 +87,7 @@ class NnaCrear(BaseModel):
     discapacidades: list[DiscapacidadNnaCrear] = []
 
 
-# ---------------------------------------------------------------------------
 # Esquemas de respuesta
-# ---------------------------------------------------------------------------
 
 class TutorRespuesta(BaseModel):
     id_tutor:      int

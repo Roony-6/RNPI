@@ -76,8 +76,7 @@ RNPI/
 │   └── script.py.mako       # Template para nuevas migraciones
 ├── alembic.ini              # Configuración Alembic (URL leída de entorno)
 ├── database/
-│   ├── 01_init_schema.sql   # Volcado de estructura actual (punto de partida único)
-│   └── .archive_backup/     # Backup de migraciones numeradas históricas (02-08)
+│   └── 01_init_schema.sql   # Volcado de estructura actual (punto de partida único)
 ├── catalogos/               # Fuentes CSV/SQL: CIE-10, lenguas INALI, localidades
 └── scripts/                 # crear_admin.py, reset_pass.py, inyección de catálogos
 ```
@@ -86,7 +85,7 @@ RNPI/
 
 ### 4.1 Entidades principales
 
-- **`personal`** — usuarios del sistema. Nombre en campos atómicos: `nom_personal`, `prim_ap_personal`, `seg_ap_personal` (migración `05_personal_nombre_atomico.sql`). Únicos: `rfc`, `curp`, `correo`. FK → `cat_roles`.
+- **`personal`** — usuarios del sistema. Nombre en campos atómicos: `nom_personal`, `prim_ap_personal`, `seg_ap_personal`. Únicos: `rfc`, `curp`, `correo`. FK → `cat_roles`.
 - **`nna`** — expediente del menor: `folio_nna` (formato `NNA-xxxxx`, autogenerado), nombre atómico, `curp_nna` (única), `nacim_nna`, FKs a `cat_sexo`, `direccion` (dir_actual) y `entidad_federativa` (lugar de nacimiento).
 - **`tutor`** — adulto responsable, deduplicado por `curp_tutor`.
 
@@ -111,7 +110,7 @@ RNPI/
 
 `cat_roles`, `cat_sexo`, `cat_nacionalidad`, `cat_tipo_contacto`, `cat_lengua`, `cat_nivel_competencia_oral`, `cat_modo_adquisicion_lengua`, `cat_discapacidad`, `cat_grado_dependencia`, los catálogos legales `cat_estatus_juridico` y `cat_medida_proteccion`, más los catálogos externos importados: `cat_cie_subcategoria` (CIE-10) y `cat_lengua_inali`.
 
-> ⚠️ Los `id_rol` reales de la BD viva son: 1=Abogado, 2=Director General, 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social, 8=Voluntario. **No confiar en los INSERT de `schema.sql`** (dump desactualizado).
+> **Nota:** Los `id_rol` reales provienen de la BD viva: 1=Abogado, 2=Director General, 3=Coordinador Estatal, 4=Médico, 5=Psicólogo, 7=Trabajador Social, 8=Voluntario. No deben tomarse de los INSERT de semilla, que pueden estar desactualizados.
 
 ### 4.5 Plantillas (equipos de trabajo multidisciplinarios)
 
@@ -142,31 +141,31 @@ RNPI/
 
 ## 6. API (resumen de contratos)
 
-Todas las respuestas son JSON puro. 🔒 = requiere Bearer token; 🔒D = además rol director/coordinador.
+Todas las respuestas son JSON puro. En la columna **Auth**: *Sí* = requiere Bearer token; *Sí (D)* = además exige rol director/coordinador; *Pública* o — = sin autenticación.
 
 | Método y ruta | Auth | Descripción |
 |---|---|---|
 | `POST /auth/login` | — | Login OAuth2 form → token + usuario |
-| `GET /personal` · `GET /personal/{id}` | 🔒 | Listado / detalle de personal |
-| `POST /personal` | 🔒D | Alta (valida unicidad correo/RFC/CURP, rol existente) |
-| `PUT /personal/{id}` | 🔒D | Edición (sin cambio de contraseña) |
-| `PATCH /personal/{id}/acceso` | 🔒D | Activar/revocar acceso (no auto-revocable) |
-| `DELETE /personal/{id}` | 🔒D | Borrado físico (no auto-eliminable) |
-| `POST /nna` | 🔒 | Alta transaccional: dirección + NNA + tutores + pivotes; retorna folio |
-| `GET /nna` · `GET /nna/{id}` | 🔒 | Expediente integral serializado (tutores, lenguas, etc.) |
-| `DELETE /nna/{id}` | 🔒 | Borrado (pivotes por CASCADE) |
-| `POST /nna/{id}/padecimientos` · `GET` | 🔒 | Valoración médica (diagnósticos CIE-10) |
-| `POST /nna/{id}/situacion_legal` · `GET` | 🔒 | Situación legal (estatus jurídico + medida de protección) |
-| `GET /plantillas` · `GET /plantillas/{id}` | 🔒 | Plantillas con sus integrantes |
-| `POST /plantillas` · `PUT /plantillas/{id}` | 🔒D | Crear / editar plantilla (nombre único → 409) |
-| `POST /plantillas/{id}/personal` | 🔒D | Agregar integrante — **Regla C**: rol duplicado → 400 |
-| `DELETE /plantillas/{id}/personal/{id_personal}` | 🔒D | Quitar integrante |
-| `POST /plantillas/{id}/nna` | 🔒D | Asignar NNA (desactiva la asignación previa) |
-| `GET /plantillas/{id}/nna` | 🔒 | NNA activos de la plantilla |
-| `GET /plantillas/nna/{id_nna}` | 🔒 | Historial de plantillas de un NNA |
-| `GET /catalogos/roles` | 🔒 | Catálogo de roles |
-| `GET /catalogos/{entidades, asentamientos/{id_ent}, sexos, nacionalidades, tipos_contacto, lenguas, niveles_competencia_oral, modos_adquisicion_lengua, discapacidades, grados_dependencia, estatus_juridico, medidas_proteccion}` | ⚠️ sin auth | Catálogos `{id, nombre}` |
-| `GET /catalogos/cie10_comunes` · `GET /catalogos/cie10_buscar?q=` | ⚠️ sin auth | Búsqueda CIE-10 |
+| `GET /personal` · `GET /personal/{id}` | Sí | Listado / detalle de personal |
+| `POST /personal` | Sí (D) | Alta (valida unicidad correo/RFC/CURP, rol existente) |
+| `PUT /personal/{id}` | Sí (D) | Edición (sin cambio de contraseña) |
+| `PATCH /personal/{id}/acceso` | Sí (D) | Activar/revocar acceso (no auto-revocable) |
+| `DELETE /personal/{id}` | Sí (D) | Borrado físico (no auto-eliminable) |
+| `POST /nna` | Sí | Alta transaccional: dirección + NNA + tutores + pivotes; retorna folio |
+| `GET /nna` · `GET /nna/{id}` | Sí | Expediente integral serializado (tutores, lenguas, etc.) |
+| `DELETE /nna/{id}` | Sí | Borrado (pivotes por CASCADE) |
+| `POST /nna/{id}/padecimientos` · `GET` | Sí | Valoración médica (diagnósticos CIE-10) |
+| `POST /nna/{id}/situacion_legal` · `GET` | Sí | Situación legal (estatus jurídico + medida de protección) |
+| `GET /plantillas` · `GET /plantillas/{id}` | Sí | Plantillas con sus integrantes |
+| `POST /plantillas` · `PUT /plantillas/{id}` | Sí (D) | Crear / editar plantilla (nombre único → 409) |
+| `POST /plantillas/{id}/personal` | Sí (D) | Agregar integrante — **Regla C**: rol duplicado → 400 |
+| `DELETE /plantillas/{id}/personal/{id_personal}` | Sí (D) | Quitar integrante |
+| `POST /plantillas/{id}/nna` | Sí (D) | Asignar NNA (desactiva la asignación previa) |
+| `GET /plantillas/{id}/nna` | Sí | NNA activos de la plantilla |
+| `GET /plantillas/nna/{id_nna}` | Sí | Historial de plantillas de un NNA |
+| `GET /catalogos/roles` | Sí | Catálogo de roles |
+| `GET /catalogos/{entidades, asentamientos/{id_ent}, sexos, nacionalidades, tipos_contacto, lenguas, niveles_competencia_oral, modos_adquisicion_lengua, discapacidades, grados_dependencia, estatus_juridico, medidas_proteccion}` | Pública | Catálogos `{id, nombre}` |
+| `GET /catalogos/cie10_comunes` · `GET /catalogos/cie10_buscar?q=` | Pública | Búsqueda CIE-10 |
 | `GET /health` | — | Ping a la BD |
 | `GET /ui` | — | Sirve `static/index.html` |
 

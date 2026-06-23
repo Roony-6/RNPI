@@ -4,9 +4,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 
-# ---------------------------------------------------------------------------
 # Esquemas de creación / mutación
-# ---------------------------------------------------------------------------
 
 class PlantillaCrear(BaseModel):
     nombre_plantilla: str = Field(min_length=3, max_length=150)
@@ -27,9 +25,7 @@ class NnaAsignar(BaseModel):
     fecha_asignacion: Optional[date] = None
 
 
-# ---------------------------------------------------------------------------
 # Esquemas de respuesta
-# ---------------------------------------------------------------------------
 
 class IntegranteRespuesta(BaseModel):
     id_personal: int

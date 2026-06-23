@@ -4,9 +4,7 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 
-# ---------------------------------------------------------------------------
 # Tablas geográficas
-# ---------------------------------------------------------------------------
 
 class EntidadFederativa(Base):
     __tablename__ = "entidad_federativa"
@@ -45,9 +43,7 @@ class Direccion(Base):
     asentamiento = relationship("Asentamiento", back_populates="direcciones")
 
 
-# ---------------------------------------------------------------------------
 # Catálogos de soporte (referenciados por las tablas de NNA)
-# ---------------------------------------------------------------------------
 
 class CatSexo(Base):
     __tablename__ = "cat_sexo"
@@ -106,9 +102,7 @@ class CatGradoDependencia(Base):
     descripcion = Column(String(100), nullable=False)
 
 
-# ---------------------------------------------------------------------------
 # Catálogos preexistentes (personal, enfermedades, lenguas INALI)
-# ---------------------------------------------------------------------------
 
 class CatRol(Base):
     __tablename__ = "cat_roles"
@@ -134,9 +128,7 @@ class CatCieSubcategoria(Base):
     descripcion     = Column(String(300))
 
 
-# ---------------------------------------------------------------------------
 # Catálogos legales
-# ---------------------------------------------------------------------------
 
 class CatEstatusJuridico(Base):
     __tablename__ = "cat_estatus_juridico"

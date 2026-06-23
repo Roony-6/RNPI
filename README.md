@@ -51,9 +51,8 @@ RNPI/
 │
 ├── alembic.ini              # Configuración Alembic (URL desde entorno, no hardcodeada)
 │
-├── database/                # Esquema e histórico de migraciones
-│   ├── 01_init_schema.sql   #   Punto de partida único: volcado completo desde BD viva
-│   └── .archive_backup/     #   Historial de migraciones numeradas antiguas (referencia)
+├── database/                # Esquema base de la BD
+│   └── 01_init_schema.sql   #   Punto de partida único: volcado completo desde BD viva
 │
 ├── scripts/                 # Utilidades de administración y carga de datos
 │   ├── inyectar_catalogos_csv.py  # Inyecta CSV → catálogos (Pandas + SQLAlchemy)

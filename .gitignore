@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Configuración local de Claude Code
+.claude/
+
+# Salida de Repomix
+repomix-output.xml

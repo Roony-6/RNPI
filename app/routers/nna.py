@@ -224,9 +224,7 @@ def _obtener_nna_o_404(db: Session, id_nna: int) -> NNA:
     return nna
 
 
-# ---------------------------------------------------------------------------
 # Valoración Médica (nna_padecimiento — CIE-10)
-# ---------------------------------------------------------------------------
 
 @router.post("/{id_nna}/padecimientos", status_code=201)
 def registrar_padecimiento(
@@ -281,9 +279,7 @@ def listar_padecimientos(
     ]
 
 
-# ---------------------------------------------------------------------------
 # Situación Legal (nna_situacion_legal)
-# ---------------------------------------------------------------------------
 
 @router.post("/{id_nna}/situacion_legal", status_code=201)
 def registrar_situacion_legal(

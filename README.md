@@ -12,7 +12,7 @@ La aplicación expone una API REST que retorna exclusivamente JSON; todo el rend
 |---|---|
 | Backend | Python 3.11+ · [FastAPI](https://fastapi.tiangolo.com/) |
 | ORM / Validación | SQLAlchemy 2 · Pydantic 2 |
-| Base de datos | PostgreSQL 16 |
+| Base de datos | PostgreSQL 15+ |
 | Servidor ASGI | Uvicorn |
 | Autenticación | JWT (`python-jose`) · bcrypt |
 | Frontend | HTML5 + CSS3 + **Vanilla JavaScript modular** (módulos ES en `static/js/`: `api.js`, `auth.js`, `app.js`) — sin React, Vue ni librerías pesadas |
@@ -187,7 +187,7 @@ python scripts/inyectar_catalogos_csv.py
 
 El script es seguro de re-ejecutar: si una tabla ya contiene filas, la omite. Al finalizar ajusta las secuencias (`setval`) para que los nuevos registros no colisionen con los IDs importados.
 
-### 3. Crear el usuario administrador inicial
+### 5. Crear el usuario administrador inicial
 
 ```bash
 python scripts/crear_admin.py
